@@ -12,8 +12,9 @@ var app = express();
 
 // db setup
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb://localhost/recordriots' || process.env.DB_URI;
-mongoose.connect(mongoDB, {useNewUrlParser: true});
+var mongoDB_local = 'mongodb://localhost/recordriots';
+var mongoDB_prod = process.env.DB_URI;
+mongoose.connect(mongoDB_prod, {useNewUrlParser: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
