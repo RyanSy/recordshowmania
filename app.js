@@ -4,8 +4,6 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var mongoose = require('mongoose');
-var db = mongoose.connection;
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -13,7 +11,11 @@ var usersRouter = require('./routes/users');
 var app = express();
 
 // db setup
-// set up mongo here
+var mongoose = require('mongoose');
+var mongoDB = 'mongodb://localhost/recordriots' || process.env.DB_URI;
+mongoose.connect(mongoDB, {useNewUrlParser: true});
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
