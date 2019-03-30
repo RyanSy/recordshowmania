@@ -1,13 +1,49 @@
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="/"><img src="images/recordriots-logo.png" alt="Record Riots!"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse text-center" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        {{#if isLoggedIn}}
+          <li class="nav-item">
+            <span class="nav-link">Welcome, {{username}}</span>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/add-show">Add Show</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Log Out</a>
+          </li>
+        {{else}}
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/register">Register</a>
+          </li>
+        {{/if}}
+      </ul>
+    </div>
+  </div>
+</nav>
 <div class="container">
+    <h5>Register For Free</h5>
+    <br>
     <form action="/register" method="post">
       <div class="form-group">
+        <label for="inputUsername">Username</label>
+        <input type="text" class="form-control col-6" id="inputUsername" name="username" aria-describedby="usernameHelp" placeholder="Enter a username" required="true">
+      </div>
+      <div class="form-group">
         <label for="inputEmail">Email address</label>
-        <input type="email" class="form-control" id="inputEmail" name="email" aria-describedby="emailHelp" placeholder="Enter email">
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        <input type="email" class="form-control col-6" id="inputEmail" name="email" aria-describedby="emailHelp" placeholder="Enter email" required="true">
       </div>
       <div class="form-group">
         <label for="inputPassword">Password</label>
-        <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Enter Password">
+        <input type="password" class="form-control col-6" id="inputPassword" name="password" placeholder="Enter Password" required="true">
       </div>
       <button type="submit" class="btn btn-primary">Register</button>
     </form>

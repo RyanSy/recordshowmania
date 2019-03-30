@@ -1,0 +1,61 @@
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="/"><img src="images/recordriots-logo.png" alt="Record Riots!"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse text-center" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        {{#if isLoggedIn}}
+          <li class="nav-item">
+            <span class="nav-link">Welcome, {{username}}</span>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/add-show">Add Show</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Log Out</a>
+          </li>
+        {{else}}
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/register">Register</a>
+          </li>
+        {{/if}}
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <form action="/add-show" method="post">
+    <div class="form-group">
+      <label for="inputDate">Date</label>
+      <input type="date" class="form-control col-6" id="inputDate" name="date" aria-describedby="dateHelp" placeholder="Enter date" required="true">
+    </div>
+    <div class="form-group">
+      <label for="inputName">Name</label>
+      <input type="text" class="form-control col-6" id="inputName" name="name" placeholder="Enter name of show" required="true">
+    </div>
+    <div class="form-group">
+      <label for="inputVenue">Venue</label>
+      <input type="text" class="form-control col-6" id="inputVenue" name="venue" aria-describedby="venueHelp" placeholder="Enter venue" required="true">
+    </div>
+    <div class="form-group">
+      <label for="inputHours">Hours</label>
+      <input type="text" class="form-control col-6" id="inputHours" name="hours" placeholder="Enter hours" required="true">
+    </div>
+    <div class="form-group">
+      <label for="inputAdmission">Admission</label></label>
+      <input type="text" class="form-control col-6" id="inputAdmission" name="admission" aria-describedby="admissionHelp" placeholder="Enter admission" required="true">
+    </div>
+    <div class="form-group">
+      <label for="inputComments">Comments</label>
+      <input type="textarea" class="form-control" id="inputComments" name="comments" placeholder="Enter comments" required="true">
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary">Add Show</button>
+  </form>
+</div>

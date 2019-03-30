@@ -4,18 +4,17 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mongoose = require('mongoose');
+var db = mongoose.connection;
+var mongoDB = process.env.DB_URI;
+var session = require('express-session');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 
 var app = express();
 
 // db setup
-var mongoose = require('mongoose');
-var mongoDB_local = 'mongodb://localhost/recordriots';
-var mongoDB_prod = process.env.DB_URI;
-mongoose.connect(mongoDB_prod, {useNewUrlParser: true});
-var db = mongoose.connection;
+mongoose.connect(mongoDB, {useNewUrlParser: true});
 db.on('error', console.error.bind(console, 'connection error:'));
 
 // view engine setup
@@ -28,8 +27,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+  'secret': '343ji43j4n3jn4jk3n',
+  'resave': false,
+  'saveUninitialized': true
+}));
+
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

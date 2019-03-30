@@ -1,16 +1,68 @@
-<div class="container">
-  <h6>Looking for a record show?</h6>
-  <br/>
-  <form>
-    <div class="form-row">
-      <div class="col">
-        <label for="date">Find by Date</label>
-        <input type="date" class="form-control" id="date">
-      </div>
-      <div class="col">
-        <label for="date">Find by Location</label>
-        <input type="select" class="form-control" id="locaton" placeholder="Enter location">
-      </div>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="/"><img src="images/recordriots-logo.png" alt="Record Riots!"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse text-center" id="navbarResponsive">
+      <!--  if logged in, show email, add a show and log out -->
+      <ul class="navbar-nav ml-auto">
+        {{#if isLoggedIn}}
+          <li class="nav-item">
+            <span class="nav-link">Welcome, {{username}}</span>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/add-show">Add Show</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Log Out</a>
+          </li>
+        {{else}}
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/register">Register</a>
+          </li>
+        {{/if}}
+      </ul>
     </div>
-  </form>
+  </div>
+</nav>
+<!-- Page Content -->
+<div class="container">
+  <div class="jumbotron">
+    <h6>Looking for a record show?</h6>
+    <br>
+    <form action="/search" method="post">
+      <div class="form-row">
+        <div class="col">
+          <label for="date">Find by Date</label>
+          <input type="date" class="form-control" id="date">
+        </div>
+        <div class="col">
+          <label for="date">Find by Location</label>
+          <input type="select" class="form-control" id="locaton" placeholder="Enter location">
+        </div>
+      </div>
+      <br>
+      <button class="btn btn-success" type="submit" name="button">Search</button>
+    </form>
+  </div>
+  <div class="container">
+    <br>
+    <h3>Recently Added Shows:</h3>
+    <ul>
+      {{#each showsArray}}
+        Date: {{this.date}}<br>
+        Name: {{this.name}}<br>
+        Venue: {{this.venue}}<br>
+        Hours: {{this.hours}}<br>
+        Admission: {{this.admission}}<br>
+        Comments: {{this.comments}}<br>
+        <hr>
+      {{/each}}
+    </ul>
+  </div>
 </div>

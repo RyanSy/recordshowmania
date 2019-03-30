@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-var PostSchema = new Schema(
+var postSchema = new Schema(
   {
     date: {type: Date, required: true},
     name: {type: String, required: true, max: 100},
@@ -13,4 +13,4 @@ var PostSchema = new Schema(
   }
 );
 
-module.exports = mongoose.model('Post', PostSchema);
+module.exports = mongoose.model('Post', postSchema);
