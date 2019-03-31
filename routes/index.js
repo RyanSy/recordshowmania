@@ -4,6 +4,7 @@ var User = require('../models/user');
 var Post = require('../models/post');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+var moment = require('moment');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -13,18 +14,17 @@ router.get('/', function(req, res, next) {
       console.log(err);
       res.send('An error occured.');
     }
-    showsArray = posts;
-    console.log('showsArray:\n', showsArray);
     if (req.session.isLoggedIn) {
       res.render('index', {
+        title: 'Record Riots!',
         username: req.session.username,
         isLoggedIn: true,
-        showsArray: showsArray
+        posts: posts
       });
     } else {
       res.render('index', {
         title: 'Record Riots!',
-        showsArray: showsArray
+        posts: posts
       });
     }
   });
@@ -133,18 +133,24 @@ router.get('/add-show', function(req, res, next) {
 
 router.post('/add-show', function(req, res, next) {
   let show = {
-    date: req.body.date,
+    date: moment(req.body.date).format('MMMM Do, YYYY'),
     name: req.body.name,
     venue: req.body.venue,
-    hours: req.body.hours,
+    address: req.body.address,
+    city: req.body.city,
+    state: req.body.state,
+    zip: req.body.zip,
+    start: req.body.start,
+    end: req.body.end,
     admission: req.body.admission,
-    comments: req.body.comments
+    details: req.body.details
   };
   Post.create(show, function(err, newPost) {
     if (err) {
       console.log(err);
       res.send('An error occured.');
     } else {
+      console.log('show crested:\n', newPost);
       res.redirect('/')
     }
   })
@@ -161,6 +167,53 @@ router.get('/logout', function(req, res, next) {
     res.render('logout', {
       title: 'You have been logged out.'
     });
+  });
+});
+
+// Search
+router.post('/search', function(req, res) {
+  var dateFormatted = moment(req.body.date).format('MMMM Do, YYYY');
+  console.log(dateFormatted);
+  Post.find({
+    $or: [
+      { 'date': dateFormatted },
+      { 'state': req.body.state}
+    ]
+  }, function(err, posts) {
+    console.log(req.body.state);
+    console.log('/search route called\nposts:\n', posts);
+    if (err) {
+      console.log(err);
+      res.send('An error occured.');
+    }
+    if (posts.length == 0) {
+      if (req.session.isLoggedIn) {
+        res.render('no-results', {
+          title: 'Record Riots!',
+          username: req.session.username,
+          isLoggedIn: true,
+          posts: posts
+        });
+      } else {
+        res.render('no-results', {
+          title: 'Record Riots!',
+        });
+      }
+    } else {
+      if (req.session.isLoggedIn) {
+        res.render('search-results', {
+          title: 'Record Riots!',
+          username: req.session.username,
+          isLoggedIn: true,
+          posts: posts
+        });
+      } else {
+        res.render('search-results', {
+          title: 'Record Riots!',
+          posts: posts
+        });
+      }
+    }
   });
 });
 

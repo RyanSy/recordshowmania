@@ -39,12 +39,11 @@
       <div class="form-row">
         <div class="col">
           <label for="date">Find by Date</label>
-          <input type="date" class="form-control" id="inputDate" name="date">
+          <input type="date" class="form-control" id="date" name="date">
         </div>
         <div class="col">
           <label for="date">Find by State</label>
-          <select class="form-control" id="inputState" name="state" aria-describedby="stateHelp" placeholder="Select state">
-            <option value="">Select State</option>
+          <select class="form-control" id="inputState" name="state" aria-describedby="stateHelp" placeholder="Enter state" required="true">
             <option value="AL">Alabama</option>
           	<option value="AK">Alaska</option>
           	<option value="AZ">Arizona</option>
@@ -103,9 +102,9 @@
       <button class="btn btn-success" type="submit" name="button">Search</button>
     </form>
   </div>
-  <div class="container">
+  <div class="container mt-5">
     <br>
-    <h3>Recently Added Shows:</h3>
+    <h3>Search Results:</h3>
     <br>
     <table class="table table-striped">
       <tbody>
@@ -122,5 +121,6 @@
         {{/each}}
       </tbody>
     </table>
+    <a href="/">Return to main page</a>
   </div>
 </div>

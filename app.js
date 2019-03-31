@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
 var db = mongoose.connection;
-var mongoDB = process.env.DB_URI;
+var mongoDB = process.env.DB_URI || 'mongodb://localhost:27017/recordriots';
 var session = require('express-session');
 
 var indexRouter = require('./routes/index');

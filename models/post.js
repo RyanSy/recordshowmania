@@ -4,12 +4,17 @@ var Schema = mongoose.Schema;
 
 var postSchema = new Schema(
   {
-    date: {type: Date, required: true},
-    name: {type: String, required: true, max: 100},
-    venue: {type: String, required: true, max: 100},
-    hours: {type: String, required: true, max: 100},
-    admission: {type: String, required: true, max: 100},
-    comments: {type: String, required: true, max: 100},
+    date: {type: String},
+    name: {type: String, required: true, max: 50},
+    venue: {type: String, required: true, max: 50},
+    address: {type: String, required: true, max: 100},
+    city: {type: String, required: true, max: 75},
+    state: {type: String, required: true, max: 2},
+    zip: {type: String, required: true, max: 10},
+    start: {type: String, required: true, max: 50},
+    end: {type: String, required: true, max: 50},
+    admission: {type: String, required: true, max: 25},
+    details: {type: String, required: true, max: 100},
   }
 );
 
