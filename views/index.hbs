@@ -112,11 +112,15 @@
         {{#each posts}}
           <tr>
             <td>
-              {{this.name}} - {{this.date}} <br>
-              {{this.venue}}, {{this.city}}, {{this.state}} <br>
+              {{this.date}} <br>
+              {{this.name}} <br>
+              <a href="https://maps.google.com/?q={{this.address}}+{{this.city}}+{{this.state}}" target="_blank">
+                {{this.venue}}, {{this.city}}, {{this.state}} <br>
+              </a>
               Time: {{this.start}} to {{this.end}} <br>
               Admission: {{this.admission}} <br>
               Details: {{this.details}}
+              Posted by: {{this.posted_by}}
             </td>
           </tr>
         {{/each}}

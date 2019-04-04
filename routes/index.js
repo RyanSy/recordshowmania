@@ -8,7 +8,7 @@ var moment = require('moment');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  console.log(req);
+  console.log('req.session.isLoggedIn: ', req.session.isLoggedIn);
   let showsArray;
   Post.find(function(err, posts) {
     if (err) {
@@ -76,9 +76,13 @@ router.get('/forgot', function(req, res, next) {
 
 // get user registration page
 router.get('/register', function(req, res, next) {
-  res.render('register', {
-    title: 'Register for free'
-  });
+  if (req.session.isLoggedIn) {
+    res.send("You are currently logged in.");
+  } else {
+    res.render('register', {
+      title: 'Register for free'
+    });
+  }
 });
 
 // user registration
@@ -133,8 +137,9 @@ router.get('/add-show', function(req, res, next) {
 });
 
 router.post('/add-show', function(req, res, next) {
+  // format start and end times
   let show = {
-    date: moment(req.body.date).format('MMMM Do, YYYY'),
+    date: moment(req.body.date).format('dddd, MMMM Do, YYYY'),
     name: req.body.name,
     venue: req.body.venue,
     address: req.body.address,
@@ -144,7 +149,8 @@ router.post('/add-show', function(req, res, next) {
     start: req.body.start,
     end: req.body.end,
     admission: req.body.admission,
-    details: req.body.details
+    details: req.body.details,
+    posted_by: req.session.username
   };
   Post.create(show, function(err, newPost) {
     if (err) {

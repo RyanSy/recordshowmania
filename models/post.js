@@ -15,6 +15,7 @@ var postSchema = new Schema(
     end: {type: String, required: true, max: 50},
     admission: {type: String, required: true, max: 25},
     details: {type: String, required: true, max: 100},
+    posted_by: {type: String, required: true, max: 100}
   }
 );
 
