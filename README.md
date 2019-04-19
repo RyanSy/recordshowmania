@@ -1,1 +1,18 @@
-# recordriots
+Todo:
+- my shows page
+- edit show
+- delete show
+- add other inputs to form from Steve's instructions
+- search between 2 dates
+- add sort feature for shows
+- implement reset password
+- create handlebars partial for nav
+- incorporate image storage
+- use async and refactor to eliminate callback hell
+- make sure session is working properly
+- create views for errors / 404
+- change db name
+- production best practices
+- security best practices
+- google analytics
+- SEO
