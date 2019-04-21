@@ -1,7 +1,6 @@
 TODO
 
 priority for MVP:
-- configure state default value on edit show page
 - add other inputs to form from Steve's instructions
 - search between 2 dates
 - add sort feature for shows
