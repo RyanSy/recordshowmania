@@ -14,7 +14,6 @@ cleaning up:
 - change db name
 - polish UI: make buttons same size?
 - Google Maps autocomplete
-- on confirm delete modal, dynamically set show name
 
 before deployment:
 - testing
