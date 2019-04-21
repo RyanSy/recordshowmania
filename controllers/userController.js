@@ -15,9 +15,7 @@ exports.display_registration = function(req, res) {
 
 // register user 
 exports.register_user = function(req, res) {
-  User.findOne({
-    email: req.body.email
-  }, function(err, user) {
+  User.findOne({ email: req.body.email }, function(err, user) {
     if (err) {
       console.log(err);
       res.send('An error occured.');
@@ -25,7 +23,6 @@ exports.register_user = function(req, res) {
     if (user) {
       console.log(user);
       res.send(`${req.body.email} already registered`);
-      return;
     } else {
       bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
         if (err) {
@@ -116,9 +113,9 @@ exports.send_reset = function(req, res) {
   res.send('Check your email for password reset instructions.');
 }
 
-// get reset password
-exports.reset_password = function(req, res) {
-  // render reset password form
+// get reset password form
+exports.get_reset_password = function(req, res) {
+  res.render('forgot');
 }
 
 // reset password

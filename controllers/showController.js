@@ -4,10 +4,12 @@ var moment = require('moment');
 // display shows on index
 exports.list_shows = function(req, res) {
   Show.find(function(err, shows) {
+      // remove shows if past
+
     console.log('/ called\nshows:\n', shows);
     if (err) {
       console.log(err);
-      res.send('An error occured.');
+      res.send('An error occured displaying all shows.');
     }
     var showsArray = [];
     for (var i = 0; i < shows.length; i++) {
@@ -53,12 +55,13 @@ exports.get_add_show = function(req, res) {
     });
   }
   else {
-    res.send('You must be logged in to add a show.');
+    res.render('session-expired', {message: 'add a show.'});
   }
 };
 
 // add show
 exports.post_add_show = function(req, res) {
+  // set id to random string
   var show = {
     date: req.body.date,
     name: req.body.name,
@@ -76,12 +79,47 @@ exports.post_add_show = function(req, res) {
   Show.create(show, function(err, newShow) {
     if (err) {
       console.log(err);
-      res.send('An error occured.');
+      res.send('An error occured creating your show.');
     }
-    else {
-      console.log('show created:\n', newShow);
-      res.redirect('/');
-    }
+    console.log('show created:\n', newShow);
+    Show.find({ 'posted_by': req.session.username }, function(err, shows) {
+      if (err) {
+        console.log(err);
+        res.send('An error occured getting your shows.');
+      }
+      var showsArray = [];
+      for (var i = 0; i < shows.length; i++) {
+        var showObject = {
+          id: shows[i]._id,
+          date: moment(shows[i].date).format('dddd, MMMM Do, YYYY'),
+          name: shows[i].name,
+          venue: shows[i].venue,
+          address: shows[i].address,
+          city: shows[i].city,
+          state: shows[i].state,
+          zip: shows[i].zip,
+          start: moment(shows[i].start, 'H:MM').format('h:mm A'),
+          end: moment(shows[i].end, 'H:MM').format('h:mm A'),
+          admission: shows[i].admission,
+          details: shows[i].details,
+          posted_by: shows[i].posted_by
+        };
+        showsArray.push(showObject);
+      }
+      if (req.session.isLoggedIn == true) {
+        res.render('my-shows', {
+          title: 'Record Riots!',
+          username: req.session.username,
+          isLoggedIn: true,
+          shows: showsArray,
+          message: `"${newShow.name}" successfully added.`,
+          message_exists: true
+        });
+      }
+      else {
+        res.render('session-expired', { message: 'add a show.' });
+      }
+    });
   });
 };
 
@@ -95,7 +133,7 @@ exports.search_shows = function(req, res) {
   }, function(err, shows) {
     if (err) {
       console.log(err);
-      res.send('An error occured.');
+      res.send('An error occured searching for shows.');
     }
     if (shows.length == 0) {
       if (req.session.isLoggedIn == true) {
@@ -136,7 +174,7 @@ exports.get_my_shows = function(req, res) {
   Show.find({ 'posted_by': req.session.username }, function(err, shows) {
     if (err) {
       console.log(err);
-      res.send('An error occured.');
+      res.send('An error occured getting your shows.');
     }
     var showsArray = [];
     for (var i = 0; i < shows.length; i++) {
@@ -157,16 +195,23 @@ exports.get_my_shows = function(req, res) {
       };
       showsArray.push(showObject);
     }
+    var noshow_message;
+    if (showsArray.length == 0) {
+      noshow_message = 'You have no shows listed.';
+    } else {
+      noshow_message = null;
+    }
     if (req.session.isLoggedIn == true) {
       res.render('my-shows', {
         title: 'Record Riots!',
         username: req.session.username,
         isLoggedIn: true,
-        shows: showsArray
+        shows: showsArray,
+        noshow_message: noshow_message
       });
     }
     else {
-      res.render('access-denied');
+      res.render('session-expired', { message: 'view your shows.'});
     }
   });
 };
@@ -174,10 +219,9 @@ exports.get_my_shows = function(req, res) {
 // get edit show page
 exports.get_edit_show = function(req, res) {
   Show.findOne({ '_id': req.params.id }, function(err, show) {
-    console.log(show);
     if (err) {
       console.log(err);
-      res.send('An error occured.');
+      res.send('An error occured getting that show.');
     }
     if (req.session.isLoggedIn) {
       res.render('edit-show', {
@@ -252,7 +296,7 @@ exports.post_edit_show = function(req, res) {
         });
       }
       else {
-        res.render('access-denied');
+        res.render('session-expired', { message: 'edit your show.' });
       }
     });
   });
@@ -300,7 +344,7 @@ exports.delete_show = function(req, res) {
         });
       }
       else {
-        res.render('access-denied');
+        res.render('session-expired', { message: 'delete your show.' });
       }
     });
   })

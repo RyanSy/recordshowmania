@@ -1,3 +1,37 @@
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container">
+    <a class="navbar-brand" href="/"><img src="images/recordriots-logo.png" alt="Record Riots!"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse text-center" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        {{#if isLoggedIn}}
+        <li class="nav-item">
+          <span class="nav-link">Welcome, {{username}}</span>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/add-show">Add Show</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/my-shows">My Shows</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Log Out</a>
+        </li>
+        {{else}}
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/register">Register</a>
+        </li>
+        {{/if}}
+      </ul>
+    </div>
+  </div>
+</nav>
+
 <div class="container mt-5">
   <h5 class="mb-4">Edit Show:</h5>
   <form action="/edit-show/{{show._id}}" method="post">
@@ -23,7 +57,7 @@
     </div>
     <div class="form-group">
       <label for="inputState">State</label>
-      <select class="form-control col-1" id="inputState" name="state" aria-describedby="stateHelp" placeholder="Enter state" required="true" value="{{show.state}}">
+      <select class="form-control col-1" id="inputState" name="state" aria-describedby="stateHelp" placeholder="Enter state" required="true">
         <option value="AL">AL</option>
       	<option value="AK">AK</option>
       	<option value="AZ">AZ</option>
@@ -76,6 +110,7 @@
       	<option value="WI">WI</option>
       	<option value="WY">WY</option>
       </select>
+      <input id="selectedState" type="hidden" value="{{show.state}}">
     </div>
     <div class="form-group">
       <label for="inputZip">Zip</label>
@@ -98,10 +133,22 @@
       <textarea class="form-control col-6" id="inputDetails" name="details" placeholder="Enter details" required="true" rows="4">{{show.details}}</textarea>
     </div>
     <br>
-    <button type="submit" class="btn btn-primary">Save</button><a class="btn" href="/my-shows">Cancel</a>
+    <button type="submit" class="btn btn-primary">Save</button><a class="btn btn-link" href="/my-shows">Cancel</a>
   </form>
 </div>
 
 <script>
   // dynamically set option selected state
+  var state = document.getElementById('selectedState').value;
+  
+  setSelectedState(state);
+  
+  function setSelectedState(value) {
+    var options = document.getElementsByTagName("option");
+    for (var i = 0; i < options.length; i++) {
+      if (options[i].value == value) {
+        options[i].selected = true;
+      }
+    }
+  }
 </script>
