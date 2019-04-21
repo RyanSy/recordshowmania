@@ -116,14 +116,40 @@
           <tr>
             <td>
               {{this.date}} <br>
-              {{this.name}} <br>
-              <a href="https://maps.google.com/?q={{this.address}}+{{this.city}}+{{this.state}}" target="_blank">
-                {{this.venue}}, {{this.city}}, {{this.state}} <br>
-              </a>
-              Time: {{this.start}} to {{this.end}} <br>
-              Admission: {{this.admission}} <br>
-              Details: {{this.details}} <br>
-              Posted by: {{this.posted_by}}
+              <button class="btn btn-link" data-toggle="modal" data-target="#showDetailModal{{this.id}}" type="button" name="button">
+                {{this.name}} <br>
+                {{this.venue}} - {{this.city}}, {{this.state}} <br>
+              </button> <br>
+              {{this.start}} to {{this.end}}
+              <!-- Modal -->
+              <div class="modal fade" id="showDetailModal{{this.id}}" tabindex="-1" role="dialog" aria-labelledby="showDetailModalLabel{{this.id}}" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="showDetailModalLabel{{this.id}}">Show Details</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      {{this.name}} <br>
+                      <a href="https://maps.google.com/?q={{this.address}}+{{this.city}}+{{this.state}}" target="_blank">
+                        {{this.venue}} <br>
+                        {{this.address}} <br>
+                        {{this.city}}, {{this.state}} {{this.zip}} <br>
+                      </a>
+                      Time: {{this.start}} to {{this.end}} <br>
+                      Admission: {{this.admission}} <br>
+                      Details: {{this.details}} <br>
+                      Posted by: {{this.posted_by}}
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {{!-- end mnodal --}}
             </td>
           </tr>
         {{/each}}

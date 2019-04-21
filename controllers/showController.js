@@ -21,8 +21,8 @@ exports.list_shows = function(req, res) {
         city: shows[i].city,
         state: shows[i].state,
         zip: shows[i].zip,
-        start: moment(shows[i].start, 'H:MM').format('h:mm A'),
-        end: moment(shows[i].end, 'H:MM').format('h:mm A'),
+        start: moment(shows[i].start, 'HH:MM').format('h:mm A'),
+        end: moment(shows[i].end, 'HH:MM').format('h:mm A'),
         admission: shows[i].admission,
         details: shows[i].details,
         posted_by: shows[i].posted_by
@@ -260,7 +260,7 @@ exports.post_edit_show = function(req, res) {
     }
     // look at this later
     console.log('updatedShow: ', updatedShow);
-    
+
     Show.find({ 'posted_by': req.session.username }, function(err, shows) {
       if (err) {
         console.log(err);

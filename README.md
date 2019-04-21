@@ -12,7 +12,7 @@ cleaning up:
 - create handlebars partial for nav
 - use async and refactor to eliminate callback hell
 - change db name
-- polish UI: make buttons same size?
+- polish UI: make buttons same size? look to google events for inspiration
 - Google Maps autocomplete
 
 before deployment:
