@@ -2,27 +2,6 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-/* 
-Steve's show inputs:
-Date
-State
-Name Of Show
-Venue/Address
-Show Hours
-Regular Admission/Time
-Early Admission/Time
-Number Of Dealers
-Number Of Tables
-Size Of Tables
-Table Rent
-CD Dealers?
-45 Dealers?
-78 Dealers?
-Food/Drink?
-Handicapped Access?
-More Information
-*/
-
 var showSchema = new Schema(
   {
     date: {type: String},

@@ -5,29 +5,29 @@
   <form action="/edit-show/{{show._id}}" method="post">
     <div class="form-group">
       <label for="inputDate">Date</label>
-      <input type="date" class="form-control col-md-3" id="inputDate" name="date" placeholder="Enter date" required="true" value="{{show.date}}">
+      <input type="date" class="form-control" id="inputDate" name="date" placeholder="Enter date" required="true" value="{{show.date}}">
     </div>
-    
+
     <div class="form-group">
       <label for="inputName">Name</label>
-      <input type="text" class="form-control col-6" id="inputName" name="name" placeholder="Enter name of show" required="true" value="{{show.name}}">
+      <input type="text" class="form-control" id="inputName" name="name" placeholder="Enter name of show" required="true" value="{{show.name}}">
     </div>
-    
+
     <div class="form-group">
       <label for="inputVenue">Venue</label>
-      <input type="text" class="form-control col-6" id="inputVenue" name="venue" placeholder="Enter venue" required="true" value="{{show.venue}}">
+      <input type="text" class="form-control" id="inputVenue" name="venue" placeholder="Enter venue" required="true" value="{{show.venue}}">
     </div>
-    
+
     <div class="form-group">
       <label for="inputAddress">Address</label>
-      <input type="text" class="form-control col-6" id="inputAddress" name="address" aria-describedby="addressHelp" placeholder="Enter address" required="true" value="{{show.address}}">
+      <input type="text" class="form-control" id="inputAddress" name="address" aria-describedby="addressHelp" placeholder="Enter address" required="true" value="{{show.address}}">
     </div>
-    
+
     <div class="form-group">
       <label for="inputCity">City</label>
-      <input type="text" class="form-control col-6" id="inputCity" name="city" placeholder="Enter city" required="true" value="{{show.city}}">
+      <input type="text" class="form-control" id="inputCity" name="city" placeholder="Enter city" required="true" value="{{show.city}}">
     </div>
-    
+
     <div class="form-group">
       <label for="inputState">State</label>
       <input type="hidden" id="selectedState" value="{{show.state}}">
@@ -85,27 +85,27 @@
       	<option value="WY">WY</option>
       </select>
     </div>
-    
+
     <div class="form-group">
       <label for="inputZip">Zip</label>
       <input type="text" class="form-control col-2" id="inputZip" name="zip" placeholder="Enter zip" required="true" max="10" value="{{show.zip}}">
     </div>
-    
+
     <div class="form-group">
       <label for="inputStart">Start</label>
       <input type="time" class="form-control col-2" id="inputStart" name="start" placeholder="Enter start time" required="true" value="{{show.start}}">
     </div>
-    
+
     <div class="form-group">
       <label for="inputEnd">End</label>
       <input type="time" class="form-control" id="inputEnd" name="end" placeholder="Enter end time" required="true" value="{{show.end}}">
     </div>
-    
+
     <div class="form-group">
       <label for="inputRegularAdmission">Admission</label>
       <input type="text" class="form-control" id="inputRegularAdmission" name="regular_admission_fee" placeholder="Enter regular admission" required="true" value="{{show.regular_admission_fee}}">
     </div>
-    
+
     <div class="form-group">
       <div class="form-check form-check-inline">
         <label for="earlyAdmissionYes">Early Admission?</label>
@@ -129,7 +129,7 @@
           No
         </div>
     </div>
-    
+
     <div id="earlyAdmissionFields" class="d-none">
       <div class="form-group">
         <label for="earlyAdmissionTime">Early Admission Time</label>
@@ -140,27 +140,27 @@
         <input type="text" class="form-control" id="earlyAdmissionFee" name="early_admission_fee" placeholder="Enter early admission fee" value="{{show.early_admission_fee}}">
       </div>
     </div>
-    
+
     <div class="form-group">
       <label for="numberOfDealers">Number Of Dealers</label>
       <input type="text" class="form-control" id="numberOfDealers" name="number_of_dealers" placeholder="Enter number of dealers" value="{{show.number_of_dealers}}">
     </div>
-    
+
     <div class="form-group">
       <label for="numberOfTables">Number Of Tables</label>
       <input type="text" class="form-control" id="numberOfTables" name="number_of_tables" placeholder="Enter regular admission" required="true"value="{{show.number_of_tables}}">
     </div>
-    
+
     <div class="form-group">
       <label for="sizeOfTables">Size Of Tables</label>
       <input type="text" class="form-control" id="sizeOfTables" name="size_of_tables" placeholder="Enter size of tables" value="{{show.size_of_tables}}">
     </div>
-    
+
     <div class="form-group">
       <label for="tableRent">Table Rent</label>
       <input type="text" class="form-control" id="tableRent" name="table_rent" placeholder="Enter price to rent per table" value="{{show.table_rent}}">
     </div>
-  
+
     <div class="form-group">
       <div class="form-check form-check-inline">
         <label for="cdDealers">CD Dealers?</label>
@@ -185,7 +185,7 @@
         </div>
       {{/if}}
     </div>
-    
+
     <div class="form-group">
       <div class="form-check form-check-inline">
         <label for="fortyFiveDealers">45 Dealers?</label>
@@ -210,7 +210,7 @@
         </div>
       {{/if}}
     </div>
-    
+
     <div class="form-group">
       <div class="form-check form-check-inline">
         <label for="sevetyEightDealers">78 Dealers?</label>
@@ -235,7 +235,7 @@
         </div>
       {{/if}}
     </div>
-    
+
     <div class="form-group">
       <div class="form-check form-check-inline">
         <label for="foodDrink">Food/Drink?</label>
@@ -260,7 +260,7 @@
         </div>
       {{/if}}
     </div>
-    
+
     <div class="form-group">
       <div class="form-check form-check-inline">
         <label for="handicappedAccess">Handicapped Access?</label>
@@ -285,16 +285,16 @@
         </div>
       {{/if}}
     </div>
-    
+
     <div class="form-group">
       <label for="inputMoreInformation">More Information</label>
-      <textarea class="form-control col-6" id="inputMoreInformation" name="more_information" placeholder="Enter more information" required="true" rows="4">{{show.more_information}}</textarea>
+      <textarea class="form-control " id="inputMoreInformation" name="more_information" placeholder="Enter more information" required="true" rows="4">{{show.more_information}}</textarea>
     </div>
-    
+
     <div class="form-group">
       <button type="submit" class="btn btn-primary">Save</button><a class="btn btn-link" href="/my-shows">Cancel</a>
     </div>
-    
+
   </form>
 </div>
 
@@ -302,9 +302,9 @@
   // set selected state
   var state = document.getElementById('selectedState').value;
   console.log(state);
-  
+
   setSelectedState(state);
-  
+
   function setSelectedState(value) {
     var options = document.getElementsByTagName("option");
     for (var i = 0; i < options.length; i++) {
