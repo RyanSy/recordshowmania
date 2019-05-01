@@ -1,70 +1,42 @@
-<nav class="navbar navbar-expand-lg navbar-dark">
-  <div class="container">
-    <a class="navbar-brand" href="/"><img src="images/recordriots-logo.png" alt="Record Riots!"></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse text-center" id="navbarResponsive">
-      <ul class="navbar-nav ml-auto">
-        {{#if isLoggedIn}}
-        <li class="nav-item">
-          <span class="nav-link">Welcome, {{username}}</span>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/add-show">Add Show</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/my-shows">My Shows</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/logout">Log Out</a>
-        </li>
-        {{else}}
-        <li class="nav-item">
-          <a class="nav-link" href="/login">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/register">Register</a>
-        </li>
-        {{/if}}
-      </ul>
-    </div>
-  </div>
-</nav>
+{{> nav}}
 
 <div class="container">
   <br>
   <h3>My Shows:</h3>
-  <br> 
-  
+  <br>
+
   {{#if message_exists}}
-  <div class="alert alert-success alert-dismissible fade show" role="alert">
-    {{message}}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      {{message}}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
-  </div>
+    </div>
   {{/if}}
-  
+
   {{#if noshow_message}}
-  <p class="mt-5">{{noshow_message}}</p>
+    <p class="mt-5">{{noshow_message}}</p>
   {{/if}}
-  
+
   <table class="table table-striped">
     <tbody>
       {{#each shows}}
         <tr>
           <td>
-            {{this.date}} <br> 
+            {{this.date}} <br>
             {{this.name}} <br>
             <a href="https://maps.google.com/?q={{this.address}}+{{this.city}}+{{this.state}}" target="_blank">
-              {{this.venue}}, {{this.city}}, {{this.state}}
-            </a> <br>
-            Time: {{this.start}} to {{this.end}} <br> 
-            Admission: {{this.admission}} <br> 
-            Details: {{this.details}} <br> 
+                    {{this.venue}} <br>
+                    {{this.address}} <br>
+                    {{this.city}}, {{this.state}} {{this.zip}} <br>
+                  </a> Time: {{this.start}} to {{this.end}} <br> Regular Admission: {{this.regular_admission_fee}} <br> Early Admission? {{this.early_admission}} <br>
+            {{#if this.early_admission}}
+              Early Admission Time: {{this.early_admission_time}} <br> Early Admission Fee: {{this.early_admission_fee}} <br>
+            {{/if}}
+            Number Of Dealers: {{this.number_of_dealers}} <br> Number Of Tables: {{this.number_of_tables}} <br> Size Of Tables: {{this.size_of_tables}} <br> Table Rent: {{this.table_rent}} <br> CD Dealers? {{this.cd_dealers}} <br> 45 Dealers? {{this.fortyfive_dealers}}
+            <br> 78 Dealers? {{this.seventyeight_dealers}} <br> Food/Drink? {{this.food_drink}} <br> Handicapped Access? {{this.handicapped_access}} <br> More Information: {{this.more_information}} <br> Posted by: {{this.posted_by}}
             <div class="mt-2">
-              <a class="btn btn-primary"  href="/edit-show/{{this.id}}">Edit</a><span> | </span><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete{{this.id}}">Delete</button>
+              <a class="btn btn-primary" href="/edit-show/{{this.id}}">Edit</a><span> | </span><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete{{this.id}}">Delete</button>
             </div>
             <!-- Modal -->
             <div class="modal fade" id="confirmDelete{{this.id}}" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel{{this.id}}" aria-hidden="true">

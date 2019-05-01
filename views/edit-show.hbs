@@ -1,63 +1,37 @@
-<nav class="navbar navbar-expand-lg navbar-dark">
-  <div class="container">
-    <a class="navbar-brand" href="/"><img src="images/recordriots-logo.png" alt="Record Riots!"></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse text-center" id="navbarResponsive">
-      <ul class="navbar-nav ml-auto">
-        {{#if isLoggedIn}}
-        <li class="nav-item">
-          <span class="nav-link">Welcome, {{username}}</span>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/add-show">Add Show</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/my-shows">My Shows</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/logout">Log Out</a>
-        </li>
-        {{else}}
-        <li class="nav-item">
-          <a class="nav-link" href="/login">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/register">Register</a>
-        </li>
-        {{/if}}
-      </ul>
-    </div>
-  </div>
-</nav>
+{{> nav}}
 
 <div class="container mt-5">
   <h5 class="mb-4">Edit Show:</h5>
   <form action="/edit-show/{{show._id}}" method="post">
     <div class="form-group">
       <label for="inputDate">Date</label>
-      <input type="date" class="form-control col-3" id="inputDate" name="date" aria-describedby="dateHelp" placeholder="Enter date" required="true" value="{{show.date}}">
+      <input type="date" class="form-control col-md-3" id="inputDate" name="date" placeholder="Enter date" required="true" value="{{show.date}}">
     </div>
+    
     <div class="form-group">
       <label for="inputName">Name</label>
       <input type="text" class="form-control col-6" id="inputName" name="name" placeholder="Enter name of show" required="true" value="{{show.name}}">
     </div>
+    
     <div class="form-group">
       <label for="inputVenue">Venue</label>
-      <input type="text" class="form-control col-6" id="inputVenue" name="venue" aria-describedby="venueHelp" placeholder="Enter venue" required="true" value="{{show.venue}}">
+      <input type="text" class="form-control col-6" id="inputVenue" name="venue" placeholder="Enter venue" required="true" value="{{show.venue}}">
     </div>
+    
     <div class="form-group">
       <label for="inputAddress">Address</label>
       <input type="text" class="form-control col-6" id="inputAddress" name="address" aria-describedby="addressHelp" placeholder="Enter address" required="true" value="{{show.address}}">
     </div>
+    
     <div class="form-group">
       <label for="inputCity">City</label>
-      <input type="text" class="form-control col-6" id="inputCity" name="city" aria-describedby="cityHelp" placeholder="Enter city" required="true" value="{{show.city}}">
+      <input type="text" class="form-control col-6" id="inputCity" name="city" placeholder="Enter city" required="true" value="{{show.city}}">
     </div>
+    
     <div class="form-group">
       <label for="inputState">State</label>
-      <select class="form-control col-1" id="inputState" name="state" aria-describedby="stateHelp" placeholder="Enter state" required="true">
+      <input type="hidden" id="selectedState" value="{{show.state}}">
+      <select class="form-control col-1" id="inputState" name="state" placeholder="Enter state" required="true">
         <option value="AL">AL</option>
       	<option value="AK">AK</option>
       	<option value="AZ">AZ</option>
@@ -110,36 +84,224 @@
       	<option value="WI">WI</option>
       	<option value="WY">WY</option>
       </select>
-      <input id="selectedState" type="hidden" value="{{show.state}}">
     </div>
+    
     <div class="form-group">
       <label for="inputZip">Zip</label>
-      <input type="text" class="form-control col-2" id="inputZip" name="zip" aria-describedby="zipHelp" placeholder="Enter zip" required="true" max="10" value="{{show.zip}}">
+      <input type="text" class="form-control col-2" id="inputZip" name="zip" placeholder="Enter zip" required="true" max="10" value="{{show.zip}}">
     </div>
+    
     <div class="form-group">
       <label for="inputStart">Start</label>
       <input type="time" class="form-control col-2" id="inputStart" name="start" placeholder="Enter start time" required="true" value="{{show.start}}">
     </div>
+    
     <div class="form-group">
       <label for="inputEnd">End</label>
-      <input type="time" class="form-control col-2" id="inputEnd" name="end" placeholder="Enter end time" required="true" value="{{show.end}}">
+      <input type="time" class="form-control" id="inputEnd" name="end" placeholder="Enter end time" required="true" value="{{show.end}}">
     </div>
+    
     <div class="form-group">
-      <label for="inputAdmission">Admission</label></label>
-      <input type="text" class="form-control col-2" id="inputAdmission" name="admission" aria-describedby="admissionHelp" placeholder="Enter admission" required="true" value="{{show.admission}}">
+      <label for="inputRegularAdmission">Admission</label>
+      <input type="text" class="form-control" id="inputRegularAdmission" name="regular_admission_fee" placeholder="Enter regular admission" required="true" value="{{show.regular_admission_fee}}">
     </div>
+    
     <div class="form-group">
-      <label for="inputDetailss">Details</label>
-      <textarea class="form-control col-6" id="inputDetails" name="details" placeholder="Enter details" required="true" rows="4">{{show.details}}</textarea>
+      <div class="form-check form-check-inline">
+        <label for="earlyAdmissionYes">Early Admission?</label>
+      </div>
+      {{#if show.early_admission}}
+        <div class="form-check form-check-inline">
+        <input type="radio" class="form-check-input" id="earlyAdmissionYes" name="early_admission" onclick="displayEarlyAdmissionFields()" value="yes" checked>
+        Yes
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" id="earlyAdmissionNo" name="early_admission" onclick="displayEarlyAdmissionFields()" value="no">
+          No
+        </div>
+      {{/if}}
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" id="earlyAdmissionYes" name="early_admission" onclick="displayEarlyAdmissionFields()" value="yes">
+          Yes
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" id="earlyAdmissionNo" name="early_admission" onclick="displayEarlyAdmissionFields()" value="no" checked>
+          No
+        </div>
     </div>
-    <br>
-    <button type="submit" class="btn btn-primary">Save</button><a class="btn btn-link" href="/my-shows">Cancel</a>
+    
+    <div id="earlyAdmissionFields" class="d-none">
+      <div class="form-group">
+        <label for="earlyAdmissionTime">Early Admission Time</label>
+        <input type="time" class="form-control" id="earlyAdmissionTime" name="early_admission_time" value="{{show.early_admission_time}}">
+      </div>
+      <div class="form-group">
+        <label for="inputAdmission">Early Admission Fee</label>
+        <input type="text" class="form-control" id="earlyAdmissionFee" name="early_admission_fee" placeholder="Enter early admission fee" value="{{show.early_admission_fee}}">
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="numberOfDealers">Number Of Dealers</label>
+      <input type="text" class="form-control" id="numberOfDealers" name="number_of_dealers" placeholder="Enter number of dealers" value="{{show.number_of_dealers}}">
+    </div>
+    
+    <div class="form-group">
+      <label for="numberOfTables">Number Of Tables</label>
+      <input type="text" class="form-control" id="numberOfTables" name="number_of_tables" placeholder="Enter regular admission" required="true"value="{{show.number_of_tables}}">
+    </div>
+    
+    <div class="form-group">
+      <label for="sizeOfTables">Size Of Tables</label>
+      <input type="text" class="form-control" id="sizeOfTables" name="size_of_tables" placeholder="Enter size of tables" value="{{show.size_of_tables}}">
+    </div>
+    
+    <div class="form-group">
+      <label for="tableRent">Table Rent</label>
+      <input type="text" class="form-control" id="tableRent" name="table_rent" placeholder="Enter price to rent per table" value="{{show.table_rent}}">
+    </div>
+  
+    <div class="form-group">
+      <div class="form-check form-check-inline">
+        <label for="cdDealers">CD Dealers?</label>
+      </div>
+      {{#if show.cd_dealers}}
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" name="cd_dealers" value="yes" checked>
+          Yes
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" name="cd_dealers" value="no">
+          No
+        </div>
+      {{else}}
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" name="cd_dealers" value="yes">
+          Yes
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" name="cd_dealers" value="no" checked>
+          No
+        </div>
+      {{/if}}
+    </div>
+    
+    <div class="form-group">
+      <div class="form-check form-check-inline">
+        <label for="fortyFiveDealers">45 Dealers?</label>
+      </div>
+      {{#if show.fortyfive_dealers}}
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" name="fortyfive_dealers" value="yes" checked>
+          Yes
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" name="fortyfive_dealers" value="no">
+          No
+        </div>
+      {{else}}
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" name="fortyfive_dealers" value="yes">
+          Yes
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" name="fortyfive_dealers" value="no"checked>
+          No
+        </div>
+      {{/if}}
+    </div>
+    
+    <div class="form-group">
+      <div class="form-check form-check-inline">
+        <label for="sevetyEightDealers">78 Dealers?</label>
+      </div>
+      {{#if show.seventyeight_dealers}}
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" name="seventyeight_dealers" value="yes" checked>
+          Yes
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" name="seventyeight_dealers" value="no">
+          No
+        </div>
+      {{else}}
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" name="seventyeight_dealers" value="yes">
+          Yes
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" name="seventyeight_dealers" value="no" checked>
+          No
+        </div>
+      {{/if}}
+    </div>
+    
+    <div class="form-group">
+      <div class="form-check form-check-inline">
+        <label for="foodDrink">Food/Drink?</label>
+      </div>
+      {{#if show.food_drink}}
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" name="food_drink" value="yes" checked>
+          Yes
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" name="food_drink" value="no">
+          No
+        </div>
+      {{else}}
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" name="food_drink" value="yes">
+          Yes
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" name="food_drink" value="no" checked>
+          No
+        </div>
+      {{/if}}
+    </div>
+    
+    <div class="form-group">
+      <div class="form-check form-check-inline">
+        <label for="handicappedAccess">Handicapped Access?</label>
+      </div>
+      {{#if show.handicapped_access}}
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" name="handicapped_access" value="yes" checked>
+          Yes
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" name="handicapped_access" value="no">
+          No
+        </div>
+      {{else}}
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" name="handicapped_access" value="yes">
+          Yes
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" name="handicapped_access" value="no" checked>
+          No
+        </div>
+      {{/if}}
+    </div>
+    
+    <div class="form-group">
+      <label for="inputMoreInformation">More Information</label>
+      <textarea class="form-control col-6" id="inputMoreInformation" name="more_information" placeholder="Enter more information" required="true" rows="4">{{show.more_information}}</textarea>
+    </div>
+    
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Save</button><a class="btn btn-link" href="/my-shows">Cancel</a>
+    </div>
+    
   </form>
 </div>
 
 <script>
-  // dynamically set option selected state
+  // set selected state
   var state = document.getElementById('selectedState').value;
+  console.log(state);
   
   setSelectedState(state);
   

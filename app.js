@@ -4,6 +4,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var hbs = require('hbs');
 var mongoose = require('mongoose');
 var db = mongoose.connection;
 var mongoDB = process.env.DB_URI || 'mongodb://localhost:27017/recordriots';
@@ -20,6 +21,7 @@ db.on('error', console.error.bind(console, 'connection error:'));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+hbs.registerPartials(__dirname + '/views/partials/');
 
 app.use(logger('dev'));
 app.use(express.json());
