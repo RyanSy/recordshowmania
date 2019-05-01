@@ -7,53 +7,61 @@
     <div class="collapse navbar-collapse text-center" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
         {{#if isLoggedIn}}
-          <li class="nav-item">
-            <span class="nav-link">Welcome, {{username}}</span>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/add-show">Add Show</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/logout">Log Out</a>
-          </li>
+        <li class="nav-item">
+          <span class="nav-link">Welcome, {{username}}</span>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/add-show">Add Show</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Log Out</a>
+        </li>
         {{else}}
-          <li class="nav-item">
-            <a class="nav-link" href="/login">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/register">Register</a>
-          </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/register">Register</a>
+        </li>
         {{/if}}
       </ul>
     </div>
   </div>
 </nav>
+
 <div class="container mt-5">
   <h5 class="mb-4">Add a show:</h5>
+  
   <form action="/add-show" method="post">
+    
     <div class="form-group">
       <label for="inputDate">Date</label>
-      <input type="date" class="form-control col-3" id="inputDate" name="date" aria-describedby="dateHelp" placeholder="Enter date" required="true">
+      <input type="date" class="form-control col-md-3" id="inputDate" name="date" placeholder="Enter date" required="true">
     </div>
+    
     <div class="form-group">
       <label for="inputName">Name</label>
       <input type="text" class="form-control col-6" id="inputName" name="name" placeholder="Enter name of show" required="true">
     </div>
+    
     <div class="form-group">
       <label for="inputVenue">Venue</label>
-      <input type="text" class="form-control col-6" id="inputVenue" name="venue" aria-describedby="venueHelp" placeholder="Enter venue" required="true">
+      <input type="text" class="form-control col-6" id="inputVenue" name="venue" placeholder="Enter venue" required="true">
     </div>
+    
     <div class="form-group">
       <label for="inputAddress">Address</label>
       <input type="text" class="form-control col-6" id="inputAddress" name="address" aria-describedby="addressHelp" placeholder="Enter address" required="true">
     </div>
+    
     <div class="form-group">
       <label for="inputCity">City</label>
-      <input type="text" class="form-control col-6" id="inputCity" name="city" aria-describedby="cityHelp" placeholder="Enter city" required="true">
+      <input type="text" class="form-control col-6" id="inputCity" name="city" placeholder="Enter city" required="true">
     </div>
+    
     <div class="form-group">
       <label for="inputState">State</label>
-      <select class="form-control col-1" id="inputState" name="state" aria-describedby="stateHelp" placeholder="Enter state" required="true">
+      <select class="form-control col-1" id="inputState" name="state" placeholder="Enter state" required="true">
         <option value="AL">AL</option>
       	<option value="AK">AK</option>
       	<option value="AZ">AZ</option>
@@ -107,27 +115,167 @@
       	<option value="WY">WY</option>
       </select>
     </div>
+    
     <div class="form-group">
       <label for="inputZip">Zip</label>
-      <input type="text" class="form-control col-2" id="inputZip" name="zip" aria-describedby="zipHelp" placeholder="Enter zip" required="true" max="10">
+      <input type="text" class="form-control col-2" id="inputZip" name="zip" placeholder="Enter zip" required="true" max="10">
     </div>
+    
     <div class="form-group">
       <label for="inputStart">Start</label>
       <input type="time" class="form-control col-2" id="inputStart" name="start" placeholder="Enter start time" required="true">
     </div>
+    
     <div class="form-group">
       <label for="inputEnd">End</label>
-      <input type="time" class="form-control col-2" id="inputEnd" name="end" placeholder="Enter end time" required="true">
+      <input type="time" class="form-control" id="inputEnd" name="end" placeholder="Enter end time" required="true">
     </div>
+    
     <div class="form-group">
-      <label for="inputAdmission">Admission</label></label>
-      <input type="text" class="form-control col-2" id="inputAdmission" name="admission" aria-describedby="admissionHelp" placeholder="Enter admission" required="true">
+      <label for="inputAdmission">Regular Admission</label>
+      <input type="text" class="form-control" id="inputAdmission" name="regular_admission_fee" placeholder="Enter regular admission" required="true">
     </div>
+    
     <div class="form-group">
-      <label for="inputDetailss">Details</label>
-      <textarea class="form-control col-6" id="inputDetails" name="details" placeholder="Enter details" required="true" rows="4"></textarea>
+      <div class="form-check form-check-inline">
+        <label for="earlyAdmissionYes">Early Admission?</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input type="radio" class="form-check-input" id="earlyAdmissionYes" name="early_admission" onclick="displayEarlyAdmissionFields()" value="yes">
+        Yes
+      </div>
+      <div class="form-check form-check-inline">
+        <input type="radio" class="form-check-input" id="earlyAdmissionNo" name="early_admission" onclick="displayEarlyAdmissionFields()" value="no" checked>
+        No
+      </div>
     </div>
-    <br>
-    <button type="submit" class="btn btn-primary">Add Show</button>
+    
+    <div id="earlyAdmissionFields" class="d-none">
+      <div class="form-group">
+        <label for="earlyAdmissionTime">Early Admission Time</label>
+        <input type="time" class="form-control" id="earlyAdmissionTime" name="early_admission_time">
+      </div>
+      <div class="form-group">
+        <label for="inputAdmission">Early Admission Fee</label>
+        <input type="text" class="form-control" id="earlyAdmissionFee" name="early_admission_fee" placeholder="Enter early admission fee">
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="numberOfDealers">Number Of Dealers</label>
+      <input type="text" class="form-control" id="numberOfDealers" name="number_of_dealers" placeholder="Enter number of dealers">
+    </div>
+    
+    <div class="form-group">
+      <label for="numberOfTables">Number Of Tables</label>
+      <input type="text" class="form-control" id="numberOfTables" name="number_of_tables" placeholder="Enter regular admission" required="true">
+    </div>
+    
+    <div class="form-group">
+      <label for="sizeOfTables">Size Of Tables</label>
+      <input type="text" class="form-control" id="sizeOfTables" name="size_of_tables" placeholder="Enter size of tables">
+    </div>
+    
+    <div class="form-group">
+      <label for="tableRent">Table Rent</label>
+      <input type="text" class="form-control" id="tableRent" name="table_rent" placeholder="Enter price to rent per table">
+    </div>
+  
+    <div class="form-group">
+      <div class="form-check form-check-inline">
+        <label for="cdDealers">CD Dealers?</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input type="radio" class="form-check-input" name="cd_dealers" value="yes">
+        Yes
+      </div>
+      <div class="form-check form-check-inline">
+        <input type="radio" class="form-check-input" name="cd_dealers" value="no">
+        No
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <div class="form-check form-check-inline">
+        <label for="fortyFiveDealers">45 Dealers?</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input type="radio" class="form-check-input" name="fortyfive_dealers" value="yes">
+        Yes
+      </div>
+      <div class="form-check form-check-inline">
+        <input type="radio" class="form-check-input" name="fortyfive_dealers" value="no">
+        No
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <div class="form-check form-check-inline">
+        <label for="sevetyEightDealers">78 Dealers?</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input type="radio" class="form-check-input" name="seventyeight_dealers" value="yes">
+        Yes
+      </div>
+      <div class="form-check form-check-inline">
+        <input type="radio" class="form-check-input" name="seventyeight_dealers" value="no">
+        No
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <div class="form-check form-check-inline">
+        <label for="foodDrink">Food/Drink?</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input type="radio" class="form-check-input" name="food_drink" value="yes">
+        Yes
+      </div>
+      <div class="form-check form-check-inline">
+        <input type="radio" class="form-check-input" name="food_drink" value="no">
+        No
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <div class="form-check form-check-inline">
+        <label for="handicappedAccess">Handicapped Access?</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input type="radio" class="form-check-input" name="handicapped_access" value="yes">
+        Yes
+      </div>
+      <div class="form-check form-check-inline">
+        <input type="radio" class="form-check-input" name="handicapped_access" value="no">
+        No
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="inputMoreInformation">More Information</label>
+      <textarea class="form-control col-6" id="inputMoreInformation" name="more_information" placeholder="Enter more information" required="true" rows="4"></textarea>
+    </div>
+    
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Add Show</button>
+    </div>
+    
   </form>
 </div>
+
+<script>
+  var earlyAdmissionYes = document.getElementById('earlyAdmissionYes');
+  var earlyAdmissionNo = document.getElementById('earlyAdmissionNo');
+  var earlyAdmissionFields = document.getElementById('earlyAdmissionFields');
+
+  function displayEarlyAdmissionFields() {
+    if (earlyAdmissionYes.checked) {
+      earlyAdmissionFields.className = 'd-block';
+      earlyAdmissionNo.removeAttribute('checked');
+    }
+    if (earlyAdmissionNo.checked) {
+      earlyAdmissionFields.className = 'd-none';
+      earlyAdmissionYes.removeAttribute('checked');
+    }
+  }
+</script>

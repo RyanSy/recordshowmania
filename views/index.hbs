@@ -1,159 +1,67 @@
-<nav class="navbar navbar-expand-lg navbar-dark">
-  <div class="container">
-    <a class="navbar-brand" href="/"><img src="images/recordriots-logo.png" alt="Record Riots!"></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse text-center" id="navbarResponsive">
-      <!--  if logged in, show email, add a show and log out -->
-      <ul class="navbar-nav ml-auto">
-        {{#if isLoggedIn}}
-          <li class="nav-item">
-            <span class="nav-link">Welcome, {{username}}</span>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/add-show">Add Show</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/my-shows">My Shows</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/logout">Log Out</a>
-          </li>
-        {{else}}
-          <li class="nav-item">
-            <a class="nav-link" href="/login">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/register">Register</a>
-          </li>
-        {{/if}}
-      </ul>
-    </div>
-  </div>
-</nav>
+{{> nav}}
 
-<!-- Page Content -->
 <div class="container">
-  <div class="jumbotron">
-    <h6>Looking for a record show?</h6>
-    <br>
-    <form action="/search" method="post">
-      <div class="form-row">
-        <div class="col">
-          <label for="date">Find by Date</label>
-          <input type="date" class="form-control" id="inputDate" name="date">
-        </div>
-        <div class="col">
-          <label for="date">Find by State</label>
-          <select class="form-control" id="inputState" name="state" aria-describedby="stateHelp" placeholder="Select state">
-            <option value="">Select State</option>
-            <option value="AL">Alabama</option>
-          	<option value="AK">Alaska</option>
-          	<option value="AZ">Arizona</option>
-          	<option value="AR">Arkansas</option>
-          	<option value="CA">California</option>
-          	<option value="CO">Colorado</option>
-          	<option value="CT">Connecticut</option>
-          	<option value="DE">Delaware</option>
-          	<option value="DC">District Of Columbia</option>
-          	<option value="FL">Florida</option>
-          	<option value="GA">Georgia</option>
-          	<option value="HI">Hawaii</option>
-          	<option value="ID">Idaho</option>
-          	<option value="IL">Illinois</option>
-          	<option value="IN">Indiana</option>
-          	<option value="IA">Iowa</option>
-          	<option value="KS">Kansas</option>
-          	<option value="KY">Kentucky</option>
-          	<option value="LA">Louisiana</option>
-          	<option value="ME">Maine</option>
-          	<option value="MD">Maryland</option>
-          	<option value="MA">Massachusetts</option>
-          	<option value="MI">Michigan</option>
-          	<option value="MN">Minnesota</option>
-          	<option value="MS">Mississippi</option>
-          	<option value="MO">Missouri</option>
-          	<option value="MT">Montana</option>
-          	<option value="NE">Nebraska</option>
-          	<option value="NV">Nevada</option>
-          	<option value="NH">New Hampshire</option>
-          	<option value="NJ">New Jersey</option>
-          	<option value="NM">New Mexico</option>
-          	<option value="NY">New York</option>
-          	<option value="NC">North Carolina</option>
-          	<option value="ND">North Dakota</option>
-          	<option value="OH">Ohio</option>
-          	<option value="OK">Oklahoma</option>
-          	<option value="OR">Oregon</option>
-          	<option value="PA">Pennsylvania</option>
-          	<option value="RI">Rhode Island</option>
-          	<option value="SC">South Carolina</option>
-          	<option value="SD">South Dakota</option>
-          	<option value="TN">Tennessee</option>
-          	<option value="TX">Texas</option>
-          	<option value="UT">Utah</option>
-          	<option value="VT">Vermont</option>
-          	<option value="VA">Virginia</option>
-          	<option value="WA">Washington</option>
-          	<option value="WV">West Virginia</option>
-          	<option value="WI">Wisconsin</option>
-          	<option value="WY">Wyoming</option>
-          </select>
-        </div>
-      </div>
-      <br>
-      <button class="btn btn-success" type="submit" name="button">Search</button>
-    </form>
-  </div>
+  {{> searchbox}}
   <div class="container">
     <br>
     <h3>Recently Added Shows:</h3>
     <br>
-    <table class="table table-striped">
-      <tbody>
-        {{#each shows}}
-          <tr>
-            <td>
-              {{this.date}} <br>
-              <button class="btn btn-link" data-toggle="modal" data-target="#showDetailModal{{this.id}}" type="button" name="button">
-                {{this.name}} <br>
-                {{this.venue}} - {{this.city}}, {{this.state}} <br>
-              </button> <br>
-              {{this.start}} to {{this.end}}
-              <!-- Modal -->
-              <div class="modal fade" id="showDetailModal{{this.id}}" tabindex="-1" role="dialog" aria-labelledby="showDetailModalLabel{{this.id}}" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="showDetailModalLabel{{this.id}}">Show Details</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      {{this.name}} <br>
-                      <a href="https://maps.google.com/?q={{this.address}}+{{this.city}}+{{this.state}}" target="_blank">
-                        {{this.venue}} <br>
-                        {{this.address}} <br>
-                        {{this.city}}, {{this.state}} {{this.zip}} <br>
-                      </a>
-                      Time: {{this.start}} to {{this.end}} <br>
-                      Admission: {{this.admission}} <br>
-                      Details: {{this.details}} <br>
-                      Posted by: {{this.posted_by}}
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                  </div>
+    {{#each shows}}
+      <div class="card shadow p-3 mb-2 bg-white rounded">
+        <div class="card-body">
+          {{this.date}} <br>
+          <a href="" data-toggle="modal" data-target="#showDetailModal{{this.id}}">
+            {{this.name}} <br>
+            {{this.venue}} - {{this.city}}, {{this.state}}
+          </a> <br>
+          {{this.start}} to {{this.end}}
+          
+          <!-- Modal -->
+          <div class="modal fade" id="showDetailModal{{this.id}}" tabindex="-1" role="dialog" aria-labelledby="showDetailModalLabel{{this.id}}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="showDetailModalLabel{{this.id}}">Show Details</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  {{this.date}} <br>
+                  {{this.name}} <br>
+                  <a href="https://maps.google.com/?q={{this.address}}+{{this.city}}+{{this.state}}" target="_blank">
+                    {{this.venue}} <br>
+                    {{this.address}} <br>
+                    {{this.city}}, {{this.state}} {{this.zip}} <br>
+                  </a>
+                  Time: {{this.start}} to {{this.end}} <br>
+                  Regular Admission: {{this.regular_admission_fee}} <br>
+                  Early Admission? {{this.early_admission}} <br>
+                  {{#if this.early_admission}}
+                    Early Admission Time: {{this.early_admission_time}} <br>
+                    Early Admission Fee: {{this.early_admission_fee}} <br>
+                  {{/if}}
+                  Number Of Dealers: {{this.number_of_dealers}} <br>
+                  Number Of Tables: {{this.number_of_tables}} <br>
+                  Size Of Tables: {{this.size_of_tables}} <br>
+                  Table Rent: {{this.table_rent}} <br>
+                  CD Dealers? {{this.cd_dealers}} <br>
+                  45 Dealers? {{this.fortyfive_dealers}} <br>
+                  78 Dealers? {{this.seventyeight_dealers}} <br>
+                  Food/Drink? {{this.food_drink}} <br>
+                  Handicapped Access? {{this.handicapped_access}} <br>
+                  More Information: {{this.more_information}} <br>
+                  Posted by: {{this.posted_by}}
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
               </div>
-              {{!-- end mnodal --}}
-            </td>
-          </tr>
-        {{/each}}
-      </tbody>
-    </table>
+            </div>
+          </div>
+          <!-- Modal -->
+        </div>
+      </div>
+    {{/each}}
   </div>
 </div>
