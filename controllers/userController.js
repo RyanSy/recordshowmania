@@ -52,7 +52,7 @@ exports.register_user = function(req, res) {
 // display login page
 exports.display_login = function(req, res) {
   res.render('login', {
-    title: 'Log into Record Riots!'
+    title: 'Log into Record Show Mania'
   });
 }
 
