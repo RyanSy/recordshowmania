@@ -17,15 +17,22 @@
     <br>
     {{#each shows}}
       <div class="card shadow p-3 mb-2 bg-white rounded">
-        <div class="card-body">
-          {{this.date}} <br>
-          <a href="" data-toggle="modal" data-target="#showDetailModal{{this.id}}">
-            {{this.name}} <br>
-            {{this.venue}} <br>
-            {{this.city}}, {{this.state}}
-          </a> <br>
-          {{this.start}} to {{this.end}}
-
+        <div class="card-body row">
+          <div class="col-4">
+            <h4>{{this.day_abbreviated}}</h4>
+            <h2>{{this.day}}</h2>
+            <h5>{{this.month}}</h5>
+          </div>
+          <div class="col-8">
+            <a href="" data-toggle="modal" data-target="#showDetailModal{{this.id}}">
+              <h4>
+                {{this.name}} <br>
+                {{this.venue}} <br>
+                {{this.city}}, {{this.state}} <br>
+              </h4>
+            </a>
+            <h5>{{this.start}} to {{this.end}}</h5>
+          </div>
           <!-- Modal -->
           <div class="modal fade" id="showDetailModal{{this.id}}" tabindex="-1" role="dialog" aria-labelledby="showDetailModalLabel{{this.id}}" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -37,31 +44,31 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  {{this.date}} <br>
+                  <strong>{{this.date}}</strong> <br>
                   {{this.name}} <br>
                   <a href="https://maps.google.com/?q={{this.address}}+{{this.city}}+{{this.state}}" target="_blank">
                     {{this.venue}} <br>
                     {{this.address}} <br>
                     {{this.city}}, {{this.state}} {{this.zip}} <br>
                   </a>
-                  Time: {{this.start}} to {{this.end}} <br>
-                  Regular Admission: {{this.regular_admission_fee}} <br>
-                  Early Admission? {{this.early_admission}} <br>
+                  <strong>Time:</strong> {{this.start}} to {{this.end}} <br>
+                  <strong>Regular Admission:</strong> {{this.regular_admission_fee}} <br>
+                  <strong>Early Admission?</strong> {{# if tihs.early_admission}}Yes{{else}}No{{/if}}<br>
                   {{#if this.early_admission}}
-                    Early Admission Time: {{this.early_admission_time}} <br>
-                    Early Admission Fee: {{this.early_admission_fee}} <br>
+                    <strong>Early Admission Time:</strong> {{this.early_admission_time}} <br>
+                    <strong>Early Admission Fee:</strong> {{this.early_admission_fee}} <br>
                   {{/if}}
-                  Number Of Dealers: {{this.number_of_dealers}} <br>
-                  Number Of Tables: {{this.number_of_tables}} <br>
-                  Size Of Tables: {{this.size_of_tables}} <br>
-                  Table Rent: {{this.table_rent}} <br>
-                  CD Dealers? {{this.cd_dealers}} <br>
-                  45 Dealers? {{this.fortyfive_dealers}} <br>
-                  78 Dealers? {{this.seventyeight_dealers}} <br>
-                  Food/Drink? {{this.food_drink}} <br>
-                  Handicapped Access? {{this.handicapped_access}} <br>
-                  More Information: {{this.more_information}} <br>
-                  Posted by: {{this.posted_by}}
+                  <strong>Number Of Dealers:</strong> {{this.number_of_dealers}} <br>
+                  <strong>Number Of Tables:</strong> {{this.number_of_tables}} <br>
+                  <strong>Size Of Tables:</strong> {{this.size_of_tables}} <br>
+                  <strong>Table Rent:</strong> {{this.table_rent}} <br>
+                  <strong>CD Dealers?</strong> {{#if this.cd_dealers}}Yes{{else}}No{{/if}}<br>
+                  <strong>45 Dealers?</strong> {{#if this.fortyfive_dealers}}Yes{{else}}No{{/if}}<br>
+                  <strong>78 Dealers?</strong> {{#if this.seventyeight_dealers}}Yes{{else}}No{{/if}}<br>
+                  <strong>Food/Drink?</strong> {{#if this.food_drink}}Yes{{else}}No{{/if}}<br>
+                  <strong>Handicapped Access?</strong> {{#if this.handicapped_access}}Yes{{else}}No{{/if}}<br>
+                  <strong>More Information:</strong> {{this.more_information}} <br>
+                  <strong>Posted by:</strong> {{this.posted_by}}
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
