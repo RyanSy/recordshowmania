@@ -3,31 +3,38 @@ var router = express.Router();
 var show_controller = require('../controllers/showController');
 var user_controller = require('../controllers/userController');
 
-/* GET home page. */
+// display home page
 router.get('/', show_controller.list_shows);
 
-// get user registration page
+// display user registration page
 router.get('/register', user_controller.display_registration);
 
-// user registration
+// regiser user
 router.post('/register', user_controller.register_user);
 
-// get login page
+// display login page
 router.get('/login', user_controller.display_login);
 
-// user login
+// login user
 router.post('/login', user_controller.login_user);
 
-// user logout
+// logout user
 router.get('/logout', user_controller.logout_user);
 
-// get forgot password page
+// display forgot password page
 router.get('/forgot', user_controller.display_forgot);
 
-// send reset password email 
+// send reset password email
 router.post('/forgot', user_controller.send_reset);
 
+// display reset password page
+router.get('/reset/:token', user_controller.display_reset);
+
 // reset password
+router.post('/reset', user_controller.reset_password);
+
+// display password updated confirmation page
+router.get('/password-updated', user_controller.password_updated);
 
 // get add show page
 router.get('/add-show', show_controller.get_add_show);
