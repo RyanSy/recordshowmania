@@ -1,5 +1,14 @@
 {{> nav}}
 
+{{#if message}}
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{message}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+{{/if}}
+
 <div class="container">
   {{> searchbox}}
   <div class="container">
@@ -12,10 +21,11 @@
           {{this.date}} <br>
           <a href="" data-toggle="modal" data-target="#showDetailModal{{this.id}}">
             {{this.name}} <br>
-            {{this.venue}} - {{this.city}}, {{this.state}}
+            {{this.venue}} <br>
+            {{this.city}}, {{this.state}}
           </a> <br>
           {{this.start}} to {{this.end}}
-          
+
           <!-- Modal -->
           <div class="modal fade" id="showDetailModal{{this.id}}" tabindex="-1" role="dialog" aria-labelledby="showDetailModalLabel{{this.id}}" aria-hidden="true">
             <div class="modal-dialog" role="document">
