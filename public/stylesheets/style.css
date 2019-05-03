@@ -4,3 +4,6 @@ body {
 .navbar {
   background-color: black;
 }
+#logo {
+  font-family: 'Rock Salt', cursive;
+}
