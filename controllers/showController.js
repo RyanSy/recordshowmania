@@ -92,6 +92,7 @@ exports.post_add_show = function(req, res) {
       var showsArray = [];
       for (var i = 0; i < shows.length; i++) {
         var showObject = {
+          id: shows[i]._id,
           date: moment(shows[i].date).format('dddd, MMMM Do, YYYY'),
           name: shows[i].name,
           venue: shows[i].venue,
