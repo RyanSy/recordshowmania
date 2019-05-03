@@ -19,19 +19,18 @@
       <div class="card shadow p-3 mb-2 bg-white rounded">
         <div class="card-body row">
           <div class="col-4">
-            <h4>{{this.day_abbreviated}}</h4>
-            <h2>{{this.day}}</h2>
-            <h5>{{this.month}}</h5>
+            <h5>{{this.day_abbreviated}}</h5>
+            <h5>{{this.day}}</h5>
+            <h5>{{this.month}}</h5
+            </h5>
           </div>
           <div class="col-8">
             <a href="" data-toggle="modal" data-target="#showDetailModal{{this.id}}">
-              <h4>
-                {{this.name}} <br>
-                {{this.venue}} <br>
-                {{this.city}}, {{this.state}} <br>
-              </h4>
+              <h5>{{this.name}}</h5>
+              <h6>{{this.venue}}</h6>
+              <h6>{{this.city}}, {{this.state}}</h6>
             </a>
-            <h5>{{this.start}} to {{this.end}}</h5>
+            <h6>{{this.start}} to {{this.end}}</h6>
           </div>
           <!-- Modal -->
           <div class="modal fade" id="showDetailModal{{this.id}}" tabindex="-1" role="dialog" aria-labelledby="showDetailModalLabel{{this.id}}" aria-hidden="true">
