@@ -1,7 +1,7 @@
 var Show = require('../models/show');
 var moment = require('moment');
 
-/* display shows on index */ 
+/* display shows on index */
 exports.list_shows = function(req, res) {
   Show.find(function(err, shows) {
       // remove shows if past
@@ -9,26 +9,29 @@ exports.list_shows = function(req, res) {
       console.log(err);
       res.send('An error occured displaying all shows.');
     }
-    
+
     var showsArray = [];
-    
+
     for (var i = 0; i < shows.length; i++) {
       var showObject = {
         date: moment(shows[i].date).format('dddd, MMMM Do, YYYY'),
+        month: moment(shows[i].date).format('MMM'),
+        day: moment(shows[i].date).format('D'),
+        day_abbreviated: moment(shows[i].date).format('ddd'),
         name: shows[i].name,
         venue: shows[i].venue,
         address: shows[i].address,
         city: shows[i].city,
         state: shows[i].state,
         zip: shows[i].zip,
-        start: moment(shows[i].start, 'HH:MM').format('h:mm A'),
-        end: moment(shows[i].end, 'HH:MM').format('h:mm A'),
-        regular_admission_fee: shows[i].regular_admission_fee,
+        start: shows[i].start,
+        end:shows[i].end,
         early_admission: shows[i].early_admission,
         early_admission_time: shows[i].early_admission_time,
         early_admission_fee: shows[i].early_admission_fee,
         number_of_dealers: shows[i].number_of_dealers,
         number_of_tables: shows[i].number_of_tables,
+        size_of_tables: shows[i].size_of_tables,
         table_rent: shows[i].table_rent,
         cd_dealers: shows[i].cd_dealers,
         fortyfive_dealers: shows[i].fortyfive_dealers,
@@ -40,7 +43,7 @@ exports.list_shows = function(req, res) {
       };
       showsArray.push(showObject);
     }
-    
+
     if (req.session.isLoggedIn == true) {
       res.render('index', {
         title: 'Record Show Mania',
@@ -70,34 +73,17 @@ exports.get_add_show = function(req, res) {
   }
 };
 
-/* add show */ 
+/* add show */
 exports.post_add_show = function(req, res) {
-  // set id to random string
-  // var show = {
-  //   date: req.body.date,
-  //   name: req.body.name,
-  //   venue: req.body.venue,
-  //   address: req.body.address,
-  //   city: req.body.city,
-  //   state: req.body.state,
-  //   zip: req.body.zip,
-  //   start: req.body.start,
-  //   end: req.body.end,
-  //   admission: req.body.admission,
-  //   details: req.body.details,
-  //   posted_by: req.session.username
-  // };
-
   var show = req.body;
   console.log(show);
   show.posted_by = req.session.username;
-  
+
   Show.create(show, function(err, newShow) {
     if (err) {
       console.log(err);
       res.send('An error occured creating your show.');
     }
-    console.log('show created:\n', newShow);
     Show.find({ 'posted_by': req.session.username }, function(err, shows) {
       if (err) {
         console.log(err);
@@ -113,8 +99,8 @@ exports.post_add_show = function(req, res) {
           city: shows[i].city,
           state: shows[i].state,
           zip: shows[i].zip,
-          start: moment(shows[i].start, 'HH:MM').format('h:mm A'),
-          end: moment(shows[i].end, 'HH:MM').format('h:mm A'),
+          start: shows[i].start,
+          end: shows[i].end,
           regular_admission_fee: shows[i].regular_admission_fee,
           early_admission: shows[i].early_admission,
           early_admission_time: shows[i].early_admission_time,
@@ -138,7 +124,7 @@ exports.post_add_show = function(req, res) {
           title: 'Record Show Mania',
           username: req.session.username,
           isLoggedIn: true,
-          shows: showsArray,
+          shows: shows,
           message: `"${newShow.name}" successfully added.`,
           message_exists: true
         });
