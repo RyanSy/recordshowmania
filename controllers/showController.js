@@ -14,6 +14,7 @@ exports.list_shows = function(req, res) {
 
     for (var i = 0; i < shows.length; i++) {
       var showObject = {
+        id: shows[i]._id,
         date: moment(shows[i].date).format('dddd, MMMM Do, YYYY'),
         month: moment(shows[i].date).format('MMM'),
         day: moment(shows[i].date).format('D'),
