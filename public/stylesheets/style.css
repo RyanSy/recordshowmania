@@ -7,3 +7,22 @@ body {
 #logo {
   font-family: 'Rock Salt', cursive;
 }
+#searchbox {
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  height: 250px;
+  width: 100%;
+  padding-left: 50px;
+  padding-right: 50px;  
+}
+#heading {
+  font-family: 'Rock Salt', cursive;
+  color: white;
+}
+.header {
+  background-image: url('../images/recordriots4.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 250px;
+}
