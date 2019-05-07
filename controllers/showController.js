@@ -138,7 +138,7 @@ exports.post_add_show = function(req, res) {
   });
 };
 
-// search shows
+/* search shows */
 exports.search_shows = function(req, res) {
   Show.find({
     $or: [
@@ -156,7 +156,6 @@ exports.search_shows = function(req, res) {
           title: 'Record Show Mania',
           username: req.session.username,
           isLoggedIn: true,
-          shows: shows
         });
       }
       else {
@@ -164,27 +163,59 @@ exports.search_shows = function(req, res) {
           title: 'Record Show Mania',
         });
       }
-    }
-    else {
-      if (req.session.isLoggedIn == true) {
-        res.render('search-results', {
-          title: 'Record Show Mania',
-          username: req.session.username,
-          isLoggedIn: true,
-          shows: shows
-        });
-      }
-      else {
-        res.render('search-results', {
-          title: 'Record Show Mania',
-          shows: shows
-        });
+    } else {
+        var showsArray = [];
+
+        for (var i = 0; i < shows.length; i++) {
+          var showObject = {
+            id: shows[i]._id,
+            date: moment(shows[i].date).format('dddd, MMMM Do, YYYY'),
+            month: moment(shows[i].date).format('MMM'),
+            day: moment(shows[i].date).format('D'),
+            day_abbreviated: moment(shows[i].date).format('ddd'),
+            name: shows[i].name,
+            venue: shows[i].venue,
+            address: shows[i].address,
+            city: shows[i].city,
+            state: shows[i].state,
+            zip: shows[i].zip,
+            start: shows[i].start,
+            end:shows[i].end,
+            early_admission: shows[i].early_admission,
+            early_admission_time: shows[i].early_admission_time,
+            early_admission_fee: shows[i].early_admission_fee,
+            number_of_dealers: shows[i].number_of_dealers,
+            number_of_tables: shows[i].number_of_tables,
+            size_of_tables: shows[i].size_of_tables,
+            table_rent: shows[i].table_rent,
+            cd_dealers: shows[i].cd_dealers,
+            fortyfive_dealers: shows[i].fortyfive_dealers,
+            seventyeight_dealers: shows[i].seventyeight_dealers,
+            food_drink: shows[i].food_drink,
+            handicapped_access: shows[i].handicapped_access,
+            more_information: shows[i].more_information,
+            posted_by: shows[i].posted_by
+          };
+          showsArray.push(showObject);
+        }
+        if (req.session.isLoggedIn == true) {
+          res.render('search-results', {
+            title: 'Record Show Mania',
+            username: req.session.username,
+            isLoggedIn: true,
+            shows: showsArray
+          });
+        } else {
+            res.render('search-results', {
+              title: 'Record Show Mania',
+              shows: showsArray
+          });
       }
     }
   });
 };
 
-// get my shows page
+/* get my shows page */
 exports.get_my_shows = function(req, res) {
   Show.find({ 'posted_by': req.session.username }, function(err, shows) {
     if (err) {

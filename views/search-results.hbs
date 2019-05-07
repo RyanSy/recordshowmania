@@ -1,6 +1,6 @@
 {{> nav}}
 
-<div class="container">
+<div class="header">
   {{> searchbox}}
   <div class="container mt-5">
     <br>
@@ -9,61 +9,69 @@
     <table class="table table-striped">
       <tbody>
         {{#each shows}}
-      <div class="card shadow p-3 mb-2 bg-white rounded">
-        <div class="card-body">
-          <button class="btn btn-link" data-toggle="modal" data-target="#showDetailModal{{this.id}}" type="button" name="button">
-            {{this.name}} <br>
-            {{this.venue}} - {{this.city}}, {{this.state}} <br>
-          </button> <br>
-          {{this.start}} to {{this.end}}
-          
-          <!-- Modal -->
-          <div class="modal fade" id="showDetailModal{{this.id}}" tabindex="-1" role="dialog" aria-labelledby="showDetailModalLabel{{this.id}}" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="showDetailModalLabel{{this.id}}">Show Details</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  {{this.name}} <br>
-                  <a href="https://maps.google.com/?q={{this.address}}+{{this.city}}+{{this.state}}" target="_blank">
-                    {{this.venue}} <br>
-                    {{this.address}} <br>
-                    {{this.city}}, {{this.state}} {{this.zip}} <br>
-                  </a>
-                  Time: {{this.start}} to {{this.end}} <br>
-                  Regular Admission: {{this.regular_admission_fee}} <br>
-                  Early Admission? {{this.early_admission}} <br>
-                  {{#if this.early_admission}}
-                    Early Admission Time: {{this.early_admission_time}} <br>
-                    Early Admission Fee: {{this.early_admission_fee}} <br>
-                  {{/if}}
-                  Number Of Dealers: {{this.number_of_dealers}}
-                  Number Of Tables: {{this.number_of_tables}}
-                  Size Of Tables: {{this.size_of_tables}}
-                  Table Rent: {{this.table_rent}}
-                  CD Dealers? {{this.cd_dealers}}
-                  45 Dealers? {{this.fortyfive_dealers}}
-                  78 Dealers? {{this.seventyeight_dealers}}
-                  Food/Drink? {{this.food_drink}}
-                  Handicapped Access? {{this.handicapped_access}}
-                  More Information: {{this.more_information}} <br>
-                  Posted by: {{this.posted_by}}
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <div class="card shadow p-3 mb-2 bg-white rounded">
+          <div class="card-body row">
+            <div class="col-4">
+              <h5>{{this.day_abbreviated}}</h5>
+              <h5>{{this.day}}</h5>
+              <h5>{{this.month}}</h5
+              </h5>
+            </div>
+            <div class="col-8">
+              <a href="" data-toggle="modal" data-target="#showDetailModal{{this.id}}">
+                <h5>{{this.name}}</h5>
+                <h6>{{this.venue}}</h6>
+                <h6>{{this.city}}, {{this.state}}</h6>
+              </a>
+              <h6>{{this.start}} to {{this.end}}</h6>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="showDetailModal{{this.id}}" tabindex="-1" role="dialog" aria-labelledby="showDetailModalLabel{{this.id}}" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="showDetailModalLabel{{this.id}}">Show Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <strong>{{this.date}}</strong> <br>
+                    {{this.name}} <br>
+                    <a href="https://maps.google.com/?q={{this.address}}+{{this.city}}+{{this.state}}" target="_blank">
+                      {{this.venue}} <br>
+                      {{this.address}} <br>
+                      {{this.city}}, {{this.state}} {{this.zip}} <br>
+                    </a>
+                    <strong>Time:</strong> {{this.start}} to {{this.end}} <br>
+                    <strong>Regular Admission:</strong> {{this.regular_admission_fee}} <br>
+                    <strong>Early Admission?</strong> {{# if tihs.early_admission}}Yes{{else}}No{{/if}}<br>
+                    {{#if this.early_admission}}
+                      <strong>Early Admission Time:</strong> {{this.early_admission_time}} <br>
+                      <strong>Early Admission Fee:</strong> {{this.early_admission_fee}} <br>
+                    {{/if}}
+                    <strong>Number Of Dealers:</strong> {{this.number_of_dealers}} <br>
+                    <strong>Number Of Tables:</strong> {{this.number_of_tables}} <br>
+                    <strong>Size Of Tables:</strong> {{this.size_of_tables}} <br>
+                    <strong>Table Rent:</strong> {{this.table_rent}} <br>
+                    <strong>CD Dealers?</strong> {{#if this.cd_dealers}}Yes{{else}}No{{/if}}<br>
+                    <strong>45 Dealers?</strong> {{#if this.fortyfive_dealers}}Yes{{else}}No{{/if}}<br>
+                    <strong>78 Dealers?</strong> {{#if this.seventyeight_dealers}}Yes{{else}}No{{/if}}<br>
+                    <strong>Food/Drink?</strong> {{#if this.food_drink}}Yes{{else}}No{{/if}}<br>
+                    <strong>Handicapped Access?</strong> {{#if this.handicapped_access}}Yes{{else}}No{{/if}}<br>
+                    <strong>More Information:</strong> {{this.more_information}} <br>
+                    <strong>Posted by:</strong> {{this.posted_by}}
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
                 </div>
               </div>
             </div>
+            <!-- Modal -->
           </div>
-          <!-- Modal -->
-
         </div>
-      </div>
-    {{/each}}
+        {{/each}}
       </tbody>
     </table>
     <a href="/">Return to main page</a>
