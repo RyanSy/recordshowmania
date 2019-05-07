@@ -1,7 +1,8 @@
 TODO
 
 priority for MVP:
-- fix start / end time invalid issue
+- fix start & end time invalid issue
+- fix time format
 - search between 2 dates
 - add sort feature for shows
 - make sure session is working properly
