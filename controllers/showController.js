@@ -27,6 +27,8 @@ exports.list_shows = function(req, res) {
         zip: shows[i].zip,
         start: moment(shows[i].start, 'HH').format('LT'),
         end: moment(shows[i].end, 'HH').format('LT'),
+        date_start: new Date(shows[i].date + ' ' + shows[i].start),
+        regular_admission_fee: shows[i].regular_admission_fee,
         early_admission: shows[i].early_admission,
         early_admission_time: moment(shows[i].early_admission_time, 'HH').format('LT'),
         early_admission_fee: shows[i].early_admission_fee,
@@ -45,17 +47,25 @@ exports.list_shows = function(req, res) {
       showsArray.push(showObject);
     }
 
+    var sortByDateStart = function(showsArray) {
+      return showsArray.sort(function(a, b) {
+        return new Date(a.date_start) - new Date(b.date_start);
+      });
+    }
+
+    var showsArraySorted = sortByDateStart(showsArray);
+
     if (req.session.isLoggedIn == true) {
       res.render('index', {
         title: 'Record Show Mania',
         username: req.session.username,
         isLoggedIn: true,
-        shows: showsArray
+        shows: showsArraySorted
       });
     } else {
       res.render('index', {
         title: 'Record Show Mania',
-        shows: showsArray
+        shows: showsArraySorted
       });
     }
   });
@@ -78,6 +88,7 @@ exports.get_add_show = function(req, res) {
 exports.post_add_show = function(req, res) {
   var show = req.body;
   show.posted_by = req.session.username;
+  show.date_start = new Date(req.body.date + ' ' + req.body.start);
 
   Show.create(show, function(err, newShow) {
     if (err) {
@@ -105,6 +116,7 @@ exports.post_add_show = function(req, res) {
           zip: shows[i].zip,
           start: moment(shows[i].start, 'HH').format('LT'),
           end: moment(shows[i].end, 'HH').format('LT'),
+          date_start: new Date(shows[i].date + ' ' + shows[i].start),
           regular_admission_fee: shows[i].regular_admission_fee,
           early_admission: shows[i].early_admission,
           early_admission_time: moment(shows[i].early_admission_time, 'HH').format('LT'),
@@ -124,12 +136,20 @@ exports.post_add_show = function(req, res) {
         showsArray.push(showObject);
       }
 
+      var sortByDateStart = function(showsArray) {
+        return showsArray.sort(function(a, b) {
+          return new Date(a.date_start) - new Date(b.date_start);
+        });
+      }
+
+      var showsArraySorted = sortByDateStart(showsArray);
+
       if (req.session.isLoggedIn == true) {
         res.render('my-shows', {
           title: 'Record Show Mania',
           username: req.session.username,
           isLoggedIn: true,
-          shows: showsArray,
+          shows: showsArraySorted,
           message: `"${newShow.name}" successfully added.`,
           message_exists: true
         });
@@ -180,6 +200,8 @@ exports.search_shows = function(req, res) {
             zip: shows[i].zip,
             start: moment(shows[i].start, 'HH').format('LT'),
             end: moment(shows[i].end, 'HH').format('LT'),
+            date_start: new Date(shows[i].date + ' ' + shows[i].start),
+            regular_admission_fee: shows[i].regular_admission_fee,
             early_admission: shows[i].early_admission,
             early_admission_time: moment(shows[i].early_admission_time, 'HH').format('LT'),
             early_admission_fee: shows[i].early_admission_fee,
@@ -198,17 +220,25 @@ exports.search_shows = function(req, res) {
           showsArray.push(showObject);
         }
 
+        var sortByDateStart = function(showsArray) {
+          return showsArray.sort(function(a, b) {
+            return new Date(a.date_start) - new Date(b.date_start);
+          });
+        }
+
+        var showsArraySorted = sortByDateStart(showsArray);
+
         if (req.session.isLoggedIn == true) {
           res.render('search-results', {
             title: 'Record Show Mania',
             username: req.session.username,
             isLoggedIn: true,
-            shows: showsArray
+            shows: showsArraySorted
           });
         } else {
             res.render('search-results', {
               title: 'Record Show Mania',
-              shows: showsArray
+              shows: showsArraySorted
           });
       }
     }
@@ -235,6 +265,7 @@ exports.get_my_shows = function(req, res) {
         zip: shows[i].zip,
         start: moment(shows[i].start, 'HH').format('LT'),
         end: moment(shows[i].end, 'HH').format('LT'),
+        date_start: new Date(shows[i].date + ' ' + shows[i].start),
         regular_admission_fee: shows[i].regular_admission_fee,
         early_admission: shows[i].early_admission,
         early_admission_time: moment(shows[i].early_admission_time, 'HH').format('LT'),
@@ -254,6 +285,14 @@ exports.get_my_shows = function(req, res) {
       showsArray.push(showObject);
     }
 
+    var sortByDateStart = function(showsArray) {
+      return showsArray.sort(function(a, b) {
+        return new Date(a.date_start) - new Date(b.date_start);
+      });
+    }
+
+    var showsArraySorted = sortByDateStart(showsArray);
+
     var noshow_message;
 
     if (showsArray.length == 0) {
@@ -267,7 +306,7 @@ exports.get_my_shows = function(req, res) {
         title: 'Record Show Mania',
         username: req.session.username,
         isLoggedIn: true,
-        shows: showsArray,
+        shows: showsArraySorted,
         noshow_message: noshow_message
       });
     } else {
@@ -331,6 +370,7 @@ exports.post_edit_show = function(req, res) {
           zip: shows[i].zip,
           start: moment(shows[i].start, 'HH').format('LT'),
           end: moment(shows[i].end, 'HH').format('LT'),
+          date_start: new Date(shows[i].date + ' ' + shows[i].start),
           regular_admission_fee: shows[i].regular_admission_fee,
           early_admission: shows[i].early_admission,
           early_admission_time: moment(shows[i].early_admission_time, 'HH').format('LT'),
@@ -350,12 +390,20 @@ exports.post_edit_show = function(req, res) {
         showsArray.push(showObject);
       };
 
+      var sortByDateStart = function(showsArray) {
+        return showsArray.sort(function(a, b) {
+          return new Date(a.date_start) - new Date(b.date_start);
+        });
+      }
+
+      var showsArraySorted = sortByDateStart(showsArray);
+
       if (req.session.isLoggedIn == true) {
         res.render('my-shows', {
           title: 'Record Show Mania',
           username: req.session.username,
           isLoggedIn: true,
-          shows: showsArray,
+          shows: showsArraySorted,
           message: 'Update successful.',
           message_exists: true
         });
@@ -395,6 +443,7 @@ exports.delete_show = function(req, res) {
           zip: shows[i].zip,
           start: moment(shows[i].start, 'HH').format('LT'),
           end: moment(shows[i].end, 'HH').format('LT'),
+          date_start: new Date(shows[i].date + ' ' + shows[i].start),
           regular_admission_fee: shows[i].regular_admission_fee,
           early_admission: shows[i].early_admission,
           early_admission_time: moment(shows[i].early_admission_time, 'HH').format('LT'),
@@ -413,12 +462,21 @@ exports.delete_show = function(req, res) {
         };
         showsArray.push(showObject);
       }
+
+      var sortByDateStart = function(showsArray) {
+        return showsArray.sort(function(a, b) {
+          return new Date(a.date_start) - new Date(b.date_start);
+        });
+      }
+
+      var showsArraySorted = sortByDateStart(showsArray);
+
       if (req.session.isLoggedIn == true) {
         res.render('my-shows', {
           title: 'Record Show Mania',
           username: req.session.username,
           isLoggedIn: true,
-          shows: showsArray,
+          shows: showsArraySorted,
           message: 'Show deleted successfully.',
           message_exists: true
         });
