@@ -13,6 +13,7 @@ var showSchema = new Schema(
     zip: {type: String, required: true, max: 10},
     start: {type: String, required: true, max: 50},
     end: {type: String, required: true, max: 50},
+    date_start: {type: Date, required: true},
     regular_admission_fee: {type: String, required: true},
     early_admission: {type: Boolean, required: true},
     early_admission_fee: {type: String},
