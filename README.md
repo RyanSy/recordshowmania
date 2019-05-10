@@ -1,10 +1,7 @@
 TODO
 
 priority for MVP:
-- fix start & end time invalid issue
-- fix time format
 - search between 2 dates
-- add sort feature for shows
 - make sure session is working properly
 - create views for errors / 404
 - create footer
@@ -18,7 +15,6 @@ cleaning up:
 before deployment:
 - testing
 - incorporate image storage
-- configure db store
 - production best practices
 - security best practices
 - google analytics
