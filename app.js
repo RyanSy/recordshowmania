@@ -9,10 +9,22 @@ var mongoose = require('mongoose');
 var db = mongoose.connection;
 var mongoDB = process.env.DB_URI || 'mongodb://localhost:27017/recordriots';
 var session = require('express-session');
+var MongoDBStore = require('connect-mongodb-session')(session);
 
 var indexRouter = require('./routes/index');
 
 var app = express();
+var store = new MongoDBStore({
+  uri: mongoDB,
+  collection: 'userSessions'
+}, function(error) {
+  if (error) { console.log(error); }
+});
+
+// Catch errors
+store.on('error', function(error) {
+  console.log(error);
+});
 
 // db setup
 mongoose.connect(mongoDB, {useNewUrlParser: true});
@@ -31,6 +43,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
   'secret': '343ji43j4n3jn4jk3n',
+  'store': store,
   'resave': false,
   'saveUninitialized': true
 }));
