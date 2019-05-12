@@ -19,3 +19,6 @@ before deployment:
 - security best practices
 - google analytics
 - SEO
+
+odds and ends:
+- (node:10712) DeprecationWarning: collection.ensureIndex is deprecated. Use createIndexes instead.

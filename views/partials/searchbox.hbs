@@ -1,73 +1,85 @@
-<div id="searchbox">
-    <br>
-    <h6 id="heading">Looking for a record show?</h6>
-    <br>
-    <form action="/search" method="post">
-        <div class="container form-row">
-            <div class="col">
-                <label for="date">Find by Date</label>
-                <input type="date" class="form-control" id="date" name="date">
-            </div>
-            <div class="col">
-              <label for="date">Find by State</label>
-              <select class="form-control" id="inputState" name="state" aria-describedby="stateHelp" placeholder="Enter state">
-                <option value=""></option>
-                <option value="AL">Alabama</option>
-              	<option value="AK">Alaska</option>
-              	<option value="AZ">Arizona</option>
-              	<option value="AR">Arkansas</option>
-              	<option value="CA">California</option>
-              	<option value="CO">Colorado</option>
-              	<option value="CT">Connecticut</option>
-              	<option value="DE">Delaware</option>
-              	<option value="DC">District Of Columbia</option>
-              	<option value="FL">Florida</option>
-              	<option value="GA">Georgia</option>
-              	<option value="HI">Hawaii</option>
-              	<option value="ID">Idaho</option>
-              	<option value="IL">Illinois</option>
-              	<option value="IN">Indiana</option>
-              	<option value="IA">Iowa</option>
-              	<option value="KS">Kansas</option>
-              	<option value="KY">Kentucky</option>
-              	<option value="LA">Louisiana</option>
-              	<option value="ME">Maine</option>
-              	<option value="MD">Maryland</option>
-              	<option value="MA">Massachusetts</option>
-              	<option value="MI">Michigan</option>
-              	<option value="MN">Minnesota</option>
-              	<option value="MS">Mississippi</option>
-              	<option value="MO">Missouri</option>
-              	<option value="MT">Montana</option>
-              	<option value="NE">Nebraska</option>
-              	<option value="NV">Nevada</option>
-              	<option value="NH">New Hampshire</option>
-              	<option value="NJ">New Jersey</option>
-              	<option value="NM">New Mexico</option>
-              	<option value="NY">New York</option>
-              	<option value="NC">North Carolina</option>
-              	<option value="ND">North Dakota</option>
-              	<option value="OH">Ohio</option>
-              	<option value="OK">Oklahoma</option>
-              	<option value="OR">Oregon</option>
-              	<option value="PA">Pennsylvania</option>
-              	<option value="RI">Rhode Island</option>
-              	<option value="SC">South Carolina</option>
-              	<option value="SD">South Dakota</option>
-              	<option value="TN">Tennessee</option>
-              	<option value="TX">Texas</option>
-              	<option value="UT">Utah</option>
-              	<option value="VT">Vermont</option>
-              	<option value="VA">Virginia</option>
-              	<option value="WA">Washington</option>
-              	<option value="WV">West Virginia</option>
-              	<option value="WI">Wisconsin</option>
-              	<option value="WY">Wyoming</option>
-              </select>
-            </div>
-        </div>
-        <div id="search-button" class="container form-row mt-3 text-center">
-          <button class="btn btn-success" type="submit" name="button">Search</button>
-        </div>
-    </form>
+<div id="searchbox" class="container mt-5">
+  <!-- navigation -->
+  <ul class="nav nav-pills mb-3">
+    <li>
+      <span class="nav-link">Looking for a record show? Search by: </span>
+    </li>
+    <li class="nav-item">
+      <a href="#search-by-date" class="nav-link active" role="tab" data-toggle="pill">Date</a>
+    </li>
+    <li class="nav-item">
+      <a href="#search-by-state" class="nav-link" role="tab" data-toggle="pill">State</a>
+    </li>
+  </ul>
+
+  <!-- tab content -->
+  <div class="tab-content">
+    <!-- search by date -->
+    <div class="tab-pane show active" role="tabpanel" id="search-by-date">
+      <form class="form-inline justify-content-center" action="/search" method="post">
+        <input type="date" class="form-control col-sm-3" id="date" name="date">
+        <button type="submit" class="btn btn-success ml-2"><i class="fas fa-search fa-lg"></i></button>
+      </form>
+    </div>
+    <!-- search by state -->
+    <div class="tab-pane" role="tabpanel" id="search-by-state">
+      <form class="form-inline justify-content-center" action="/search" method="post">
+        <select class="form-control" id="state" name="state" aria-describedby="stateHelp" placeholder="Enter state">
+          <option value="">Choose a state:</option>
+          <option value="AL">Alabama</option>
+          <option value="AK">Alaska</option>
+          <option value="AZ">Arizona</option>
+          <option value="AR">Arkansas</option>
+          <option value="CA">California</option>
+          <option value="CO">Colorado</option>
+          <option value="CT">Connecticut</option>
+          <option value="DE">Delaware</option>
+          <option value="DC">District Of Columbia</option>
+          <option value="FL">Florida</option>
+          <option value="GA">Georgia</option>
+          <option value="HI">Hawaii</option>
+          <option value="ID">Idaho</option>
+          <option value="IL">Illinois</option>
+          <option value="IN">Indiana</option>
+          <option value="IA">Iowa</option>
+          <option value="KS">Kansas</option>
+          <option value="KY">Kentucky</option>
+          <option value="LA">Louisiana</option>
+          <option value="ME">Maine</option>
+          <option value="MD">Maryland</option>
+          <option value="MA">Massachusetts</option>
+          <option value="MI">Michigan</option>
+          <option value="MN">Minnesota</option>
+          <option value="MS">Mississippi</option>
+          <option value="MO">Missouri</option>
+          <option value="MT">Montana</option>
+          <option value="NE">Nebraska</option>
+          <option value="NV">Nevada</option>
+          <option value="NH">New Hampshire</option>
+          <option value="NJ">New Jersey</option>
+          <option value="NM">New Mexico</option>
+          <option value="NY">New York</option>
+          <option value="NC">North Carolina</option>
+          <option value="ND">North Dakota</option>
+          <option value="OH">Ohio</option>
+          <option value="OK">Oklahoma</option>
+          <option value="OR">Oregon</option>
+          <option value="PA">Pennsylvania</option>
+          <option value="RI">Rhode Island</option>
+          <option value="SC">South Carolina</option>
+          <option value="SD">South Dakota</option>
+          <option value="TN">Tennessee</option>
+          <option value="TX">Texas</option>
+          <option value="UT">Utah</option>
+          <option value="VT">Vermont</option>
+          <option value="VA">Virginia</option>
+          <option value="WA">Washington</option>
+          <option value="WV">West Virginia</option>
+          <option value="WI">Wisconsin</option>
+          <option value="WY">Wyoming</option>
+        </select>
+        <button type="submit" class="btn btn-success ml-2"><i class="fas fa-search fa-lg"></i></button>
+      </form>
+    </div>
+  </div>
 </div>
