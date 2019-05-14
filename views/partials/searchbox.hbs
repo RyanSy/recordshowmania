@@ -1,30 +1,29 @@
 <div id="searchbox" class="container mt-5">
-  <!-- navigation -->
-  <ul class="nav nav-pills mb-3">
-    <li>
-      <span class="nav-link">Looking for a record show? Search by: </span>
-    </li>
-    <li class="nav-item">
-      <a href="#search-by-date" class="nav-link active" role="tab" data-toggle="pill">Date</a>
-    </li>
-    <li class="nav-item">
-      <a href="#search-by-state" class="nav-link" role="tab" data-toggle="pill">State</a>
-    </li>
-  </ul>
-
   <!-- tab content -->
   <div class="tab-content">
+    <label class="row">
+      <!-- navigation -->
+      <span class="mt-2 mr-2"><strong>Search by: </strong></span>
+      <ul class="nav nav-pills mb-3">
+        <li>
+          <a href="#search-by-date" class="nav-link searchbox-link active" role="tab" data-toggle="pill">Date</a>
+        </li>
+        <li>
+          <a href="#search-by-state" class="nav-link searchbox-link" role="tab" data-toggle="pill">State</a>
+        </li>
+      </ul>
+    </label>
     <!-- search by date -->
-    <div class="tab-pane show active" role="tabpanel" id="search-by-date">
-      <form class="form-inline justify-content-center" action="/search" method="post">
-        <input type="date" class="form-control col-sm-3" id="date" name="date">
+    <div class="tab-pane row show active" role="tabpanel" id="search-by-date">
+      <form class="form-inline" action="/search" method="post">
+        <input type="date" class="form-control col col-sm-6 col-md-4 col-lg-4 col-xl-4" id="date" name="date">
         <button type="submit" class="btn btn-success ml-2"><i class="fas fa-search fa-lg"></i></button>
       </form>
     </div>
     <!-- search by state -->
-    <div class="tab-pane" role="tabpanel" id="search-by-state">
-      <form class="form-inline justify-content-center" action="/search" method="post">
-        <select class="form-control" id="state" name="state" aria-describedby="stateHelp" placeholder="Enter state">
+    <div class="tab-pane row" role="tabpanel" id="search-by-state">
+      <form class="form-inline  " action="/search" method="post">
+        <select class="form-control col col-md-4 col-lg-4 col-xl-4" id="state" name="state" aria-describedby="stateHelp" placeholder="Enter state">
           <option value="">Choose a state:</option>
           <option value="AL">Alabama</option>
           <option value="AK">Alaska</option>

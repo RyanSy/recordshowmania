@@ -1,28 +1,25 @@
 body {
   padding-bottom: 75px;
 }
-/* .navbar {
-  background: none;
-} */
 #logo {
   font-family: 'Rock Salt', cursive;
+  color: #FF5800;
+}
+#navbarbutton {
+  color: #2F4F4F !important;
 }
 .header {
   background: url('../images/records.jpg');
   background-repeat: no-repeat;
   background-size: cover;
 }
-.transparent-cover {
-  background-color: rgb(0, 0, 0, 0.7) !important;
+#header-message {
+  color: white !important;
 }
 #searchbox {
-  color: white;
+  color: white !important;
   height: 250px;
   width: 100%;
   padding-left: 50px;
   padding-right: 50px;
-}
-#heading {
-  font-family: 'Rock Salt', cursive;
-  color: white;
 }
