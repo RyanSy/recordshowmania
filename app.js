@@ -10,16 +10,15 @@ var db = mongoose.connection;
 var mongoDB = process.env.DB_URI || 'mongodb://localhost:27017/recordriots';
 var session = require('express-session');
 var MongoDBStore = require('connect-mongodb-session')(session);
-
-var indexRouter = require('./routes/index');
-
-var app = express();
 var store = new MongoDBStore({
   uri: mongoDB,
   collection: 'userSessions'
 }, function(error) {
   if (error) { console.log(error); }
 });
+var indexRouter = require('./routes/index');
+var helmet = require('helmet');
+var app = express();
 
 // Catch errors
 store.on('error', function(error) {
@@ -40,15 +39,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+if (app.get('env') === 'production') {
+  app.set('trust proxy', 1) // trust first proxy
+  sess.cookie.secure = true // serve secure cookies
+}
 app.use(session({
   'secret': '343ji43j4n3jn4jk3n',
   'store': store,
   'resave': false,
   'saveUninitialized': true
 }));
-
 app.use('/', indexRouter);
+app.use(helmet());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
