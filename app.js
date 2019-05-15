@@ -39,18 +39,23 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({
+
+// session setup
+var sess = {
   'secret': '343ji43j4n3jn4jk3n',
   'cookie': {},
   'store': store,
   'resave': false,
   'saveUninitialized': true
-}));
+}
 if (app.get('env') === 'production') {
   app.set('trust proxy', 1); // trust first proxy
-  session.cookie.secure = true; // serve secure cookies
+  sess.cookie.secure = true; // serve secure cookies
 }
+app.use(session(sess));
+
 app.use('/', indexRouter);
+
 app.use(helmet());
 
 // catch 404 and forward to error handler
