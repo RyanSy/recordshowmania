@@ -17,6 +17,7 @@
     "express": "~4.16.0",
     "express-session": "^1.15.6",
     "hbs": "^4.0.4",
+    "helmet": "^3.18.0",
     "http-errors": "~1.6.2",
     "moment": "^2.24.0",
     "mongoose": "^5.4.19",
