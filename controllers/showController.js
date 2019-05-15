@@ -42,6 +42,9 @@ exports.list_shows = function(req, res) {
         food_drink: shows[i].food_drink,
         handicapped_access: shows[i].handicapped_access,
         more_information: shows[i].more_information,
+        contact_name: shows[i].contact_name,
+        contact_email: shows[i].contact_email,
+        contact_phone: shows[i].contact_phone,
         posted_by: shows[i].posted_by
       };
       showsArray.push(showObject);
@@ -131,6 +134,9 @@ exports.post_add_show = function(req, res) {
           food_drink: shows[i].food_drink,
           handicapped_access: shows[i].handicapped_access,
           more_information: shows[i].more_information,
+          contact_name: shows[i].contact_name,
+          contact_email: shows[i].contact_email,
+          contact_phone: shows[i].contact_phone,
           posted_by: shows[i].posted_by
         };
         showsArray.push(showObject);
@@ -215,6 +221,9 @@ exports.search_shows = function(req, res) {
             food_drink: shows[i].food_drink,
             handicapped_access: shows[i].handicapped_access,
             more_information: shows[i].more_information,
+            contact_name: shows[i].contact_name,
+            contact_email: shows[i].contact_email,
+            contact_phone: shows[i].contact_phone,
             posted_by: shows[i].posted_by
           };
           showsArray.push(showObject);
@@ -280,6 +289,9 @@ exports.get_my_shows = function(req, res) {
         food_drink: shows[i].food_drink,
         handicapped_access: shows[i].handicapped_access,
         more_information: shows[i].more_information,
+        contact_name: shows[i].contact_name,
+        contact_email: shows[i].contact_email,
+        contact_phone: shows[i].contact_phone,
         posted_by: shows[i].posted_by
       };
       showsArray.push(showObject);
@@ -385,6 +397,9 @@ exports.post_edit_show = function(req, res) {
           food_drink: shows[i].food_drink,
           handicapped_access: shows[i].handicapped_access,
           more_information: shows[i].more_information,
+          contact_name: shows[i].contact_name,
+          contact_email: shows[i].contact_email,
+          contact_phone: shows[i].contact_phone,
           posted_by: shows[i].posted_by
         };
         showsArray.push(showObject);
@@ -458,6 +473,9 @@ exports.delete_show = function(req, res) {
           food_drink: shows[i].food_drink,
           handicapped_access: shows[i].handicapped_access,
           more_information: shows[i].more_information,
+          contact_name: shows[i].contact_name,
+          contact_email: shows[i].contact_email,
+          contact_phone: shows[i].contact_phone,
           posted_by: shows[i].posted_by
         };
         showsArray.push(showObject);
