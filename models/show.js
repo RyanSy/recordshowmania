@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 var showSchema = new Schema(
   {
-    date: {type: String},
+    date: {type: String, required: true},
     name: {type: String, required: true, max: 50},
     venue: {type: String, required: true, max: 50},
     address: {type: String, required: true, max: 100},
@@ -15,19 +15,22 @@ var showSchema = new Schema(
     end: {type: String, required: true, max: 50},
     date_start: {type: Date, required: true},
     regular_admission_fee: {type: String, required: true},
-    early_admission: {type: Boolean, required: true},
+    early_admission: {type: Boolean},
     early_admission_fee: {type: String},
     early_admission_time: {type: String},
     number_of_dealers: {type: String},
     number_of_tables: {type: String},
     size_of_tables: {type: String, max: 50},
     table_rent: {type: String},
-    cd_dealers: {type: Boolean, required: true},
-    fortyfive_dealers: {type: Boolean, required: true},
-    seventyeight_dealers: {type: Boolean, required: true},
-    food_drink: {type: Boolean, required: true},
-    handicapped_access: {type: Boolean, required: true},
-    more_information: {type: String, required: true, max: 100},
+    cd_dealers: {type: Boolean},
+    fortyfive_dealers: {type: Boolean},
+    seventyeight_dealers: {type: Boolean},
+    food_drink: {type: Boolean},
+    handicapped_access: {type: Boolean},
+    more_information: {type: String, max: 100},
+    contact_name: {type: String, max: 100},
+    contact_email: {type: String, max: 100},
+    contact_phone: {type: String, max: 100},
     message: {type: String, max: 100},
     posted_by: {type: String, required: true, max: 100}
   }

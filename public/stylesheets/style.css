@@ -23,3 +23,12 @@ body {
   padding-left: 50px;
   padding-right: 50px;
 }
+#searchByDateButton {
+  color: white !important;
+}
+#searchByStateButton {
+  color: white !important;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    background-color: #18bc9c !important;
+}

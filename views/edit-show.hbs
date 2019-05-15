@@ -1,37 +1,39 @@
 {{> nav}}
 
 <div class="container mt-5">
-  <h5 class="mb-4">Edit Show:</h5>
-  <form action="/edit-show/{{show._id}}" method="post">
+  <h5>Edit Show:</h5>
+  <small>Fields with a * are required - all other fields are optional, but recommended.</small>
+
+  <form class="mt-4" action="/edit-show/{{show._id}}" method="post">
     <div class="form-group">
-      <label for="inputDate">Date</label>
-      <input type="date" class="form-control" id="inputDate" name="date" placeholder="Enter date" required="true" value="{{show.date}}">
+      <label for="inputDate">Date *</label>
+      <input type="date" class="form-control col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3" id="inputDate" name="date" required="true" value="{{show.date}}">
     </div>
 
     <div class="form-group">
-      <label for="inputName">Name</label>
-      <input type="text" class="form-control" id="inputName" name="name" placeholder="Enter name of show" required="true" value="{{show.name}}">
+      <label for="inputName">Name *</label>
+      <input type="text" class="form-control col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3" id="inputName" name="name" required="true" value="{{show.name}}">
     </div>
 
     <div class="form-group">
-      <label for="inputVenue">Venue</label>
-      <input type="text" class="form-control" id="inputVenue" name="venue" placeholder="Enter venue" required="true" value="{{show.venue}}">
+      <label for="inputVenue">Venue *</label>
+      <input type="text" class="form-control col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3" id="inputVenue" name="venue" required="true" value="{{show.venue}}">
     </div>
 
     <div class="form-group">
-      <label for="inputAddress">Address</label>
-      <input type="text" class="form-control" id="inputAddress" name="address" aria-describedby="addressHelp" placeholder="Enter address" required="true" value="{{show.address}}">
+      <label for="inputAddress">Address *</label>
+      <input type="text" class="form-control col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3" id="inputAddress" name="address" required="true" value="{{show.address}}">
     </div>
 
     <div class="form-group">
-      <label for="inputCity">City</label>
-      <input type="text" class="form-control" id="inputCity" name="city" placeholder="Enter city" required="true" value="{{show.city}}">
+      <label for="inputCity">City *</label>
+      <input type="text" class="form-control col-md-6 col-lg-6 col-xl-6" id="inputCity" name="city" required="true" value="{{show.city}}">
     </div>
 
     <div class="form-group">
-      <label for="inputState">State</label>
+      <label for="inputState">State *</label>
       <input type="hidden" id="selectedState" value="{{show.state}}">
-      <select class="form-control col-1" id="inputState" name="state" placeholder="Enter state" required="true">
+      <select class="form-control col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="inputState" name="state" required="true">
         <option value="AL">AL</option>
       	<option value="AK">AK</option>
       	<option value="AZ">AZ</option>
@@ -87,23 +89,23 @@
     </div>
 
     <div class="form-group">
-      <label for="inputZip">Zip</label>
-      <input type="text" class="form-control col-2" id="inputZip" name="zip" placeholder="Enter zip" required="true" max="10" value="{{show.zip}}">
+      <label for="inputZip">Zip *</label>
+      <input type="text" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="inputZip" name="zip" required="true" max="10" value="{{show.zip}}">
     </div>
 
     <div class="form-group">
-      <label for="inputStart">Start</label>
-      <input type="time" class="form-control col-2" id="inputStart" name="start" placeholder="Enter start time" required="true" value="{{show.start}}">
+      <label for="inputStart">Start Time *</label>
+      <input type="time" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="inputStart" name="start" required="true" value="{{show.start}}">
     </div>
 
     <div class="form-group">
-      <label for="inputEnd">End</label>
-      <input type="time" class="form-control" id="inputEnd" name="end" placeholder="Enter end time" required="true" value="{{show.end}}">
+      <label for="inputEnd">End Time *</label>
+      <input type="time" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="inputEnd" name="end" required="true" value="{{show.end}}">
     </div>
 
     <div class="form-group">
       <label for="inputRegularAdmission">Admission</label>
-      <input type="text" class="form-control" id="inputRegularAdmission" name="regular_admission_fee" placeholder="Enter regular admission" required="true" value="{{show.regular_admission_fee}}">
+      <input type="text" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="inputRegularAdmission" name="regular_admission_fee" required="true" value="{{show.regular_admission_fee}}">
     </div>
 
     <div class="form-group">
@@ -133,32 +135,42 @@
     <div id="earlyAdmissionFields" class="d-none">
       <div class="form-group">
         <label for="earlyAdmissionTime">Early Admission Time</label>
-        <input type="time" class="form-control" id="earlyAdmissionTime" name="early_admission_time" value="{{show.early_admission_time}}">
+        <input type="time" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="earlyAdmissionTime" name="early_admission_time" value="{{show.early_admission_time}}">
       </div>
       <div class="form-group">
         <label for="inputAdmission">Early Admission Fee</label>
-        <input type="text" class="form-control" id="earlyAdmissionFee" name="early_admission_fee" placeholder="Enter early admission fee" value="{{show.early_admission_fee}}">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">$</div>
+          </div>
+          <input type="text" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="earlyAdmissionFee" name="early_admission_fee" value="{{show.early_admission_fee}}">
+        </div>
       </div>
     </div>
 
     <div class="form-group">
       <label for="numberOfDealers">Number Of Dealers</label>
-      <input type="text" class="form-control" id="numberOfDealers" name="number_of_dealers" placeholder="Enter number of dealers" value="{{show.number_of_dealers}}">
+      <input type="text" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="numberOfDealers" name="number_of_dealers" value="{{show.number_of_dealers}}">
     </div>
 
     <div class="form-group">
       <label for="numberOfTables">Number Of Tables</label>
-      <input type="text" class="form-control" id="numberOfTables" name="number_of_tables" placeholder="Enter regular admission" required="true"value="{{show.number_of_tables}}">
+      <input type="text" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="numberOfTables" name="number_of_tables" value="{{show.number_of_tables}}">
     </div>
 
     <div class="form-group">
       <label for="sizeOfTables">Size Of Tables</label>
-      <input type="text" class="form-control" id="sizeOfTables" name="size_of_tables" placeholder="Enter size of tables" value="{{show.size_of_tables}}">
+      <input type="text" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="sizeOfTables" name="size_of_tables" value="{{show.size_of_tables}}">
     </div>
 
     <div class="form-group">
       <label for="tableRent">Table Rent</label>
-      <input type="text" class="form-control" id="tableRent" name="table_rent" placeholder="Enter price to rent per table" value="{{show.table_rent}}">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">$</div>
+        </div>
+        <input type="text" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="tableRent" name="table_rent" value="{{show.table_rent}}">
+      </div>
     </div>
 
     <div class="form-group">
@@ -289,6 +301,21 @@
     <div class="form-group">
       <label for="inputMoreInformation">More Information</label>
       <textarea class="form-control " id="inputMoreInformation" name="more_information" placeholder="Enter more information" required="true" rows="4">{{show.more_information}}</textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="inputContactName">Contact Name</label>
+      <input type="text" class="form-control col-md-6 col-lg-6 col-xl-6" id="inputContactName" name="contact_name" value="{{show.contact_name}}">
+    </div>
+
+    <div class="form-group">
+      <label for="inputContactEmail">Contact Email</label>
+      <input type="email" class="form-control col-md-6 col-lg-6 col-xl-6" id="inputContactEmail" name="contact_email" value="{{show.contact_email}}">
+    </div>
+
+    <div class="form-group">
+      <label for="inputContactPhone">Contact Phone</label>
+      <input type="tel" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="inputContactPhone" name="contact_phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value="{{show.contact_phone}}"> <small class="text-muted">Format: 212-555-1234</small>
     </div>
 
     <div class="form-group">

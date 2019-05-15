@@ -29,12 +29,26 @@
                     {{this.venue}} <br>
                     {{this.address}} <br>
                     {{this.city}}, {{this.state}} {{this.zip}} <br>
-                  </a> Time: {{this.start}} to {{this.end}} <br> Regular Admission: {{this.regular_admission_fee}} <br> Early Admission? {{this.early_admission}} <br>
-            {{#if this.early_admission}}
-              Early Admission Time: {{this.early_admission_time}} <br> Early Admission Fee: {{this.early_admission_fee}} <br>
-            {{/if}}
-            Number Of Dealers: {{this.number_of_dealers}} <br> Number Of Tables: {{this.number_of_tables}} <br> Size Of Tables: {{this.size_of_tables}} <br> Table Rent: {{this.table_rent}} <br> CD Dealers? {{this.cd_dealers}} <br> 45 Dealers? {{this.fortyfive_dealers}}
-            <br> 78 Dealers? {{this.seventyeight_dealers}} <br> Food/Drink? {{this.food_drink}} <br> Handicapped Access? {{this.handicapped_access}} <br> More Information: {{this.more_information}} <br> Posted by: {{this.posted_by}}
+                  </a> Time: {{this.start}} to {{this.end}} <br>
+                  Regular Admission: {{this.regular_admission_fee}} <br>
+                  Early Admission? {{this.early_admission}} <br>
+                  {{#if this.early_admission}}
+                    Early Admission Time: {{this.early_admission_time}} <br>
+                    Early Admission Fee: {{this.early_admission_fee}} <br>
+                  {{/if}}
+                  Number Of Dealers: {{this.number_of_dealers}} <br>
+                  Number Of Tables: {{this.number_of_tables}} <br>
+                  Size Of Tables: {{this.size_of_tables}} <br> T
+                  able Rent: {{this.table_rent}} <br>
+                  CD Dealers? {{#if this.cd_dealers}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
+                  45 Dealers? {{#if this.fortyfive_dealers}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
+                  78 Dealers? {{#if this.seventyeight_dealers}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
+                  Food/Drink? {{#if this.food_drink}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
+                  Handicapped Access? {{#if this.handicapped_access}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
+                  Contact Name: {{this.contact_name}} <br>
+                  Contact Email: {{this.contact_email}} <br>
+                  Contact Phone: {{this.contact_phone}} <br>
+                  More Information: {{this.more_information}} <br> Posted by: {{this.posted_by}}
             <div class="mt-2">
               <a class="btn btn-primary" href="/edit-show/{{this.id}}">Edit</a><span> | </span><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete{{this.id}}">Delete</button>
             </div>
