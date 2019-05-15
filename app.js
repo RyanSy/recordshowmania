@@ -39,16 +39,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-if (app.get('env') === 'production') {
-  app.set('trust proxy', 1) // trust first proxy
-  sess.cookie.secure = true // serve secure cookies
-}
 app.use(session({
   'secret': '343ji43j4n3jn4jk3n',
   'store': store,
   'resave': false,
   'saveUninitialized': true
 }));
+if (app.get('env') === 'production') {
+  app.set('trust proxy', 1); // trust first proxy
+  session.cookie.secure = true; // serve secure cookies
+}
 app.use('/', indexRouter);
 app.use(helmet());
 
