@@ -1,5 +1,7 @@
 var Show = require('../models/show');
 var moment = require('moment');
+var fs = require('fs');
+var cloudinary = require('cloudinary');
 
 /* display shows on index */
 exports.list_shows = function(req, res) {
@@ -92,6 +94,15 @@ exports.post_add_show = function(req, res) {
   var show = req.body;
   show.posted_by = req.session.username;
   show.date_start = new Date(req.body.date + ' ' + req.body.start);
+  show.image = req.file.path;
+
+  console.log('req.file: ', req.file);
+  //
+  // var stream = cloudinary.uploader.upload_stream(function(result) {
+  //   console.log(result);
+  // }, { public_id: req.body.title } );
+  //
+  // fs.createReadStream(req.files.image.path, {encoding: 'binary'}).on('data', stream.write).on('end', stream.end);
 
   Show.create(show, function(err, newShow) {
     if (err) {
@@ -137,6 +148,7 @@ exports.post_add_show = function(req, res) {
           contact_name: shows[i].contact_name,
           contact_email: shows[i].contact_email,
           contact_phone: shows[i].contact_phone,
+          image: shows[i].image,
           posted_by: shows[i].posted_by
         };
         showsArray.push(showObject);
@@ -224,6 +236,7 @@ exports.search_shows = function(req, res) {
             contact_name: shows[i].contact_name,
             contact_email: shows[i].contact_email,
             contact_phone: shows[i].contact_phone,
+            image: shows[i].image,
             posted_by: shows[i].posted_by
           };
           showsArray.push(showObject);
@@ -292,6 +305,7 @@ exports.get_my_shows = function(req, res) {
         contact_name: shows[i].contact_name,
         contact_email: shows[i].contact_email,
         contact_phone: shows[i].contact_phone,
+        image: shows[i].image,
         posted_by: shows[i].posted_by
       };
       showsArray.push(showObject);
@@ -352,15 +366,16 @@ exports.post_edit_show = function(req, res) {
   var update = req.body;
 
   update.message = 'Updated successfully.';
+  update.image = req.file.path;
   update.posted_by = req.session.username;
+
+  console.log('req.file: ', req.file);
 
   Show.findByIdAndUpdate(req.params.id, update, function(err, updatedShow) {
     if (err) {
       console.log(err);
       res.send('An error occured updating db.');
     }
-    // look at this later
-    console.log('updatedShow: ', updatedShow);
 
     Show.find({ 'posted_by': req.session.username }, function(err, shows) {
       if (err) {
@@ -400,6 +415,7 @@ exports.post_edit_show = function(req, res) {
           contact_name: shows[i].contact_name,
           contact_email: shows[i].contact_email,
           contact_phone: shows[i].contact_phone,
+          image: shows[i].image,
           posted_by: shows[i].posted_by
         };
         showsArray.push(showObject);
@@ -413,6 +429,7 @@ exports.post_edit_show = function(req, res) {
 
       var showsArraySorted = sortByDateStart(showsArray);
 
+      //  change to redirect?
       if (req.session.isLoggedIn == true) {
         res.render('my-shows', {
           title: 'Record Show Mania',
@@ -431,15 +448,10 @@ exports.post_edit_show = function(req, res) {
 
 // delete show
 exports.delete_show = function(req, res) {
-  console.log('req.body: ', req.body)
   Show.findByIdAndDelete(req.body.id, function(err) {
     if (err) {
       res.send('An error occured deleting this show.');
     }
-    /*
-    try this?
-    res.render('my-shows', { message: "Show has been deleted successfully." });
-    */
     Show.find({ 'posted_by': req.session.username }, function(err, shows) {
       if (err) {
         console.log(err);
@@ -489,6 +501,7 @@ exports.delete_show = function(req, res) {
 
       var showsArraySorted = sortByDateStart(showsArray);
 
+      //  change to redirect?
       if (req.session.isLoggedIn == true) {
         res.render('my-shows', {
           title: 'Record Show Mania',

@@ -1,11 +1,17 @@
 TODO
 
 priority for MVP:
+- add featured dealers input after table rent
+- configure image on edit show page
 - make sure session is working properly
 - create views for errors / 404
 - create footer
 
 odds and ends:
+- grey out past dates in date picker
+- fix phone number format
+- add cassette dealers?
+- fix login page
 - search between 2 dates
 - ongoing shows
 - use async and refactor to eliminate callback hell

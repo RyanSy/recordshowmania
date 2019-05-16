@@ -14,7 +14,7 @@ var showSchema = new Schema(
     start: {type: String, required: true, max: 50},
     end: {type: String, required: true, max: 50},
     date_start: {type: Date, required: true},
-    regular_admission_fee: {type: String, required: true},
+    regular_admission_fee: {type: String},
     early_admission: {type: Boolean},
     early_admission_fee: {type: String},
     early_admission_time: {type: String},
@@ -31,6 +31,7 @@ var showSchema = new Schema(
     contact_name: {type: String, max: 100},
     contact_email: {type: String, max: 100},
     contact_phone: {type: String, max: 100},
+    image: {type: String, max: 100},
     message: {type: String, max: 100},
     posted_by: {type: String, required: true, max: 100}
   }
