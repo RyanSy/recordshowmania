@@ -61,9 +61,6 @@ exports.post_add_show = function(req, res) {
             res.send('Error uploading image.')
             return;
           }
-          fs.unlink(req.file.path, (err) => {
-            if (err) throw err;
-          });
           var imageUrl = result.secure_url;
           var imagePublicId = result.public_id;
           console.log(imagePublicId);
@@ -118,6 +115,9 @@ exports.post_add_show = function(req, res) {
 
   // waterfall callback
   function(err, showsArraySorted) {
+    fs.unlink(req.file.path, (err) => {
+      if (err) throw err;
+    });
     if (req.session.isLoggedIn == true) {
           res.render('my-shows', {
             title: 'Record Show Mania',
@@ -245,9 +245,6 @@ exports.post_edit_show = function(req, res) {
             res.send('Error uploading image.')
             return;
           }
-          fs.unlink(req.file.path, (err) => {
-            if (err) throw err;
-          });
           var imageUrl = result.secure_url;
           var imagePublicId = result.public_id;
           callback(null, imageUrl, imagePublicId);
@@ -299,6 +296,9 @@ exports.post_edit_show = function(req, res) {
 
   // waterfall callback
   function(err, showsArraySorted) {
+    fs.unlink(req.file.path, (err) => {
+      if (err) throw err;
+    });
     if (req.session.isLoggedIn == true) {
           res.render('my-shows', {
             title: 'Record Show Mania',
