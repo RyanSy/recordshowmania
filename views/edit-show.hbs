@@ -6,6 +6,9 @@
 
   <form class="mt-4" action="/edit-show/{{show._id}}" enctype="multipart/form-data" method="post">
     <div class="form-group">
+      <img src="{{show.image}}" alt="{{show.name}}" class="img-fluid mb-4">
+    </div>
+    <div class="form-group">
       <label for="inputDate">Date *</label>
       <input type="date" class="form-control col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3" id="inputDate" name="date" required="true" value="{{show.date}}">
     </div>
@@ -95,12 +98,12 @@
 
     <div class="form-group">
       <label for="inputStart">Start Time *</label>
-      <input type="time" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="inputStart" name="start" required="true" value="{{show.start}}">
+      <input type="time" class="form-control col-4 col-sm-4 col-md-3 col-lg-2 col-xl-2" id="inputStart" name="start" required="true" value="{{show.start}}">
     </div>
 
     <div class="form-group">
       <label for="inputEnd">End Time *</label>
-      <input type="time" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="inputEnd" name="end" required="true" value="{{show.end}}">
+      <input type="time" class="form-control col-4 col-sm-4 col-md-3 col-lg-2 col-xl-2" id="inputEnd" name="end" required="true" value="{{show.end}}">
     </div>
 
     <div class="form-group">
@@ -319,7 +322,7 @@
     </div>
 
     <div class="form-group">
-      <label for="inputImage">Image Upload</label>
+      <label for="inputImage">Upload New Image</label>
       <input type="file" accept="image/*,.pdf" class="form-control-file" id="inputImage" name="image">
     </div>
 
