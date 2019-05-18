@@ -23,6 +23,7 @@
       {{#each shows}}
         <tr>
           <td>
+            <img src="{{this.image}}" alt="{{this.name}}" class="img-fluid mb-4"> <br>
             {{this.date}} <br>
             {{this.name}} <br>
             <a href="https://maps.google.com/?q={{this.address}}+{{this.city}}+{{this.state}}" target="_blank">
@@ -68,6 +69,7 @@
                   <div class="modal-footer">
                     <form action="/delete-show" method="post">
                       <input type="hidden" name="id" value="{{this.id}}">
+                      <input type="hidden" name="image_public_id" value="{{this.image_public_id}}">
                       <button class="btn btn-danger" type="submit">Delete</button>
                     </form>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
