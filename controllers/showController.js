@@ -115,10 +115,10 @@ exports.post_add_show = function(req, res) {
 
   // waterfall callback
   function(err, showsArraySorted) {
-    // fs.unlink(req.file.path, (err) => {
-    //   if (err) throw err;
-    //   res.send('Server error. Sorry.')
-    // });
+    fs.unlink(req.file.path, (err) => {
+      if (err) throw err;
+      res.send('Server error. Sorry.')
+    });
     if (req.session.isLoggedIn == true) {
           res.render('my-shows', {
             title: 'Record Show Mania',
@@ -297,10 +297,10 @@ exports.post_edit_show = function(req, res) {
 
   // waterfall callback
   function(err, showsArraySorted) {
-    // fs.unlink(req.file.path, (err) => {
-    //   if (err) throw err;
-    //   console.log('Server error. Sorry.');
-    // });
+    fs.unlink(req.file.path, (err) => {
+      if (err) throw err;
+      console.log('Server error. Sorry.');
+    });
     if (req.session.isLoggedIn == true) {
           res.render('my-shows', {
             title: 'Record Show Mania',
