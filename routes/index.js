@@ -3,11 +3,10 @@ var router = express.Router();
 var show_controller = require('../controllers/showController');
 var user_controller = require('../controllers/userController');
 var path = require('path');
-var tmp = path.join(__dirname, 'public');
 var multer = require('multer');
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, tmp);
+    cb(null, 'app/tmp');
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname);
