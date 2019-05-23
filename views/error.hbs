@@ -1,3 +1,14 @@
-<h1>{{message}}</h1>
+<div class="header">
+  <div class="transparent-cover">
+    {{> nav}}
+    {{> searchbox}}
+  </div>
+</div>
+
+<div class="container text-center mt-5">
+  <h5>{{message}}. If the problem persists, please contact <a href="mailto:help@recordshowmania.com">help@recordshowmania.com</a></h5>
+  <p><a href="/">Return to main page</a></p>
+</div>
+
 <h2>{{error.status}}</h2>
 <pre>{{error.stack}}</pre>
