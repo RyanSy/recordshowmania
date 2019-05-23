@@ -32,15 +32,15 @@
                     {{this.city}}, {{this.state}} {{this.zip}} <br>
                   </a> Time: {{this.start}} to {{this.end}} <br>
                   Regular Admission: {{this.regular_admission_fee}} <br>
-                  Early Admission? {{this.early_admission}} <br>
+                  Early Admission? {{# if tihs.early_admission}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
                   {{#if this.early_admission}}
                     Early Admission Time: {{this.early_admission_time}} <br>
                     Early Admission Fee: {{this.early_admission_fee}} <br>
                   {{/if}}
                   Number Of Dealers: {{this.number_of_dealers}} <br>
                   Number Of Tables: {{this.number_of_tables}} <br>
-                  Size Of Tables: {{this.size_of_tables}} <br> T
-                  able Rent: {{this.table_rent}} <br>
+                  Size Of Tables: {{this.size_of_tables}} <br>
+                  Table Rent: {{this.table_rent}} <br>
                   CD Dealers? {{#if this.cd_dealers}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
                   45 Dealers? {{#if this.fortyfive_dealers}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
                   78 Dealers? {{#if this.seventyeight_dealers}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
