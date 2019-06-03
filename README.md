@@ -2,6 +2,7 @@ TODO
 
 priority for MVP:
 - add featured dealers input after table rent
+- fix cloudinary (use stream or delete image after upload to cloudinary)
 - make sure session is working properly (ie can't click back)
 - create views for errors / 404
 - create footer
