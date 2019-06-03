@@ -158,7 +158,7 @@ exports.search_shows = function(req, res) {
     } else {
         var showsArray = createShowsArray(shows);
         var showsArraySorted = sortByDateStart(showsArray);
-
+        
         if (req.session.isLoggedIn == true) {
           res.render('search-results', {
             title: 'Record Show Mania',

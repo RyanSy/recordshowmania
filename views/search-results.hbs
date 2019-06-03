@@ -6,80 +6,71 @@
 </div>
 
   <div class="container mt-5">
-    <br>
-    <h3>Search Results:</h3>
-    <br>
-    <table class="table table-striped">
-      <tbody>
-        {{#each shows}}
-        <div class="card shadow p-3 mb-2 bg-white rounded">
-          <div class="card-body row">
-            <div class="col-4">
-              <h5>{{this.day_abbreviated}}</h5>
-              <h5>{{this.day}}</h5>
-              <h5>{{this.month}}</h5
-              </h5>
-            </div>
-            <div class="col-8">
-              <a href="" data-toggle="modal" data-target="#showDetailModal{{this.id}}">
-                <h5>{{this.name}}</h5>
-                <h6>{{this.venue}}</h6>
-                <h6>{{this.city}}, {{this.state}}</h6>
-              </a>
-              <h6>{{this.start}} to {{this.end}}</h6>
-            </div>
-            <!-- Modal -->
-            <div class="modal fade" id="showDetailModal{{this.id}}" tabindex="-1" role="dialog" aria-labelledby="showDetailModalLabel{{this.id}}" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="showDetailModalLabel{{this.id}}">Show Details</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <img src="{{this.image}}" alt="{{this.name}}" class="img-fluid mb-4"> <br>
-                    <strong>{{this.date}}</strong> <br>
-                    {{this.name}} <br>
-                    <a href="https://maps.google.com/?q={{this.address}}+{{this.city}}+{{this.state}}" target="_blank">
-                      {{this.venue}} <br>
-                      {{this.address}} <br>
-                      {{this.city}}, {{this.state}} {{this.zip}} <br>
-                    </a>
-                    <strong>Time:</strong> {{this.start}} to {{this.end}} <br>
-                    <strong>Regular Admission:</strong> {{this.regular_admission_fee}} <br>
-                    <strong>Early Admission?</strong> {{# if tihs.early_admission}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
-                      <strong>Early Admission Time:</strong> {{this.early_admission_time}} <br>
-                      <strong>Early Admission Fee:</strong> {{this.early_admission_fee}} <br>
-                    {{/if}}
-                    <strong>Number Of Dealers:</strong> {{this.number_of_dealers}} <br>
-                    <strong>Number Of Tables:</strong> {{this.number_of_tables}} <br>
-                    <strong>Size Of Tables:</strong> {{this.size_of_tables}} <br>
-                    <strong>Table Rent:</strong> {{this.table_rent}} <br>
-                    <strong>CD Dealers?</strong> {{#if this.cd_dealers}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
-                    <strong>45 Dealers?</strong> {{#if this.fortyfive_dealers}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
-                    <strong>78 Dealers?</strong> {{#if this.seventyeight_dealers}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
-                    <strong>Food/Drink?</strong> {{#if this.food_drink}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
-                    <strong>Handicapped Access?</strong> {{#if this.handicapped_access}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
-                    <strong>More Information:</strong> {{this.more_information}} <br>
-                    <strong>Contact Name:</strong> {{this.contact_name}} <br>
-                    <strong>Contact Email:</strong> {{this.contact_email}} <br>
-                    <strong>Contact Phone:</strong> {{this.contact_phone}} <br>
-                    <strong>Posted by:</strong> {{this.posted_by}}
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  </div>
-                </div>
+    <h3 class="mt-5 mb-5">Search Results:</h3>
+    {{#each shows}}
+    <div class="card shadow p-3 mb-2 bg-white rounded">
+      <div class="card-body row">
+        <div class="col-4">
+          <h5>{{this.month}} {{this.day}}</h5>
+        </div>
+        <div class="col-8">
+          <a href="" data-toggle="modal" data-target="#showDetailModal{{this.id}}">
+            <h5>{{this.name}} - {{this.city}}, {{this.state}}</h5>
+          </a>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="showDetailModal{{this.id}}" tabindex="-1" role="dialog" aria-labelledby="showDetailModalLabel{{this.id}}" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="showDetailModalLabel{{this.id}}">Show Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <img src="{{this.image}}" alt="{{this.name}}" class="img-fluid mb-4"> <br>
+                <strong>{{this.date}}</strong> <br>
+                {{this.name}} <br>
+                <a href="https://maps.google.com/?q={{this.address}}+{{this.city}}+{{this.state}}" target="_blank">
+                  {{this.venue}} <br>
+                  {{this.address}} <br>
+                  {{this.city}}, {{this.state}} {{this.zip}} <br>
+                </a>
+                <strong>Time:</strong> {{this.start}} to {{this.end}} <br>
+                <strong>Regular Admission:</strong> {{this.regular_admission_fee}} <br>
+                <strong>Early Admission?</strong> {{# if tihs.early_admission}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
+                {{#if this.early_admission}}
+                  <strong>Early Admission Time:</strong> {{this.early_admission_time}} <br>
+                  <strong>Early Admission Fee:</strong> {{this.early_admission_fee}} <br>
+                {{/if}}
+                <strong>Number Of Dealers:</strong> {{this.number_of_dealers}} <br>
+                <strong>Number Of Tables:</strong> {{this.number_of_tables}} <br>
+                <strong>Size Of Tables:</strong> {{this.size_of_tables}} <br>
+                <strong>Table Rent:</strong> {{this.table_rent}} <br>
+                <strong>CD Dealers?</strong> {{#if this.cd_dealers}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
+                <strong>45 Dealers?</strong> {{#if this.fortyfive_dealers}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
+                <strong>78 Dealers?</strong> {{#if this.seventyeight_dealers}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
+                <strong>Food/Drink?</strong> {{#if this.food_drink}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
+                <strong>Handicapped Access?</strong> {{#if this.handicapped_access}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
+                <strong>More Information:</strong> {{this.more_information}} <br>
+                <strong>Contact Name:</strong> {{this.contact_name}} <br>
+                <strong>Contact Email:</strong> {{this.contact_email}} <br>
+                <strong>Contact Phone:</strong> {{this.contact_phone}} <br>
+                <strong>Posted by:</strong> {{this.posted_by}}
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               </div>
             </div>
-            <!-- Modal -->
           </div>
         </div>
-        {{/each}}
-      </tbody>
-    </table>
-    <a href="/">Return to main page</a>
+        <!-- Modal -->
+      </div>
+    </div>
+    {{/each}}
+    <div class="mt-5 mb-5">
+      <a href="/">Return to main page</a>
+    </div>
   </div>
 </div>

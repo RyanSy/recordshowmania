@@ -16,25 +16,17 @@
 {{/if}}
 
 <div class="container mt-5">
-  <br>
-  <h3>Upcoming Shows</h3>
-  <br>
+  <h3 class="mt-5 mb-5">Upcoming Shows</h3>
   {{#each shows}}
     <div class="card shadow p-3 mb-2 bg-white rounded">
       <div class="card-body row">
         <div class="col-4">
-          <h5>{{this.day_abbreviated}}</h5>
-          <h5>{{this.day}}</h5>
-          <h5>{{this.month}}</h5
-          </h5>
+          <h5>{{this.month}} {{this.day}}</h5>
         </div>
         <div class="col-8">
           <a href="" data-toggle="modal" data-target="#showDetailModal{{this.id}}">
-            <h5>{{this.name}}</h5>
-            <h6>{{this.venue}}</h6>
-            <h6>{{this.city}}, {{this.state}}</h6>
+            <h5>{{this.name}} - {{this.city}}, {{this.state}}</h5>
           </a>
-          <h6>{{this.start}} to {{this.end}}</h6>
         </div>
         <!-- Modal -->
         <div class="modal fade" id="showDetailModal{{this.id}}" tabindex="-1" role="dialog" aria-labelledby="showDetailModalLabel{{this.id}}" aria-hidden="true">
