@@ -18,7 +18,7 @@
     <p class="mt-5">{{noshow_message}}</p>
   {{/if}}
 
-  <table class="table table-striped">
+  <table class="table">
     <tbody>
       {{#each shows}}
         <tr>
@@ -51,7 +51,7 @@
                   Contact Phone: {{this.contact_phone}} <br>
                   More Information: {{this.more_information}} <br> Posted by: {{this.posted_by}}
             <div class="mt-2">
-              <a class="btn btn-primary" href="/edit-show/{{this.id}}">Edit</a><span> | </span><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete{{this.id}}">Delete</button>
+              <a class="btn btn-warning" href="/edit-show/{{this.id}}">Edit</a><span> | </span><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete{{this.id}}">Delete</button>
             </div>
             <!-- Modal -->
             <div class="modal fade" id="confirmDelete{{this.id}}" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel{{this.id}}" aria-hidden="true">
