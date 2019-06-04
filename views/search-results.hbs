@@ -8,18 +8,16 @@
   <div class="container mt-5">
     <h3 class="mt-5 mb-5">Search Results:</h3>
     {{#each shows}}
-    <div class="card shadow pt-3 pl-3 pr-3 bg-white rounded">
+    <div class="card shadow mb-2 pt-3 pl-3 pr-3 bg-white rounded">
       <div class="card-body row">
-        <ul class="list-inline">
-          <li class="list-inline-item">
-            {{this.month}} {{this.day}}
-          </li>
-          <li class="list-inline-item">
-            <a href="" data-toggle="modal" data-target="#showDetailModal{{this.id}}">
-              {{this.name}} - {{this.city}}, {{this.state}}
-            </a>
-          </li>
-        </ul>
+        <div class="col-4">
+          {{this.month}} {{this.day}}
+        </div>
+        <div class="col-8">
+          <a href="" data-toggle="modal" data-target="#showDetailModal{{this.id}}">
+            {{this.name}} - {{this.city}}, {{this.state}}
+          </a>
+        </div>
         <!-- Modal -->
         <div class="modal fade" id="showDetailModal{{this.id}}" tabindex="-1" role="dialog" aria-labelledby="showDetailModalLabel{{this.id}}" aria-hidden="true">
           <div class="modal-dialog" role="document">
