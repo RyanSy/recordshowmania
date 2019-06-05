@@ -41,7 +41,12 @@
                   Number Of Tables: {{this.number_of_tables}} <br>
                   Size Of Tables: {{this.size_of_tables}} <br>
                   Table Rent: {{this.table_rent}} <br>
+                  Featured Dealers: <br>
+                  {{#each this.featured_dealers}}
+                    <li>{{this}}</li>
+                  {{/each}}
                   CD Dealers? {{#if this.cd_dealers}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
+                  Cassette Dealers? {{#if this.cassette_dealers}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
                   45 Dealers? {{#if this.fortyfive_dealers}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
                   78 Dealers? {{#if this.seventyeight_dealers}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
                   Food/Drink? {{#if this.food_drink}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>

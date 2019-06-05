@@ -49,6 +49,7 @@ exports.post_add_show = function(req, res) {
   var show = req.body;
   show.posted_by = req.session.username;
   show.date_start = new Date(req.body.date + ' ' + req.body.start);
+  console.log(show.featured_dealers);
 
   async.waterfall([
     // upload image and get url
@@ -90,7 +91,7 @@ exports.post_add_show = function(req, res) {
         if (err) {
           console.log(err);
           callback(err, null);
-          res.send('An error occured updating db.');
+          res.send('An error occured creating the show (Error code: SC93)');
           return;
         }
         callback(null, newShow);
@@ -158,7 +159,7 @@ exports.search_shows = function(req, res) {
     } else {
         var showsArray = createShowsArray(shows);
         var showsArraySorted = sortByDateStart(showsArray);
-        
+
         if (req.session.isLoggedIn == true) {
           res.render('search-results', {
             title: 'Record Show Mania',
@@ -216,6 +217,7 @@ exports.get_edit_show = function(req, res) {
       console.log(err);
       res.send('An error occured getting that show.');
     }
+
     if (req.session.isLoggedIn) {
       res.render('edit-show', {
         username: req.session.username,
@@ -320,13 +322,15 @@ exports.post_edit_show = function(req, res) {
 
 /* delete show */
 exports.delete_show = function(req, res) {
-  cloudinary.uploader.destroy(req.body.image_public_id, function(error, result) {
-    if (error) {
-      console.log(error);
-      res.send('An error occured deleting this show.')
-    }
-    console.log(result);
-  });
+  if (req.body.image_public_id) {
+    cloudinary.uploader.destroy(req.body.image_public_id, function(error, result) {
+      if (error) {
+        console.log(error);
+        res.send('An error occured deleting this show.')
+      }
+      console.log(result);
+    });
+  }
   Show.findByIdAndDelete(req.body.id, function(err) {
     if (err) {
       res.send('An error occured deleting this show.');
@@ -386,7 +390,9 @@ function createShowsArray(shows) {
       number_of_tables: shows[i].number_of_tables,
       size_of_tables: shows[i].size_of_tables,
       table_rent: shows[i].table_rent,
+      featured_dealers: shows[i].featured_dealers,
       cd_dealers: shows[i].cd_dealers,
+      cassette_dealers: shows[i].cassette_dealers,
       fortyfive_dealers: shows[i].fortyfive_dealers,
       seventyeight_dealers: shows[i].seventyeight_dealers,
       food_drink: shows[i].food_drink,

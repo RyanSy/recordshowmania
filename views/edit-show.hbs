@@ -37,8 +37,8 @@
       <label for="inputState">State *</label>
       <input type="hidden" id="selectedState" value="{{show.state}}">
       <select class="form-control col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="inputState" name="state" required="true">
+        <option value="AK">AK</option>
         <option value="AL">AL</option>
-      	<option value="AK">AK</option>
       	<option value="AZ">AZ</option>
       	<option value="AR">AR</option>
       	<option value="CA">CA</option>
@@ -63,15 +63,15 @@
       	<option value="MN">MN</option>
       	<option value="MS">MS</option>
       	<option value="MO">MO</option>
-      	<option value="MT">MT</option>
-      	<option value="NE">NE</option>
+        <option value="MT">MT</option>
+        <option value="NC">NC</option>
+      	<option value="ND">ND</option>
+        <option value="NE">NE</option>
       	<option value="NV">NV</option>
       	<option value="NH">NH</option>
       	<option value="NJ">NJ</option>
       	<option value="NM">NM</option>
       	<option value="NY">NY</option>
-      	<option value="NC">NC</option>
-      	<option value="ND">ND</option>
       	<option value="OH">OH</option>
       	<option value="OK">OK</option>
       	<option value="OR">OR</option>
@@ -176,6 +176,21 @@
       </div>
     </div>
 
+    <div id="featuedDealers" class="form-group">
+      <label for="inputFeaturedDealers">Featured Dealers</label><br>
+
+      {{show.featured_dealers_index}}
+
+      <div id="featuedDealersContainer">
+        {{#each show.featured_dealers}}
+        <div id="featuredDealer{{@index}}" class="featured-dealer form-inline">
+          <input type="text" class="form-control col-md-6 col-lg-6 col-xl-6 mb-3" name="featured_dealers" value="{{this}}"><input id="featuredDealerDeleteButton{{@index}}" type="button" class="btn btn-danger ml-2 mb-3" onclick="deleteFeaturedDealer()" value="Delete">
+        </div>
+        {{/each}}
+      </div>
+      <input type="button" id="addFeaturedDealerButton" class="btn btn-success" onclick="addFeaturedDealer()" value="Add Featured Dealer">
+    </div>
+
     <div class="form-group">
       <div class="form-check form-check-inline">
         <label for="cdDealers">CD Dealers?</label>
@@ -196,6 +211,31 @@
         </div>
         <div class="form-check form-check-inline">
           <input type="radio" class="form-check-input" name="cd_dealers" value="no" checked>
+          No
+        </div>
+      {{/if}}
+    </div>
+
+    <div class="form-group">
+      <div class="form-check form-check-inline">
+        <label for="cassetteDealers">Cassette Dealers?</label>
+      </div>
+      {{#if show.cassette_dealers}}
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" name="cassette_dealers" value="yes" checked>
+          Yes
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" name="cassette_dealers" value="no">
+          No
+        </div>
+      {{else}}
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" name="cassette_dealers" value="yes">
+          Yes
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" name="cassette_dealers" value="no" checked>
           No
         </div>
       {{/if}}
@@ -347,5 +387,39 @@
         options[i].selected = true;
       }
     }
+  }
+
+  function addFeaturedDealer() {
+    var div = document.createElement("div");
+    var text = document.createElement("input");
+    var deleteButton = document.createElement("input");
+    var featuedDealersArray = document.getElementsByClassName("featured-dealer");
+
+    for (var i = 0; i <= featuedDealersArray.length; i++) {
+      div.setAttribute("id", "featuredDealer" + i);
+      deleteButton.setAttribute("id", "featuredDealerDeleteButton" + i);
+    }
+
+    div.setAttribute("class", "featured-dealer form-inline");
+    text.setAttribute("type", "text");
+    text.setAttribute("name", "featured_dealers");
+    text.setAttribute("class", "form-control col-md-6 col-lg-6 col-xl-6 mb-3");
+    deleteButton.setAttribute("type", "button");
+    deleteButton.setAttribute("class", "btn btn-danger ml-2 mb-3");
+    deleteButton.setAttribute("onclick", "deleteFeaturedDealer()");
+    deleteButton.setAttribute("value", "Delete");
+
+    div.appendChild(text);
+    div.appendChild(deleteButton);
+
+    document.getElementById("featuedDealersContainer").appendChild(div);
+  }
+
+  function deleteFeaturedDealer() {
+    var deleteButtonID = document.getElementById(event.target.id);
+    var featuredDealerDiv = document.getElementById(deleteButtonID.closest("div").id);
+    console.log(deleteButtonID);
+    console.log(featuredDealerDiv);
+    featuredDealerDiv.parentNode.removeChild(featuredDealerDiv);
   }
 </script>
