@@ -7,6 +7,7 @@ priority for MVP:
 - create footer
 
 odds and ends:
+- fix states dropdown
 - utilize connect-flash for redirects?
 - use req.body.id for show edit instead of req.param?
 - fix phone number format
