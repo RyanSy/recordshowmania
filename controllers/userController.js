@@ -24,7 +24,7 @@ exports.register_user = function(req, res) {
     }
     if (user) {
       console.log(user);
-      res.send(`${req.body.email} already registered`);
+      res.send(`${req.body.email} is already registered.`);
     } else {
       bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
         if (err) {
