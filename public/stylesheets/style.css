@@ -14,7 +14,7 @@ body {
   color: #2F4F4F !important;
 }
 .header {
-  background: url('../images/records.jpg');
+  background: url('https://res.cloudinary.com/hxzook5wx/image/upload/v1558490982/records.jpg');
   background-repeat: no-repeat;
   background-size: cover;
 }

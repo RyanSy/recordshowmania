@@ -49,7 +49,6 @@ exports.post_add_show = function(req, res) {
   var show = req.body;
   show.posted_by = req.session.username;
   show.date_start = new Date(req.body.date + ' ' + req.body.start);
-  console.log(show.featured_dealers);
 
   async.waterfall([
     // upload image and get url
@@ -64,7 +63,9 @@ exports.post_add_show = function(req, res) {
           }
           var imageUrl = result.secure_url;
           var imagePublicId = result.public_id;
-          console.log(imagePublicId);
+          fs.unlink('./' + req.file.path, (err) => {
+            if (err) throw err;
+          });
           callback(null, imageUrl, imagePublicId);
         });
       } else {
@@ -75,7 +76,6 @@ exports.post_add_show = function(req, res) {
     // set image url and image public id in show object
     function setShowImage(imageUrl, imagePublicId, callback) {
       if (imageUrl) {
-        console.log(imagePublicId);
         show.image = imageUrl;
         show.image_public_id = imagePublicId;
         callback(null, show);
@@ -86,7 +86,6 @@ exports.post_add_show = function(req, res) {
 
     // add show
     function addShow(show, callback) {
-      console.log(show);
       Show.create(show, function(err, newShow) {
         if (err) {
           console.log(err);
@@ -116,10 +115,6 @@ exports.post_add_show = function(req, res) {
 
   // waterfall callback
   function(err, showsArraySorted) {
-    // fs.unlink(req.file.path, (err) => {
-    //   if (err) throw err;
-    //   res.send('Server error. Sorry.')
-    // });
     if (req.session.isLoggedIn == true) {
           res.render('my-shows', {
             title: 'Record Show Mania',
@@ -250,6 +245,9 @@ exports.post_edit_show = function(req, res) {
           }
           var imageUrl = result.secure_url;
           var imagePublicId = result.public_id;
+          fs.unlink('./' + req.file.path, (err) => {
+            if (err) throw err;
+          });
           callback(null, imageUrl, imagePublicId);
         });
       } else {
@@ -299,12 +297,6 @@ exports.post_edit_show = function(req, res) {
 
   // waterfall callback
   function(err, showsArraySorted) {
-    // fs.unlink(req.file.path, (err) => {
-    //   if (err) {
-    //     console.log(err);
-    //     res.send('Server error. Sorry.')
-    //   }
-    // });
     if (req.session.isLoggedIn == true) {
           res.render('my-shows', {
             title: 'Record Show Mania',
@@ -323,12 +315,11 @@ exports.post_edit_show = function(req, res) {
 /* delete show */
 exports.delete_show = function(req, res) {
   if (req.body.image_public_id) {
-    cloudinary.uploader.destroy(req.body.image_public_id, function(error, result) {
+    cloudinary.uploader.destroy(req.body.image_public_id, function(error) {
       if (error) {
         console.log(error);
         res.send('An error occured deleting this show.')
       }
-      console.log(result);
     });
   }
   Show.findByIdAndDelete(req.body.id, function(err) {
