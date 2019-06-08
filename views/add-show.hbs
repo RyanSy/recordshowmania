@@ -7,7 +7,7 @@
   <form class="mt-4" action="/add-show" enctype="multipart/form-data" method="post">
     <div class="form-group">
       <label for="inputDate">Date *</label>
-      <input type="date" class="form-control col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3" id="inputDate" name="date" required="true">
+      <input type="date" class="form-control col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3" id="inputDate" name="date" min="{{dateNow}}" required="true">
     </div>
 
     <div class="form-group">
@@ -27,7 +27,7 @@
 
     <div class="form-group">
       <label for="inputCity">City *</label>
-      <input type="text" class="form-control col-md-6 col-lg-6 col-xl-6" id="inputCity" name="city" required="true">
+      <input type="text" class="form-control col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3" id="inputCity" name="city" required="true">
     </div>
 
     <div class="form-group">
@@ -260,17 +260,17 @@
 
     <div class="form-group">
       <label for="inputMoreInformation">More Information</label>
-      <textarea class="form-control " id="inputMoreInformation" name="more_information" rows="4"></textarea>
+      <textarea class="form-control col-8" id="inputMoreInformation" name="more_information" rows="4"></textarea>
     </div>
 
     <div class="form-group">
       <label for="inputContactName">Contact Name</label>
-      <input type="text" class="form-control col-md-6 col-lg-6 col-xl-6" id="inputContactName" name="contact_name">
+      <input type="text" class="form-control col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3" id="inputContactName" name="contact_name">
     </div>
 
     <div class="form-group">
       <label for="inputContactEmail">Contact Email</label>
-      <input type="email" class="form-control col-md-6 col-lg-6 col-xl-6" id="inputContactEmail" name="contact_email">
+      <input type="email" class="form-control col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3" id="inputContactEmail" name="contact_email">
     </div>
 
     <div class="form-group">
@@ -320,7 +320,7 @@
       div.setAttribute("class", "featured-dealer form-inline");
       text.setAttribute("type", "text");
       text.setAttribute("name", "featured_dealers");
-      text.setAttribute("class", "form-control col-md-6 col-lg-6 col-xl-6 mb-3");
+      text.setAttribute("class", "form-control col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3 mb-3");
       deleteButton.setAttribute("type", "button");
       deleteButton.setAttribute("class", "btn btn-danger ml-2 mb-3");
       deleteButton.setAttribute("onclick", "deleteFeaturedDealer()");

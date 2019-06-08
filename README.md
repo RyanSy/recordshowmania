@@ -1,9 +1,9 @@
 TODO
 
 priority for MVP:
-- grey out past dates in date picker
 - make sure session is working properly (ie can't click back after log out)
 - create views for all errors / 404
+- make sure input state select are in order
 
 odds and ends:
 - fix states dropdown
