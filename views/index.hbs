@@ -1,9 +1,11 @@
 <div class="header">
-  {{> nav}}
-  <div class="text-center">
-    <h2 id="header-message" class="header-message mt-5 mb-5">Looking for a record show?</h2>
+  <div class="header-wrapper">
+    {{> nav}}
+    <div class="text-center">
+      <h2 id="header-message" class="header-message mt-5 mb-5">Looking for a record show?</h2>
+    </div>
+    {{> searchbox}}
   </div>
-  {{> searchbox}}
 </div>
 
 {{#if message}}

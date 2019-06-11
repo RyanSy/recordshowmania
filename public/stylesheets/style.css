@@ -13,8 +13,11 @@ body {
 #navbarbutton {
   color: #2F4F4F !important;
 }
+.header-wrapper {
+  background-color: rgba(0, 0, 0, 0.5);
+}
 .header {
-  background: url('https://res.cloudinary.com/hxzook5wx/image/upload/v1558490982/records.jpg');
+  background: url('https://res.cloudinary.com/hxzook5wx/image/upload/v1560203300/MARKETLANDSCAPE_jyk0tk.jpg');
   background-repeat: no-repeat;
   background-size: cover;
 }
