@@ -53,7 +53,7 @@
                 </a>
                 <strong>Time:</strong> {{this.start}} to {{this.end}} <br>
                 <strong>Regular Admission:</strong> {{this.regular_admission_fee}} <br>
-                <strong>Early Admission?</strong> {{# if tihs.early_admission}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
+                <strong>Early Admission?</strong> {{#if this.early_admission}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
                 {{#if this.early_admission}}
                   <strong>Early Admission Time:</strong> {{this.early_admission_time}} <br>
                   <strong>Early Admission Fee:</strong> {{this.early_admission_fee}} <br>

@@ -117,14 +117,14 @@
       </div>
       {{#if show.early_admission}}
         <div class="form-check form-check-inline">
-        <input type="radio" class="form-check-input" id="earlyAdmissionYes" name="early_admission" onclick="displayEarlyAdmissionFields()" value="yes" checked>
-        Yes
+          <input type="radio" class="form-check-input" id="earlyAdmissionYes" name="early_admission" onclick="displayEarlyAdmissionFields()" value="yes" checked>
+          Yes
         </div>
         <div class="form-check form-check-inline">
           <input type="radio" class="form-check-input" id="earlyAdmissionNo" name="early_admission" onclick="displayEarlyAdmissionFields()" value="no">
           No
         </div>
-      {{/if}}
+      {{else}}
         <div class="form-check form-check-inline">
           <input type="radio" class="form-check-input" id="earlyAdmissionYes" name="early_admission" onclick="displayEarlyAdmissionFields()" value="yes">
           Yes
@@ -133,9 +133,11 @@
           <input type="radio" class="form-check-input" id="earlyAdmissionNo" name="early_admission" onclick="displayEarlyAdmissionFields()" value="no" checked>
           No
         </div>
+      {{/if}}
     </div>
 
-    <div id="earlyAdmissionFields" class="d-none">
+    {{#if show.early_admission}}
+    <div id="earlyAdmissionFields" class="d-block">
       <div class="form-group">
         <label for="earlyAdmissionTime">Early Admission Time</label>
         <input type="time" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="earlyAdmissionTime" name="early_admission_time" value="{{show.early_admission_time}}">
@@ -150,6 +152,24 @@
         </div>
       </div>
     </div>
+    {{else}}
+    <div id="earlyAdmissionFields" class="d-none">
+      <div class="form-group">
+        <label for="earlyAdmissionTime">Early Admission Time</label>
+        <input type="time" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="earlyAdmissionTime" name="early_admission_time" value="">
+      </div>
+      <div class="form-group">
+        <label for="inputAdmission">Early Admission Fee</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">$</div>
+          </div>
+          <input type="text" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="earlyAdmissionFee" name="early_admission_fee" value="">
+        </div>
+      </div>
+    </div>
+    {{/if}}
+
 
     <div class="form-group">
       <label for="numberOfDealers">Number Of Dealers</label>
@@ -386,6 +406,21 @@
       if (options[i].value == value) {
         options[i].selected = true;
       }
+    }
+  }
+
+  var earlyAdmissionYes = document.getElementById('earlyAdmissionYes');
+  var earlyAdmissionNo = document.getElementById('earlyAdmissionNo');
+  var earlyAdmissionFields = document.getElementById('earlyAdmissionFields');
+
+  function displayEarlyAdmissionFields() {
+    if (earlyAdmissionYes.checked) {
+      earlyAdmissionFields.className = 'd-block';
+      earlyAdmissionNo.removeAttribute('checked');
+    }
+    if (earlyAdmissionNo.checked) {
+      earlyAdmissionFields.className = 'd-none';
+      earlyAdmissionYes.removeAttribute('checked');
     }
   }
 
