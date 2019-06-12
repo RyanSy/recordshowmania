@@ -7,18 +7,17 @@ priority for MVP:
 - make sure input state select are in order
 
 odds and ends:
-- refactor image uploads
-- fix states dropdown
+- refactor image uploads?
 - utilize connect-flash for redirects?
 - use req.body.id for show edit instead of req.param?
 - fix phone number format
 - fix login page
 - search between 2 dates
-- polish UI: make buttons same size? full screen modal? look to google events for inspiration
+- polish UI: google events for inspiration
 - Google Maps autocomplete
 - (node:10712) DeprecationWarning: collection.ensureIndex is deprecated. Use createIndexes instead.
 
-before deployment:
+before deployment?
 - testing
 - production best practices
 - security best practices

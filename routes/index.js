@@ -4,15 +4,11 @@ var show_controller = require('../controllers/showController');
 var user_controller = require('../controllers/userController');
 var path = require('path');
 var multer = require('multer');
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'public/images');
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname);
-  }
+var memoryStorage = multer.memoryStorage({
+  storage: memoryStorage,
+  limits: {fileSize: 50000, files: 1}
 });
-var upload = multer({ storage: storage });
+var upload = multer({memoryStorage}).single('image');
 
 // display home page
 router.get('/', show_controller.list_shows);
@@ -51,7 +47,7 @@ router.get('/password-updated', user_controller.password_updated);
 router.get('/add-show', show_controller.get_add_show);
 
 // add show
-router.post('/add-show', upload.single('image'), show_controller.post_add_show);
+router.post('/add-show', upload, show_controller.post_add_show);
 
 // search shows
 router.post('/search', show_controller.search_shows);
@@ -63,7 +59,7 @@ router.get('/my-shows', show_controller.get_my_shows);
 router.get('/edit-show/:id', show_controller.get_edit_show);
 
 // edit show
-router.post('/edit-show/:id', upload.single('image'), show_controller.post_edit_show);
+router.post('/edit-show/:id', upload, show_controller.post_edit_show);
 
 // delete show
 router.post('/delete-show', show_controller.delete_show);

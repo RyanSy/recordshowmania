@@ -2,7 +2,9 @@ var Show = require('../models/show');
 var moment = require('moment');
 var async = require('async');
 var cloudinary = require('cloudinary').v2;
-var fs = require('fs');
+var path = require('path');
+var Datauri = require('datauri');
+var dUri = new Datauri();
 
 /* display all shows on index in ascending order */
 exports.list_shows = function(req, res) {
@@ -56,19 +58,15 @@ exports.post_add_show = function(req, res) {
     // upload image and get url
     function uploadImage(callback) {
       if (req.file) {
-        cloudinary.uploader.upload(req.file.path, { width: 600, height: 600, crop: "limit" }, function(error, result) {
+        dUri.format(path.extname(req.file.originalname).toString(), req.file.buffer);
+        cloudinary.uploader.upload(dUri.content, function (error, result) {
           if (error) {
             console.log(error);
             callback(error, null);
-            res.send('Error uploading image.')
-            return;
           }
-          var imageUrl = result.secure_url;
-          var imagePublicId = result.public_id;
-          // fs.unlink('./' + req.file.path, (err) => {
-          //   if (err) throw err;
-          // });
-          callback(null, imageUrl, imagePublicId);
+            var imageUrl = result.secure_url;
+            var imagePublicId = result.public_id;
+            callback(null, imageUrl, imagePublicId);
         });
       } else {
         callback(null, null, null);
@@ -252,19 +250,15 @@ exports.post_edit_show = function(req, res) {
     // upload image and get url
     function uploadImage(callback) {
       if (req.file) {
-        cloudinary.uploader.upload(req.file.path, { width: 600, height: 600, crop: "limit" }, function(error, result) {
+        dUri.format(path.extname(req.file.originalname).toString(), req.file.buffer);
+        cloudinary.uploader.upload(dUri.content, function (error, result) {
           if (error) {
             console.log(error);
             callback(error, null);
-            res.send('Error uploading image.')
-            return;
           }
-          var imageUrl = result.secure_url;
-          var imagePublicId = result.public_id;
-          fs.unlink('./' + req.file.path, (err) => {
-            if (err) throw err;
-          });
-          callback(null, imageUrl, imagePublicId);
+            var imageUrl = result.secure_url;
+            var imagePublicId = result.public_id;
+            callback(null, imageUrl, imagePublicId);
         });
       } else {
         callback(null, null, null);
