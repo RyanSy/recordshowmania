@@ -92,7 +92,7 @@ exports.post_add_show = function(req, res) {
         if (err) {
           console.log(err);
           callback(err, null);
-          res.send('An error occured creating the show (Error code: SC94)');
+          res.send('An error occured creating the show (Error code: SC95)');
         }
         callback(null, newShow);
       });
@@ -104,7 +104,7 @@ exports.post_add_show = function(req, res) {
           if (err) {
             console.log(err);
             callback(err, null);
-            res.send('An error occured creating the show (Error code: SC108)');
+            res.send('An error occured creating the show (Error code: SC107)');
           }
         });
       }
