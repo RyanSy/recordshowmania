@@ -2,12 +2,12 @@ TODO
 
 priority for MVP:
 - create new mongo cluster for development
-- ongoing shows
 - make sure session is working properly (ie can't click back after log out)
 - create views for all errors / 404
 - make sure input state select are in order
 
 odds and ends:
+- refactor image uploads
 - fix states dropdown
 - utilize connect-flash for redirects?
 - use req.body.id for show edit instead of req.param?
