@@ -48,6 +48,7 @@ exports.get_add_show = function(req, res) {
 /* add show */
 exports.post_add_show = function(req, res) {
   var show = req.body;
+  var futureDates = req.body.future_dates;
   show.posted_by = req.session.username;
   show.date_start = new Date(req.body.date + ' ' + req.body.start);
 
@@ -91,15 +92,27 @@ exports.post_add_show = function(req, res) {
         if (err) {
           console.log(err);
           callback(err, null);
-          res.send('An error occured creating the show (Error code: SC93)');
-          return;
+          res.send('An error occured creating the show (Error code: SC94)');
         }
         callback(null, newShow);
       });
+      // add future shows, if any
+      for (var i = 0; i < futureDates.length; i++) {
+        show.date = futureDates[i];
+        show.date_start = new Date(futureDates[i] + ' ' + show.start);
+        Show.create(show, function(err, data) {
+          if (err) {
+            console.log(err);
+            callback(err, null);
+            res.send('An error occured creating the show (Error code: SC108)');
+          }
+        });
+      }
     },
 
     // get my shows
-    function getAllShows(newShow, callback) {
+    function getAllShows(data, callback) {
+      console.log('getAllShows() called');
       Show.find({ 'posted_by': req.session.username }, function(err, shows) {
         if (err) {
           console.log(err);
@@ -116,13 +129,14 @@ exports.post_add_show = function(req, res) {
 
   // waterfall callback
   function(err, showsArraySorted) {
+    console.log('waterfall callback');
     if (req.session.isLoggedIn == true) {
           res.render('my-shows', {
             title: 'Record Show Mania',
             username: req.session.username,
             isLoggedIn: true,
             shows: showsArraySorted,
-            message: 'Show successfully created.',
+            message: 'Show(s) successfully created.',
             message_exists: true
           });
         } else {
