@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 var showSchema = new Schema(
   {
     date: {type: String, required: true},
+    future_dates: [{type: String}],
     name: {type: String, required: true, max: 50},
     venue: {type: String, required: true, max: 50},
     address: {type: String, required: true, max: 100},
