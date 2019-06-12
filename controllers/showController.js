@@ -65,9 +65,9 @@ exports.post_add_show = function(req, res) {
           }
           var imageUrl = result.secure_url;
           var imagePublicId = result.public_id;
-          fs.unlink('./' + req.file.path, (err) => {
-            if (err) throw err;
-          });
+          // fs.unlink('./' + req.file.path, (err) => {
+          //   if (err) throw err;
+          // });
           callback(null, imageUrl, imagePublicId);
         });
       } else {
