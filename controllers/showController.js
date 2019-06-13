@@ -50,7 +50,6 @@ exports.get_add_show = function(req, res) {
 /* add show */
 exports.post_add_show = function(req, res) {
   var show = req.body;
-  var futureDates = req.body.future_dates;
   show.posted_by = req.session.username;
   show.date_start = new Date(req.body.date + ' ' + req.body.start);
 
@@ -90,21 +89,24 @@ exports.post_add_show = function(req, res) {
         if (err) {
           console.log(err);
           callback(err, null);
-          res.send('An error occured creating the show (Error code: SC95)');
+          res.send('An error occured creating the show (Error code: SC93)');
         }
         callback(null, newShow);
       });
       // add future shows, if any
-      for (var i = 0; i < futureDates.length; i++) {
-        show.date = futureDates[i];
-        show.date_start = new Date(futureDates[i] + ' ' + show.start);
-        Show.create(show, function(err, data) {
-          if (err) {
-            console.log(err);
-            callback(err, null);
-            res.send('An error occured creating the show (Error code: SC107)');
-          }
-        });
+      if (req.body.future_dates) {
+        var futureDates = req.body.future_dates;
+        for (var i = 0; i < futureDates.length; i++) {
+          show.date = futureDates[i];
+          show.date_start = new Date(futureDates[i] + ' ' + show.start);
+          Show.create(show, function(err, data) {
+            if (err) {
+              console.log(err);
+              callback(err, null);
+              res.send('An error occured creating the show (Error code: SC105)');
+            }
+          });
+        }
       }
     },
 
