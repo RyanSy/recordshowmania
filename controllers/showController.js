@@ -11,24 +11,24 @@ exports.list_shows = function(req, res) {
   Show.find(function(err, shows) {
     if (err) {
       console.log(err);
-      res.send('An error occured displaying all shows.');
-    }
-
-    var showsArray = createShowsArray(shows);
-    var showsArraySorted = sortByDateStart(showsArray);
-
-    if (req.session.isLoggedIn == true) {
-      res.render('index', {
-        title: 'Record Show Mania',
-        username: req.session.username,
-        isLoggedIn: true,
-        shows: showsArraySorted
-      });
+      res.render('error', {message: 'An error occured displaying shows'});
     } else {
-      res.render('index', {
-        title: 'Record Show Mania',
-        shows: showsArraySorted
-      });
+      var showsArray = createShowsArray(shows);
+      var showsArraySorted = sortByDateStart(showsArray);
+
+      if (req.session.isLoggedIn == true) {
+        res.render('index', {
+          title: 'Record Show Mania',
+          username: req.session.username,
+          isLoggedIn: true,
+          shows: showsArraySorted
+        });
+      } else {
+        res.render('index', {
+          title: 'Record Show Mania',
+          shows: showsArraySorted
+        });
+      }
     }
   });
 };
@@ -42,13 +42,12 @@ exports.get_add_show = function(req, res) {
       dateNow: moment().format('YYYY-MM-DD')
     });
   } else {
-    res.render('session-expired', {message: 'add a show.'});
+    res.redirect('/session-expired');
   }
 };
 
 /* add show */
 exports.post_add_show = function(req, res) {
-  console.log('post_add_show route called');
   var show = req.body;
   show.posted_by = req.session.username;
   show.date_start = new Date(req.body.date + ' ' + req.body.start);
@@ -56,13 +55,12 @@ exports.post_add_show = function(req, res) {
   async.waterfall([
     // upload image and get url
     function uploadImage(callback) {
-      console.log('uploadImage() called');
       if (req.file) {
         dUri.format(path.extname(req.file.originalname).toString(), req.file.buffer);
         cloudinary.uploader.upload(dUri.content, { width: 400, height: 400, crop: 'limit' }, function (error, result) {
           if (error) {
             console.log(error);
-            callback(error, null);
+            callback(error, null, null);
           } else {
             var imageUrl = result.secure_url;
             var imagePublicId = result.public_id;
@@ -76,7 +74,6 @@ exports.post_add_show = function(req, res) {
 
     // set image url and image public id in show object
     function setShowImage(imageUrl, imagePublicId, callback) {
-      console.log('setShowImage() called');
       if (imageUrl) {
         show.image = imageUrl;
         show.image_public_id = imagePublicId;
@@ -88,68 +85,38 @@ exports.post_add_show = function(req, res) {
 
     // add show
     function addShow(show, callback) {
-      console.log('addShow() called');
       Show.create(show, function(err, newShow) {
         if (err) {
           console.log(err);
           callback(err, null);
-          // res.send('An error occured creating the show (Error code: SC92). Please go back and try again or email help@recordshowmania.com if the problem persists.');
         } else {
           // add future shows, if any
           if (req.body.future_dates) {
             var futureDates = req.body.future_dates;
-            console.log(futureDates);
+
             for (var i = 0; i < futureDates.length; i++) {
               show.date = futureDates[i];
               show.date_start = new Date(futureDates[i] + ' ' + show.start);
-              console.log(i + ': ' + show.date_start);
-              Show.create(show, function(err, data) {
+              Show.create(show, function(err) {
                 if (err) {
                   console.log(err);
-                  // callback(err, null);
-                  // res.send('An error occured creating the show (Error code: SC106). Please go back and try again or email help@recordshowmania.com if the problem persists.');
                 }
               });
             }
           }
-          callback(null, newShow);
-        }
-      });
-    },
 
-    // get my shows
-    function getAllShows(data, callback) {
-      console.log('getAllShows() called');
-      Show.find({ 'posted_by': req.session.username }, function(err, shows) {
-        if (err) {
-          console.log(err);
-          callback(err, null);
-          // res.send('An error occured (Error code: SC119). Please go back and try again or email help@recordshowmania.com if the problem persists.');
-          // return;
-        } else {
-          var showsArray = createShowsArray(shows);
-          var showsArraySorted = sortByDateStart(showsArray);
-          callback(null, showsArraySorted);
+          callback(null, newShow);
         }
       });
     }
   ], // end waterfall array
 
   // waterfall callback
-  function(err, showsArraySorted) {
-    console.log('waterfall callback called');
+  function(err, newShow) {
     if (req.session.isLoggedIn == true) {
-          // res.render('my-shows', {
-          //   title: 'Record Show Mania',
-          //   username: req.session.username,
-          //   isLoggedIn: true,
-          //   shows: showsArraySorted,
-          //   message: 'Show(s) successfully created.',
-          //   message_exists: true
-          // });
           res.redirect('/my-shows');
         } else {
-          res.render('session-expired', { message: 'edit your show.' });
+          res.redirect('/session-expired');
         }
   }); // end waterfall
 }; // end post_add_show
@@ -201,7 +168,7 @@ exports.get_my_shows = function(req, res) {
   Show.find({ 'posted_by': req.session.username }, function(err, shows) {
     if (err) {
       console.log(err);
-      res.send('An error occured (Error code: SC193). Please go back and try again or email help@recordshowmania.com if the problem persists.');
+      res.render('error', {message: 'An error occured displaying all shows'});
     } else {
       var showsArray = createShowsArray(shows);
       var showsArraySorted = sortByDateStart(showsArray);
@@ -223,7 +190,7 @@ exports.get_my_shows = function(req, res) {
           noshow_message: noshow_message
         });
       } else {
-          res.render('session-expired', { message: 'view your shows.'});
+        res.redirect('/session-expired');
       }
     }
   });
@@ -234,7 +201,7 @@ exports.get_edit_show = function(req, res) {
   Show.findOne({ '_id': req.params.id }, function(err, show) {
     if (err) {
       console.log(err);
-      res.send('An error occured (Error code: SC226). Please go back and try again or email help@recordshowmania.com if the problem persists.');
+      res.render('error', {message: 'An error occured'});
     } else {
       if (req.session.isLoggedIn) {
         res.render('edit-show', {
@@ -243,9 +210,8 @@ exports.get_edit_show = function(req, res) {
           dateNow: moment().format('YYYY-MM-DD'),
           show: show
         });
-      }
-      else {
-        res.send('You must be logged in to edit your show.');
+      } else {
+        res.render('session-expired');
       }
     }
   });
@@ -254,7 +220,6 @@ exports.get_edit_show = function(req, res) {
 /* edit show */
 exports.post_edit_show = function(req, res) {
   var update = req.body;
-  update.message = 'Updated successfully.';
   update.posted_by = req.session.username;
 
   async.waterfall([
@@ -265,11 +230,12 @@ exports.post_edit_show = function(req, res) {
         cloudinary.uploader.upload(dUri.content, function (error, result) {
           if (error) {
             console.log(error);
-            callback(error, null);
-          }
+            callback(error, null, null);
+          } else {
             var imageUrl = result.secure_url;
             var imagePublicId = result.public_id;
             callback(null, imageUrl, imagePublicId);
+          }
         });
       } else {
         callback(null, null, null);
@@ -293,44 +259,19 @@ exports.post_edit_show = function(req, res) {
         if (err) {
           console.log(err);
           callback(err, null);
-          // res.send('An error occured (Error code: SC285). Please go back and try again or email help@recordshowmania.com if the problem persists.');
-          // return;
         } else {
           callback(null, updatedShow);
-        }
-      });
-    },
-
-    // get my shows
-    function getAllShows(updatedShow, callback) {
-      Show.find({ 'posted_by': req.session.username }, function(err, shows) {
-        if (err) {
-          console.log(err);
-          callback(err, null);
-          // res.send('An error occured (Error code: SC298). Please go back and try again or email help@recordshowmania.com if the problem persists.');
-          // return;
-        } else {
-          var showsArray = createShowsArray(shows);
-          var showsArraySorted = sortByDateStart(showsArray);
-          callback(null, showsArraySorted);
         }
       });
     }
   ],
 
   // waterfall callback
-  function(err, showsArraySorted) {
+  function(err, updatedShow) {
     if (req.session.isLoggedIn == true) {
-          res.render('my-shows', {
-            title: 'Record Show Mania',
-            username: req.session.username,
-            isLoggedIn: true,
-            shows: showsArraySorted,
-            message: 'Update successful.',
-            message_exists: true
-          });
+          res.redirect('/my-shows');
         } else {
-          res.render('session-expired', { message: 'edit your show.' });
+          res.redirect('/session-expired');
         }
   }); // end waterfall
 }; // end post_edit_show
@@ -341,41 +282,20 @@ exports.delete_show = function(req, res) {
     cloudinary.uploader.destroy(req.body.image_public_id, function(error) {
       if (error) {
         console.log(error);
-        // res.send('An error occured (Error code: SC331). Please go back and try again or email help@recordshowmania.com if the problem persists.')
       }
     });
   }
+
   Show.findByIdAndDelete(req.body.id, function(err) {
     if (err) {
-      res.send('An error occured (Error code: SC337). Please go back and try again or email help@recordshowmania.com if the problem persists.');
+      res.render('error', {message: 'An error occured deleting that show'});
     } else {
-      Show.find({ 'posted_by': req.session.username }, function(err, shows) {
-        if (err) {
-          console.log(err);
-          res.send('An error occured (Error code: SC343). Please go back and try again or email help@recordshowmania.com if the problem persists.');
-        } else {
-          var showsArray = createShowsArray(shows);
-          var showsArraySorted = sortByDateStart(showsArray);
-
-          //  change to redirect?
-          if (req.session.isLoggedIn == true) {
-            res.render('my-shows', {
-              title: 'Record Show Mania',
-              username: req.session.username,
-              isLoggedIn: true,
-              shows: showsArraySorted,
-              message: 'Show deleted successfully.',
-              message_exists: true
-            });
-          }
-          else {
-            res.render('session-expired', { message: 'delete your show.' });
-          }
-        }
-      });
+      if (req.session.isLoggedIn == true) {
+        res.redirect('/my-shows');
+      } else {
+        res.redirect('/session-expired');
+      }
     }
-
-
   })
 };
 

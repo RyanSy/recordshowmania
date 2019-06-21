@@ -2,6 +2,7 @@ body {
   background-color: black;
   color: yellow;
   padding-bottom: 10px;
+  position: relative;
 }
 .navbar {
   background-color: black;
@@ -46,4 +47,7 @@ body {
 .modal-content {
   background-color: black;
   color: yellow;
+}
+.footer {
+  width: 100%;
 }

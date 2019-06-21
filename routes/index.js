@@ -16,7 +16,7 @@ router.get('/', show_controller.list_shows);
 // display user registration page
 router.get('/register', user_controller.display_registration);
 
-// regiser user
+// register user
 router.post('/register', user_controller.register_user);
 
 // display login page
@@ -42,6 +42,9 @@ router.post('/reset', user_controller.reset_password);
 
 // display password updated confirmation page
 router.get('/password-updated', user_controller.password_updated);
+
+// display password updated confirmation page
+router.get('/session-expired', user_controller.session_expired);
 
 // get add show page
 router.get('/add-show', show_controller.get_add_show);

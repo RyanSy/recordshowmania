@@ -5,6 +5,7 @@ priority for MVP:
 - create new mongo cluster for development
 - make sure session is working properly (ie can't click back after log out)
 - create views for all errors / 404
+- privacy policy / terms of use
 
 odds and ends:
 - utilize connect-flash for redirects?
