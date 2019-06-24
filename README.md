@@ -1,11 +1,11 @@
 TODO
 
 priority for MVP:
-- * clean up showController
 - create new mongo cluster for development
 - make sure session is working properly (ie can't click back after log out)
 - create views for all errors / 404
 - privacy policy / terms of use
+- implement TTL on shows collection
 
 odds and ends:
 - utilize connect-flash for redirects?

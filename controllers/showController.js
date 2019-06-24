@@ -305,7 +305,7 @@ function createShowsArray(shows) {
   for (var i = 0; i < shows.length; i++) {
     var showObject = {
       id: shows[i]._id,
-        date: moment(shows[i].date, 'YYYY-MM-DD').format('dddd, MMMM Do, YYYY'),
+      date: moment(shows[i].date, 'YYYY-MM-DD').format('dddd, MMMM Do, YYYY'),
       month: moment(shows[i].date, 'YYYY-MM-DD').format('MMM'),
       day: moment(shows[i].date, 'YYYY-MM-DD').format('D'),
       day_abbreviated: moment(shows[i].date).format('ddd'),
@@ -341,7 +341,9 @@ function createShowsArray(shows) {
       image_public_id: shows[i].image_public_id,
       posted_by: shows[i].posted_by
     };
-    showsArray.push(showObject);
+    if (moment(showObject.date_start) > moment(new Date())) {
+      showsArray.push(showObject);
+    }
   };
   return showsArray;
 }
