@@ -1,6 +1,7 @@
 TODO
 
 priority for MVP:
+- push footer text to bottom
 - create new mongo cluster for development
 - make sure session is working properly (ie can't click back after log out)
 - create views for all errors / 404
