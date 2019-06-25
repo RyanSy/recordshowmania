@@ -15,12 +15,14 @@ body {
   color: #2F4F4F !important;
 }
 .header-wrapper {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.1);
 }
 .header {
-  background: url('https://res.cloudinary.com/hxzook5wx/image/upload/v1560351872/IMG_1699_sogztq.jpg');
+  height:auto;
+
+  background: url('https://res.cloudinary.com/hxzook5wx/image/upload/v1558490982/records.jpg');
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-size: cover;
 }
 #header-message {
   color: white !important;
