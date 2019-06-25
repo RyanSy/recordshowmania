@@ -37,48 +37,83 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="showDetailModalLabel{{this.id}}">Show Details</h5>
+                <h5 class="modal-title" id="showDetailModalLabel{{this.id}}">{{this.name}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body">
-                <img src="{{this.image}}" alt="{{this.name}}" class="img-fluid mb-4"> <br>
-                <strong>{{this.date}}</strong> <br>
-                {{this.name}} <br>
-                <a href="https://maps.google.com/?q={{this.address}}+{{this.city}}+{{this.state}}" target="_blank">
-                  {{this.venue}} <br>
-                  {{this.address}} <br>
-                  {{this.city}}, {{this.state}} {{this.zip}} <br>
-                </a>
-                <strong>Time:</strong> {{this.start}} to {{this.end}} <br>
-                <strong>Regular Admission:</strong> {{#if this.regular_admission_fee}}${{this.regular_admission_fee}}{{else}}Free{{/if}}<br>
-                <strong>Early Admission?</strong> {{#if this.early_admission}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
-                {{#if this.early_admission}}
-                  <strong>Early Admission Time:</strong> {{this.early_admission_time}} <br>
-                  <strong>Early Admission Fee:</strong> {{#if this.early_admission_fee}}${{this.early_admission_fee}}{{else}}Free{{/if}} <br>
+              <div class="modal-body">\
+                <p>
+                {{#if this.img}}
+                  <img src="{{this.image}}" alt="{{this.name}}" class="img-fluid mb-4"> <br>
                 {{/if}}
-                <strong>Number Of Dealers:</strong> {{this.number_of_dealers}} <br>
-                <strong>Number Of Tables:</strong> {{this.number_of_tables}} <br>
-                <strong>Size Of Tables:</strong> {{this.size_of_tables}} <br>
-                <strong>Table Rent:</strong> ${{this.table_rent}} <br>
-                <strong>Dealer List:</strong> <br>
-                <ul>
-                  {{#each this.featured_dealers}}
-                  <li>{{this}}</li>
-                  {{/each}}
-                </ul>
-                <strong>CD Dealers?</strong> {{#if this.cd_dealers}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
-                <strong>Cassette Dealers?</strong> {{#if this.cassette_dealers}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
-                <strong>45 Dealers?</strong> {{#if this.fortyfive_dealers}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
-                <strong>78 Dealers?</strong> {{#if this.seventyeight_dealers}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
-                <strong>Food/Drink?</strong> {{#if this.food_drink}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
-                <strong>Handicapped Access?</strong> {{#if this.handicapped_access}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
-                <strong>More Information:</strong> {{this.more_information}} <br>
-                <strong>Contact Name:</strong> {{this.contact_name}} <br>
-                <strong>Contact Email:</strong> {{this.contact_email}} <br>
-                <strong>Contact Phone:</strong> {{this.contact_phone}} <br>
-                <strong>Posted by:</strong> {{this.posted_by}}
+              </p>
+                <p><strong>{{this.date}}</strong></p>
+                <p>
+                  <a href="https://maps.google.com/?q={{this.address}}+{{this.city}}+{{this.state}}" target="_blank">
+                    {{this.venue}} <br>
+                    {{this.address}} <br>
+                    {{this.city}}, {{this.state}} {{this.zip}} <br>
+                  </a>
+                </p>
+                <p><strong>Time:</strong> {{this.start}} to {{this.end}}</p>
+                <p><strong>Regular Admission:</strong> {{#if this.regular_admission_fee}}${{this.regular_admission_fee}}{{else}}Free{{/if}}</p>
+                {{#if this.early_admission}}
+                  <p><strong>Early Admission:</strong> Yes <i class="fas fa-check"></i></p>
+                  <p><strong>Early Admission Time:</strong> {{this.early_admission_time}}</p>
+                  <p><strong>Early Admission Fee:</strong> {{#if this.early_admission_fee}}${{this.early_admission_fee}}{{else}}Free{{/if}}</p>
+                {{/if}}
+                {{#if this.number_of_dealers}}
+                  <p><strong>Number Of Dealers:</strong> {{this.number_of_dealers}}</p>
+                {{/if}}
+                {{#if this.number_of_tables}}
+                  <p><strong>Number Of Tables:</strong> {{this.number_of_tables}}</p>
+                {{/if}}
+                {{#if this.size_of_tables}}
+                  <p><strong>Size Of Tables:</strong> {{this.size_of_tables}}</p>
+                {{/if}}
+                {{#if this.table_rent}}
+                  <p><strong>Table Rent:</strong> ${{this.table_rent}}</p>
+                {{/if}}
+                {{#if this.featured_dealers}}
+                  <p><strong>Dealer List:</strong></p>
+                  <ul>
+                    {{#each this.featured_dealers}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                  </ul>
+                {{/if}}
+                {{#if this.cd_dealers}}
+                  <p><strong>CD Dealers:</strong> Yes <i class="fas fa-check"></i></p>
+                {{/if}}
+                {{#if this.cassette_dealers}}
+                  <p><strong>Cassette Dealers:</strong> Yes <i class="fas fa-check"></i></p>
+                {{/if}}
+                {{#if this.fortyfive_dealers}}
+                  <p><strong>45 Dealers:</strong> Yes <i class="fas fa-check"></i></p>
+                {{/if}}
+                {{#if this.seventyeight_dealers}}
+                  <p><strong>78 Dealers:</strong> Yes <i class="fas fa-check"></i></p>
+                {{/if}}
+                {{#if this.food_drink}}
+                  <p><strong>Food/Drink:</strong> Yes <i class="fas fa-check"></i></p>
+                {{/if}}
+                {{#if this.handicapped_access}}
+                  <p><strong>Handicapped Access:</strong> Yes <i class="fas fa-check"></i></p>
+                {{/if}}
+                {{#if this.more_information}}
+                  <p><strong>More Information:</strong> {{this.more_information}}</p>
+                {{/if}}
+                {{#if this.contact_name}}
+                  <p><strong>Contact Name:</strong> {{this.contact_name}}</p>
+                {{/if}}
+                {{#if this.contact_email}}
+                  <p><strong>Contact Email:</strong> {{this.contact_email}}</p>
+                {{/if}}
+                {{#if this.contact_phone}}
+                  <p><strong>Contact Phone:</strong> {{this.contact_phone}}</p>
+                {{/if}}
+                  <p><strong>Posted by:</strong> {{this.posted_by}}</p>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

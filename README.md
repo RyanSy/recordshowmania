@@ -7,6 +7,7 @@ priority for MVP:
 - create views for all errors / 404
 - privacy policy / terms of use
 - implement TTL on shows collection
+- add website field to add/edit show
 
 odds and ends:
 - utilize connect-flash for redirects?
