@@ -20,7 +20,7 @@ body {
 .header {
   background: url('https://res.cloudinary.com/hxzook5wx/image/upload/v1560351872/IMG_1699_sogztq.jpg');
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100% 100%;
 }
 #header-message {
   color: white !important;
