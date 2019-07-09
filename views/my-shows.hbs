@@ -53,10 +53,10 @@
                   Food/Drink? {{#if this.food_drink}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
                   Handicapped Access? {{#if this.handicapped_access}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
                   Contact Name: {{this.contact_name}} <br>
-                  Contact Phone: {{this.contact_phone}} <br>
-                  Contact Email: {{this.contact_email}} <br>
-                  Website: {{this.website}} <br>
-                  Facebook Page: {{this.facebook}} <br>
+                  Contact Phone: <a href="tel:{{this.contact_phone}}">{{this.contact_phone}}</a> <br>
+                  Contact Email: <a href="mailto:{{this.contact_email}}">{{this.contact_email}}</a> <br>
+                  Website: <a href="{{this.website}}">{{this.website}}</a> <br>
+                  Facebook Page: <a href="{{this.facebook}}">{{this.facebook}}</a> <br>
                   More Information: <span class="line-breaks">{{this.more_information}}</span>
                   <br> Posted by: {{this.posted_by}}
             <div class="mt-2">
