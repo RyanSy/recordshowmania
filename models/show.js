@@ -36,6 +36,7 @@ var showSchema = new Schema(
     contact_phone: {type: String, max: 100},
     contact_email: {type: String, max: 100},
     website: {type: String, max: 100},
+    facebook: {type: String, max: 100},
     image: {type: String, max: 100},
     image_public_id: {type: String, max: 100},
     message: {type: String, max: 100},

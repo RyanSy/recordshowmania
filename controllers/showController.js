@@ -339,6 +339,7 @@ function createShowsArray(shows) {
       contact_phone: shows[i].contact_phone,
       contact_email: shows[i].contact_email,
       website: shows[i].website,
+      facebook: shows[i].facebook,
       image: shows[i].image,
       image_public_id: shows[i].image_public_id,
       posted_by: shows[i].posted_by
