@@ -53,3 +53,6 @@ body {
 .footer {
   width: 100%;
 }
+.line-breaks {
+  white-space: pre-wrap;
+}

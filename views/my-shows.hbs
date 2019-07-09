@@ -56,7 +56,8 @@
                   Contact Phone: {{this.contact_phone}} <br>
                   Contact Email: {{this.contact_email}} <br>
                   Website: {{this.website}} <br>
-                  More Information: {{this.more_information}} <br> Posted by: {{this.posted_by}}
+                  More Information: <span class="line-breaks">{{this.more_information}}</span>
+                  <br> Posted by: {{this.posted_by}}
             <div class="mt-2">
               <a class="btn btn-warning" href="/edit-show/{{this.id}}">Edit</a><span> | </span><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete{{this.id}}">Delete</button>
             </div>
