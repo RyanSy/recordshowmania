@@ -6,7 +6,10 @@
 
   <form class="mt-4" action="/edit-show/{{show._id}}" enctype="multipart/form-data" method="post">
     <div class="form-group">
-      <img src="{{show.image}}" alt="{{show.name}}" class="img-fluid mb-4">
+      {{#if show.image}}
+        <img src="{{show.image}}" alt="{{show.name}}" class="img-fluid mb-4">
+      {{else}}
+      {{/if}}
     </div>
     <div class="form-group">
       <label for="inputDate">Date *</label>
@@ -112,7 +115,7 @@
         <div class="input-group-prepend">
           <div class="input-group-text">$</div>
         </div>
-        <input type="text" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="inputAdmission" name="regular_admission_fee" value="{{show.regular_admission_fee}}">
+        <input type="number" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="inputAdmission" name="regular_admission_fee" value="{{show.regular_admission_fee}}">
       </div>
       <small>Leave blank for free admission</small>
     </div>
@@ -154,7 +157,7 @@
           <div class="input-group-prepend">
             <div class="input-group-text">$</div>
           </div>
-          <input type="text" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="earlyAdmissionFee" name="early_admission_fee" value="{{show.early_admission_fee}}">
+          <input type="number" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="earlyAdmissionFee" name="early_admission_fee" value="{{show.early_admission_fee}}">
         </div>
         <small>Leave blank for free early admission</small>
       </div>
@@ -171,7 +174,7 @@
           <div class="input-group-prepend">
             <div class="input-group-text">$</div>
           </div>
-          <input type="text" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="earlyAdmissionFee" name="early_admission_fee" value="">
+          <input type="number" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="earlyAdmissionFee" name="early_admission_fee" value="">
         </div>
       </div>
     </div>
@@ -180,12 +183,12 @@
 
     <div class="form-group">
       <label for="numberOfDealers">Number Of Dealers</label>
-      <input type="text" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="numberOfDealers" name="number_of_dealers" value="{{show.number_of_dealers}}">
+      <input type="number" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="numberOfDealers" name="number_of_dealers" value="{{show.number_of_dealers}}">
     </div>
 
     <div class="form-group">
       <label for="numberOfTables">Number Of Tables</label>
-      <input type="text" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="numberOfTables" name="number_of_tables" value="{{show.number_of_tables}}">
+      <input type="number" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="numberOfTables" name="number_of_tables" value="{{show.number_of_tables}}">
     </div>
 
     <div class="form-group">
@@ -199,7 +202,7 @@
         <div class="input-group-prepend">
           <div class="input-group-text">$</div>
         </div>
-        <input type="text" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="tableRent" name="table_rent" value="{{show.table_rent}}">
+        <input type="number" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="tableRent" name="table_rent" value="{{show.table_rent}}">
       </div>
     </div>
 
@@ -320,6 +323,31 @@
 
     <div class="form-group">
       <div class="form-check form-check-inline">
+        <label for="memorabiliaDealers">Memorabilia Dealers?</label>
+      </div>
+      {{#if show.memorabilia_dealers}}
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" name="memorabilia_dealers" value="yes" checked>
+          Yes
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" name="memorabilia_dealers" value="no">
+          No
+        </div>
+      {{else}}
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" name="memorabilia_dealers" value="yes">
+          Yes
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" name="memorabilia_dealers" value="no" checked>
+          No
+        </div>
+      {{/if}}
+    </div>
+
+    <div class="form-group">
+      <div class="form-check form-check-inline">
         <label for="foodDrink">Food/Drink?</label>
       </div>
       {{#if show.food_drink}}
@@ -370,7 +398,7 @@
 
     <div class="form-group">
       <label for="inputMoreInformation">More Information</label>
-      <textarea class="form-control col-8 " id="inputMoreInformation" name="more_information" placeholder="Enter more information" rows="4">{{show.more_information}}</textarea>
+      <textarea class="form-control col-8 " id="inputMoreInformation" name="more_information" rows="4">{{show.more_information}}</textarea>
     </div>
 
     <div class="form-group">
@@ -379,13 +407,18 @@
     </div>
 
     <div class="form-group">
+      <label for="inputContactPhone">Contact Phone</label>
+      <input type="tel" class="form-control col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3" id="inputContactPhone" name="contact_phone" value="{{show.contact_phone}}">
+    </div>
+
+    <div class="form-group">
       <label for="inputContactEmail">Contact Email</label>
       <input type="email" class="form-control col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3" id="inputContactEmail" name="contact_email" value="{{show.contact_email}}">
     </div>
 
     <div class="form-group">
-      <label for="inputContactPhone">Contact Phone</label>
-      <input type="tel" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="inputContactPhone" name="contact_phone" value="{{show.contact_phone}}">
+      <label for="inputWebsite">Website</label>
+      <input type="url" class="form-control col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3" id="inputWebsite" name="website" value="{{show.website}}">
     </div>
 
     <div class="form-group">
@@ -394,7 +427,7 @@
     </div>
 
     <div class="form-group mt-5">
-      <button type="submit" class="btn btn-primary">Save</button><a class="btn btn-link" href="/my-shows">Cancel</a>
+      <button type="submit" class="btn btn-success">Save</button><a class="btn btn-link" href="/my-shows">Cancel</a>
     </div>
 
   </form>

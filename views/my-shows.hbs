@@ -49,11 +49,13 @@
                   Cassette Dealers? {{#if this.cassette_dealers}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
                   45 Dealers? {{#if this.fortyfive_dealers}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
                   78 Dealers? {{#if this.seventyeight_dealers}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
+                  Memorabilia Dealers? {{#if this.memorabilia_dealers}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
                   Food/Drink? {{#if this.food_drink}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
                   Handicapped Access? {{#if this.handicapped_access}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
                   Contact Name: {{this.contact_name}} <br>
-                  Contact Email: {{this.contact_email}} <br>
                   Contact Phone: {{this.contact_phone}} <br>
+                  Contact Email: {{this.contact_email}} <br>
+                  Website: {{this.website}} <br>
                   More Information: {{this.more_information}} <br> Posted by: {{this.posted_by}}
             <div class="mt-2">
               <a class="btn btn-warning" href="/edit-show/{{this.id}}">Edit</a><span> | </span><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete{{this.id}}">Delete</button>

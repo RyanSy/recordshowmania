@@ -83,6 +83,9 @@
                   {{#if this.seventyeight_dealers}}
                     <p><strong>78 Dealers:</strong> Yes <i class="fas fa-check"></i></p>
                   {{/if}}
+                  {{#if this.memorabilia_dealers}}
+                    <p><strong>Memorabilia Dealers:</strong> Yes <i class="fas fa-check"></i></p>
+                  {{/if}}
                   {{#if this.food_drink}}
                     <p><strong>Food/Drink:</strong> Yes <i class="fas fa-check"></i></p>
                   {{/if}}
@@ -95,11 +98,14 @@
                   {{#if this.contact_name}}
                     <p><strong>Contact Name:</strong> {{this.contact_name}}</p>
                   {{/if}}
-                  {{#if this.contact_email}}
-                    <p><strong>Contact Email:</strong> {{this.contact_email}}</p>
-                  {{/if}}
                   {{#if this.contact_phone}}
-                    <p><strong>Contact Phone:</strong> {{this.contact_phone}}</p>
+                    <p><strong>Contact Phone:</strong> <a href="tel:{{this.contact_phone}}">{{this.contact_phone}}</a></p>
+                  {{/if}}
+                  {{#if this.contact_email}}
+                    <p><strong>Contact Email:</strong> <a href="mailto:{{this.contact_email}}">{{this.contact_email}}</a></p>
+                  {{/if}}
+                  {{#if this.website}}
+                    <p><strong>Website:</strong> <a href="{{this.website}}">{{this.website}}</a></p>
                   {{/if}}
                     <p><strong>Posted by:</strong> {{this.posted_by}}</p>
                 </div>
