@@ -56,3 +56,6 @@ body {
 .line-breaks {
   white-space: pre-wrap;
 }
+.close {
+  color: inherit !important;
+}
