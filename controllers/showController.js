@@ -337,7 +337,7 @@ function createShowsArray(shows) {
       day: moment(shows[i].date, 'YYYY-MM-DD').format('D'),
       date_og: shows[i].date,
       name: shows[i].name,
-      name_formatted: shows[i].name.toLowerCase().replace(/\s/g, '-'),
+      name_formatted: shows[i].name.toLowerCase().replace(/[\s-@#!$%^&*()_+|~=`{}\[\]:";'<>?,.\/]/g, '-'),
       venue: shows[i].venue,
       address: shows[i].address,
       city: shows[i].city,
