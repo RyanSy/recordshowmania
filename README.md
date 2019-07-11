@@ -1,6 +1,7 @@
 TODO
 
 priority for MVP:
+- install pm2
 - push footer text to bottom
 - create new mongo cluster for development
 - make sure session is working properly (ie can't click back after log out)

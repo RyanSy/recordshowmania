@@ -33,6 +33,31 @@ exports.list_shows = function(req, res) {
   });
 };
 
+/* display a show details */
+exports.list_show = function(req, res) {
+  Show.findOne({ '_id': req.body.id }, function(err, show) {
+    if (err) {
+      console.log(err);
+      res.render('error', {message: 'An error occured.'});
+    } else {
+      var showObject = createShowObject(show);
+      if (req.session.isLoggedIn) {
+        res.render('show', {
+          username: req.session.username,
+          isLoggedIn: true,
+          show: showObject,
+          title: `${showObject.name} - ${showObject.date}`
+        })
+      } else {
+        res.render('show', {
+          show: showObject,
+          title: show.name
+        });
+      }
+    }
+  })
+}
+
 /* display add show form */
 exports.get_add_show = function(req, res) {
   if (req.session.isLoggedIn) {
@@ -51,6 +76,7 @@ exports.post_add_show = function(req, res) {
   var show = req.body;
   show.posted_by = req.session.username;
   show.date_start = new Date(req.body.date + ' ' + req.body.start);
+  show.date_posted = new Date();
 
   async.waterfall([
     // upload image and get url
@@ -203,6 +229,7 @@ exports.get_edit_show = function(req, res) {
       console.log(err);
       res.render('error', {message: 'An error occured'});
     } else {
+      console.log(show);
       if (req.session.isLoggedIn) {
         res.render('edit-show', {
           username: req.session.username,
@@ -308,8 +335,9 @@ function createShowsArray(shows) {
       date: moment(shows[i].date, 'YYYY-MM-DD').format('dddd, MMMM Do, YYYY'),
       month: moment(shows[i].date, 'YYYY-MM-DD').format('MMM'),
       day: moment(shows[i].date, 'YYYY-MM-DD').format('D'),
-      day_abbreviated: moment(shows[i].date).format('ddd'),
+      date_og: shows[i].date,
       name: shows[i].name,
+      name_formatted: shows[i].name.toLowerCase().replace(/\s/g, '-'),
       venue: shows[i].venue,
       address: shows[i].address,
       city: shows[i].city,
@@ -355,4 +383,50 @@ function sortByDateStart(showsArray) {
   return showsArray.sort(function(a, b) {
     return new Date(a.date_start) - new Date(b.date_start);
   });
+}
+
+function createShowObject(show) {
+  var showObject = {
+    id: show._id,
+    date: moment(show.date, 'YYYY-MM-DD').format('dddd, MMMM Do, YYYY'),
+    month: moment(show.date, 'YYYY-MM-DD').format('MMM'),
+    day: moment(show.date, 'YYYY-MM-DD').format('D'),
+    date_og: show.date,
+    name: show.name,
+    name_formatted: show.name.toLowerCase().replace(/\s/g, '-'),
+    venue: show.venue,
+    address: show.address,
+    city: show.city,
+    state: show.state,
+    zip: show.zip,
+    start: moment(show.start, 'HH').format('LT'),
+    end: moment(show.end, 'HH').format('LT'),
+    regular_admission_fee: show.regular_admission_fee,
+    early_admission: show.early_admission,
+    early_admission_time: moment(show.early_admission_time, 'HH').format('LT'),
+    early_admission_fee: show.early_admission_fee,
+    number_of_dealers: show.number_of_dealers,
+    number_of_tables: show.number_of_tables,
+    size_of_tables: show.size_of_tables,
+    table_rent: show.table_rent,
+    featured_dealers: show.featured_dealers,
+    cd_dealers: show.cd_dealers,
+    cassette_dealers: show.cassette_dealers,
+    fortyfive_dealers: show.fortyfive_dealers,
+    seventyeight_dealers: show.seventyeight_dealers,
+    memorabilia_dealers: show.memorabilia_dealers,
+    food_drink: show.food_drink,
+    handicapped_access: show.handicapped_access,
+    more_information: show.more_information,
+    contact_name: show.contact_name,
+    contact_phone: show.contact_phone,
+    contact_email: show.contact_email,
+    website: show.website,
+    facebook: show.facebook,
+    image: show.image,
+    image_public_id: show.image_public_id,
+    posted_by: show.posted_by
+  };
+
+  return showObject;
 }

@@ -40,7 +40,8 @@ var showSchema = new Schema(
     image: {type: String, max: 100},
     image_public_id: {type: String, max: 100},
     message: {type: String, max: 100},
-    posted_by: {type: String, required: true, max: 100}
+    posted_by: {type: String, required: true, max: 100},
+    date_posted: {type: Date}
   }
 );
 
