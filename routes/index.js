@@ -13,6 +13,9 @@ var upload = multer({memoryStorage}).single('image');
 // display home page
 router.get('/', show_controller.list_shows);
 
+// display show page
+router.post('/:name/:date', show_controller.list_show);
+
 // display user registration page
 router.get('/register', user_controller.display_registration);
 

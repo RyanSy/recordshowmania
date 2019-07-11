@@ -23,7 +23,10 @@
       {{#each shows}}
         <tr>
           <td>
-            <img src="{{this.image}}" alt="{{this.name}}" class="img-fluid mb-4"> <br>
+            {{#if this.image}}
+              <img src="{{this.image}}" alt="{{this.name}}" class="img-fluid mb-4"> <br>
+            {{else}}
+            {{/if}}
             {{this.date}} <br>
             {{this.name}} <br>
             <a href="https://maps.google.com/?q={{this.address}}+{{this.city}}+{{this.state}}" target="_blank">
