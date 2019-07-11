@@ -393,7 +393,7 @@ function createShowObject(show) {
     day: moment(show.date, 'YYYY-MM-DD').format('D'),
     date_og: show.date,
     name: show.name,
-    name_formatted: show.name.toLowerCase().replace(/\s/g, '-'),
+    name_formatted: show.name.toLowerCase().replace(/\s\//g, '-'),
     venue: show.venue,
     address: show.address,
     city: show.city,
