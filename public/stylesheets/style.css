@@ -1,8 +1,13 @@
 body {
   background-color: black;
   color: yellow;
-  padding-bottom: 10px;
+}
+.page-container {
   position: relative;
+  min-height: 100vh;
+}
+.content-wrap {
+  padding-bottom: 2.5rem;
 }
 .navbar {
   background-color: black;
@@ -18,8 +23,7 @@ body {
   background-color: rgba(0, 0, 0, 0.1);
 }
 .header {
-  height:auto;
-
+  height: auto;
   background: url('https://res.cloudinary.com/hxzook5wx/image/upload/v1558490982/records.jpg');
   background-repeat: no-repeat;
   background-size: cover;
@@ -51,6 +55,9 @@ body {
   color: yellow;
 }
 .footer {
+  position: absolute;
+  bottom: 0;
+  height: 2.5rem;
   width: 100%;
 }
 .line-breaks {
