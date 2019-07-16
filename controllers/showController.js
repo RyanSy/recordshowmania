@@ -18,14 +18,16 @@ exports.list_shows = function(req, res) {
 
       if (req.session.isLoggedIn == true) {
         res.render('index', {
-          title: 'Record Show Mania',
+          title: 'Record Show Mania - Find Record Shows Near You!',
+          meta_content: 'Record show listings all across the USA.',
           username: req.session.username,
           isLoggedIn: true,
           shows: showsArraySorted
         });
       } else {
         res.render('index', {
-          title: 'Record Show Mania',
+          title: 'Record Show Mania - Find Record Shows Near You!',
+          meta_content: 'Record show listings all across the USA.',
           shows: showsArraySorted
         });
       }
@@ -45,13 +47,15 @@ exports.list_show = function(req, res) {
         res.render('show', {
           username: req.session.username,
           isLoggedIn: true,
-          show: showObject,
-          title: `${showObject.name} - ${showObject.date}`
+          title: `${showObject.name} - ${showObject.date}`,
+          meta_content: show.more_information,
+          show: showObject
         })
       } else {
         res.render('show', {
-          show: showObject,
-          title: show.name
+          title: `${showObject.name} - ${showObject.date}`,
+          meta_content: show.more_information,
+          show: showObject
         });
       }
     }
@@ -158,30 +162,42 @@ exports.search_shows = function(req, res) {
     if (shows.length == 0) {
       if (req.session.isLoggedIn == true) {
         res.render('no-results', {
-          title: 'Record Show Mania',
+          title: 'Record Show Mania - No Results',
+          meta_content: 'Your search yielded no results.',
           username: req.session.username,
           isLoggedIn: true,
         });
       }
       else {
         res.render('no-results', {
-          title: 'Record Show Mania',
+          title: 'Record Show Mania - No Results',
+          meta_content: 'Your search yielded no results.'
         });
       }
     } else {
         var showsArray = createShowsArray(shows);
         var showsArraySorted = sortByDateStart(showsArray);
 
+        if (req.body.date) {
+          var searchTerm = req.body.date;
+        }
+
+        if (req.body.state) {
+          var searchTerm = req.body.state;
+        }
+
         if (req.session.isLoggedIn == true) {
           res.render('search-results', {
-            title: 'Record Show Mania',
+            title: `Record Show Mania - search results for ${searchTerm}`,
+            meta_content: `Search results for ${searchTerm}`,
             username: req.session.username,
             isLoggedIn: true,
             shows: showsArraySorted
           });
         } else {
             res.render('search-results', {
-              title: 'Record Show Mania',
+              title: `Record Show Mania - search results for ${searchTerm}`,
+              meta_content: `Search results for ${searchTerm}`,
               shows: showsArraySorted
           });
       }
@@ -209,7 +225,8 @@ exports.get_my_shows = function(req, res) {
 
       if (req.session.isLoggedIn == true) {
         res.render('my-shows', {
-          title: 'Record Show Mania',
+          title: 'Record Show Mania - My Shows',
+          meta_content: 'Shows you have listed on this site.',
           username: req.session.username,
           isLoggedIn: true,
           shows: showsArraySorted,
