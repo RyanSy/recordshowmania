@@ -28,7 +28,7 @@ var showSchema = new Schema(
     cassette_dealers: {type: Boolean},
     fortyfive_dealers: {type: Boolean},
     seventyeight_dealers: {type: Boolean},
-    memorabilia: {type: Boolean},
+    memorabilia_dealers: {type: Boolean},
     food_drink: {type: Boolean},
     handicapped_access: {type: Boolean},
     more_information: {type: String, max: 100},

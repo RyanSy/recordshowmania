@@ -56,7 +56,7 @@ router.get('/add-show', show_controller.get_add_show);
 router.post('/add-show', upload, show_controller.post_add_show);
 
 // search shows
-router.post('/search', show_controller.search_shows);
+router.post('/search-results', show_controller.search_shows);
 
 // get my shows
 router.get('/my-shows', show_controller.get_my_shows);
