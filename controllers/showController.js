@@ -246,7 +246,6 @@ exports.get_edit_show = function(req, res) {
       console.log(err);
       res.render('error', {message: 'An error occured'});
     } else {
-      console.log(show);
       if (req.session.isLoggedIn) {
         res.render('edit-show', {
           username: req.session.username,
@@ -299,7 +298,7 @@ exports.post_edit_show = function(req, res) {
 
     // update db
     function updateDb(update, callback) {
-      Show.findByIdAndUpdate(req.params.id, update, function(err, updatedShow) {
+      Show.findByIdAndUpdate(req.body.id, update, function(err, updatedShow) {
         if (err) {
           console.log(err);
           callback(err, null);

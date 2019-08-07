@@ -65,7 +65,7 @@ router.get('/my-shows', show_controller.get_my_shows);
 router.get('/edit-show/:id', show_controller.get_edit_show);
 
 // edit show
-router.post('/edit-show/:id', upload, show_controller.post_edit_show);
+router.post('/edit-show', upload, show_controller.post_edit_show);
 
 // delete show
 router.post('/delete-show', show_controller.delete_show);

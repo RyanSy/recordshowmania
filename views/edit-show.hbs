@@ -4,7 +4,9 @@
   <h5>Edit Show:</h5>
   <small>Fields with a * are required - all other fields are optional, but recommended.</small>
 
-  <form class="mt-4" action="/edit-show/{{show._id}}" enctype="multipart/form-data" method="post">
+  <form class="mt-4" action="/edit-show" enctype="multipart/form-data" method="post">
+    <input type="hidden" name="id" value="{{show._id}}">
+
     <div class="form-group">
       {{#if show.image}}
         <img src="{{show.image}}" alt="{{show.name}}" class="img-fluid mb-4">
