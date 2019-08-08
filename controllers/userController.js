@@ -116,9 +116,10 @@ exports.send_reset = function(req, res) {
         const msg = {
           to: req.body.email,
           from: 'no-reply@recordshowmania.com',
-          subject: 'Record Show Mania',
-          text: 'Click the link below to reset your password:',
-          html: `<a href="https://www.recordshowmania.com/reset/${token}">https://www.recordshowmania.com/reset/${token}</a>`
+          subject: 'Password Reset',
+          html: `<p>Click the link below to reset your Record Show Mania password:</p> <br>
+          <a href="https://www.recordshowmania.com/reset/${token}">https://www.recordshowmania.com/reset/${token}</a> <br>
+          <p>Please do not reply to this email. For assistance, please email <a href="mailto:help@recordshowmania.com">help@recordshowmania.com</a>`
         };
         sgMail.send(msg);
         res.render('check-email');
