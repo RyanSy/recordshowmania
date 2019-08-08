@@ -118,8 +118,8 @@ exports.send_reset = function(req, res) {
           from: 'no-reply@recordshowmania.com',
           subject: 'Password Reset',
           html: `<p>Click the link below to reset your Record Show Mania password:</p> <br>
-          <a href="https://www.recordshowmania.com/reset/${token}">https://www.recordshowmania.com/reset/${token}</a> <br>
-          <p>Please do not reply to this email. For assistance, please email <a href="mailto:help@recordshowmania.com">help@recordshowmania.com</a>`
+          <p><a href="https://www.recordshowmania.com/reset/${token}">https://www.recordshowmania.com/reset/${token}</a></p> <br>
+          <p>Please do not reply to this email. For assistance, please contuct us at <a href="mailto:help@recordshowmania.com">help@recordshowmania.com</a>`
         };
         sgMail.send(msg);
         res.render('check-email');
