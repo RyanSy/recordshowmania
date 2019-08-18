@@ -1,6 +1,6 @@
 {
   "name": "recordshowmania",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "private": true,
   "scripts": {
     "start": "pm2-runtime start ./bin/www",

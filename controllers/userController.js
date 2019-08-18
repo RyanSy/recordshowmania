@@ -133,7 +133,7 @@ exports.display_reset = function(req, res) {
   User.findOne({ reset_password_token: req.params.token }, function(err, user) {
     if (err) {
       console.log(err);
-      res.render('user-not-found');
+      res.render('error', { message: 'Sorry, a server error occured (Code UC136). '});
     } else {
       if (!user) {
         res.render('user-not-found');
