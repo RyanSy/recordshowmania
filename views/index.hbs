@@ -22,10 +22,10 @@
   {{#each shows}}
     <div class="mb-3 pl-1 pr-1 rounded">
       <div class="row">
-        <div class="col-3 pl-2 pr-1">
+        <div class="col-4 pl-2 pr-1">
           {{this.month}} {{this.day}}, {{this.year}}
         </div>
-        <div class="col-9 pl-2">
+        <div class="col-8 pl-2">
           <form id="show-{{this.id}}" action="/{{this.name_formatted}}/{{this.date_og}}" method="post">
             <input type="hidden" name="id" value="{{this.id}}">
           </form>
