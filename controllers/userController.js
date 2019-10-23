@@ -203,3 +203,10 @@ exports.session_expired = function(req, res) {
     title: 'Session expired.'
   });
 }
+
+// display privacy policy
+exports.get_privacy_policy = function(req, res) {
+  res.render('privacy-policy', {
+    title: 'Privacy Policy'
+  });
+}

@@ -70,4 +70,7 @@ router.post('/edit-show', upload, show_controller.post_edit_show);
 // delete show
 router.post('/delete-show', show_controller.delete_show);
 
+// show privacy policy
+router.get('/privacy-policy', user_controller.get_privacy_policy)
+
 module.exports = router;
