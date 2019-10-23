@@ -351,6 +351,7 @@ function createShowsArray(shows) {
       date: moment(shows[i].date, 'YYYY-MM-DD').format('dddd, MMMM Do, YYYY'),
       month: moment(shows[i].date, 'YYYY-MM-DD').format('MMM'),
       day: moment(shows[i].date, 'YYYY-MM-DD').format('D'),
+      year: moment(shows[i].date, 'YYYY-MM-DD').format('YYYY'),
       date_og: shows[i].date,
       name: shows[i].name,
       name_formatted: shows[i].name.toLowerCase().replace(/[\s-@#!$%^&*()_+|~=`{}\[\]:";'<>?,.\/]/g, '-'),
@@ -405,8 +406,6 @@ function createShowObject(show) {
   var showObject = {
     id: show._id,
     date: moment(show.date, 'YYYY-MM-DD').format('dddd, MMMM Do, YYYY'),
-    month: moment(show.date, 'YYYY-MM-DD').format('MMM'),
-    day: moment(show.date, 'YYYY-MM-DD').format('D'),
     date_og: show.date,
     name: show.name,
     name_formatted: show.name.toLowerCase().replace(/[\s-@#!$%^&*()_+|~=`{}\[\]:";'<>?,.\/]/g, '-'),
