@@ -210,3 +210,10 @@ exports.get_privacy_policy = function(req, res) {
     title: 'Privacy Policy'
   });
 }
+
+// display terms & conditions
+exports.get_terms_and_conditions = function(req, res) {
+  res.render('terms-conditions', {
+    title: 'Terms & Conditions'
+  });
+}
