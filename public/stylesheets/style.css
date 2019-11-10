@@ -66,3 +66,6 @@ body {
 .close {
   color: inherit !important;
 }
+.white-text {
+  color: white !important;
+}
