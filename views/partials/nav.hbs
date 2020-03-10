@@ -4,30 +4,30 @@
     <button id="navbarbutton" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <i class="fas fa-bars"></i>
     </button>
-    <div class="mt-3 collapse navbar-collapse text-center" id="navbarResponsive">
+    <div class="mt-3 collapse navbar-collapse text-right" id="navbarResponsive">
       <ul class="navbar-nav nav-items ml-auto">
         {{#if isLoggedIn}}
         <li class="nav-item">
           <span class="nav-link">Welcome, {{username}}</span>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/add-show">Add Show</a>
+          <h4><a class="nav-link" href="/add-show">Add Show</a></h4>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/my-shows">My Shows</a>
+          <h4><a class="nav-link" href="/my-shows">My Shows</a></h4>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/logout">Log Out</a>
+          <h4><a class="nav-link" href="/logout">Log Out</a></h4>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="https://www.recordriots.com"><img height="50" width="50" src="https://recordshowmania.com/images/record-riots-logo.png" alt="Record Riots Logo"></a>
         </li>
         {{else}}
         <li class="nav-item">
-          <a class="nav-link" href="/login">Login</a>
+          <h4><a class="nav-link" href="/login">Login</a></h4>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/register">Register</a>
+          <h4><a class="nav-link" href="/register">Register</a></h4>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="https://www.recordriots.com"><img height="50" width="50" src="https://recordshowmania.com/images/record-riots-logo.png" alt="Record Riots Logo"></a>
