@@ -8,6 +8,8 @@ var dUri = new Datauri();
 
 /* display all shows on index in ascending order */
 exports.list_shows = function(req, res) {
+  console.log(res);
+  
   Show.find(function(err, shows) {
     if (err) {
       console.log(err);
@@ -15,6 +17,7 @@ exports.list_shows = function(req, res) {
     } else {
       var showsArray = createShowsArray(shows);
       var showsArraySorted = sortByDateStart(showsArray);
+
 
       if (req.session.isLoggedIn == true) {
         res.render('index', {

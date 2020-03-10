@@ -7,26 +7,26 @@
     "devstart": "DEBUG=recordshowmania:* nodemon ./bin/www"
   },
   "dependencies": {
-    "@sendgrid/mail": "^6.4.0",
-    "async": "^2.6.2",
-    "bcrypt": "^3.0.6",
-    "cloudinary": "^1.14.0",
+    "@sendgrid/mail": "^6.5.4",
+    "async": "^2.6.3",
+    "bcrypt": "^3.0.8",
+    "cloudinary": "^1.19.0",
     "compression": "^1.7.4",
-    "connect-mongodb-session": "^2.1.1",
+    "connect-mongodb-session": "^2.3.1",
     "cookie-parser": "~1.4.3",
     "datauri": "^2.0.0",
     "debug": "~2.6.9",
     "dotenv": "^7.0.0",
     "express": "~4.16.0",
-    "express-session": "^1.16.1",
-    "hbs": "^4.0.6",
-    "helmet": "^3.21.2",
+    "express-session": "^1.17.0",
+    "hbs": "^4.1.0",
+    "helmet": "^3.21.3",
     "http-errors": "~1.6.2",
     "moment": "^2.24.0",
-    "mongoose": "^5.5.13",
+    "mongoose": "^5.9.4",
     "morgan": "~1.9.0",
-    "multer": "^1.4.1",
-    "newrelic": "^5.10.0",
-    "pm2": "^3.5.1"
+    "multer": "^1.4.2",
+    "newrelic": "^5.13.1",
+    "pm2": "^3.5.2"
   }
 }
