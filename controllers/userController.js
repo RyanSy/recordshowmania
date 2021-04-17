@@ -115,13 +115,21 @@ exports.send_reset = function(req, res) {
         sgMail.setApiKey(process.env.SENDGRID_API_KEY);
         const msg = {
           to: req.body.email,
-          from: 'no-reply@recordshowmania.com',
+          from: 'info@recordshowmania.com',
           subject: 'Password Reset',
           html: `<p>Click the link below to reset your Record Show Mania password:</p> <br>
-          <p><a href="https://www.recordshowmania.com/reset/${token}">https://www.recordshowmania.com/reset/${token}</a></p> <br>
-          <p>Please do not reply to this email. For assistance, please contuct us at <a href="mailto:help@recordshowmania.com">help@recordshowmania.com</a>`
+          <p><a href="https://www.recordshowmania.com/reset/${token}">https://www.recordshowmania.com/reset/${token}</a></p> <br>`
         };
-        sgMail.send(msg);
+        sgMail
+          .send(msg)
+          .then(() => {
+            console.log('password reset email sent');
+          })
+          .catch((error) => {
+            console.log('error sending password reset email');
+            console.log(error.response.body);
+            console.error(error);
+          });
         res.render('check-email');
       }
     }
@@ -133,7 +141,7 @@ exports.display_reset = function(req, res) {
   User.findOne({ reset_password_token: req.params.token }, function(err, user) {
     if (err) {
       console.log(err);
-      res.render('error', { message: 'Sorry, a server error occured (Code UC136). '});
+      res.render('error', { message: 'Sorry, a server error occured (Code UC144). '});
     } else {
       if (!user) {
         res.render('user-not-found');
