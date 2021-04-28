@@ -1,4 +1,3 @@
-require('dotenv').config();
 var User = require('../models/user');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
@@ -75,8 +74,11 @@ exports.login_user = function(req, res, next) {
             res.render('error', {message: 'An error occured logging in that user'});
           }
           if (result == true) {
+            console.log('user logged in: ', user);
+            console.log('user is admin? ', user.isAdmin);
             req.session.isLoggedIn = true;
             req.session.username = user.username;
+            req.session.isAdmin = user.isAdmin;
             res.redirect('/');
           } else {
             res.render('error', {message: 'Password incorrect, please go back and try again'});

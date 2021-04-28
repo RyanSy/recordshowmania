@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var show_controller = require('../controllers/showController');
 var user_controller = require('../controllers/userController');
+var admin_controller = require('../controllers/adminController');
 var path = require('path');
 var multer = require('multer');
 var memoryStorage = multer.memoryStorage({
@@ -76,5 +77,7 @@ router.get('/privacy-policy', user_controller.get_privacy_policy);
 // show terms and conditions
 router.get('/terms-conditions', user_controller.get_terms_and_conditions);
 
+// show all users
+router.get('/all-users', admin_controller.show_all_users);
 
 module.exports = router;

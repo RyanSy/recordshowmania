@@ -7,9 +7,7 @@ var Datauri = require('datauri');
 var dUri = new Datauri();
 
 /* display all shows on index in ascending order */
-exports.list_shows = function(req, res) {
-  console.log(res);
-  
+exports.list_shows = function(req, res) {  
   Show.find(function(err, shows) {
     if (err) {
       console.log(err);

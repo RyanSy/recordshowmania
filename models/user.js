@@ -8,7 +8,8 @@ var userSchema = new Schema(
     email: {type: String, required: true, max: 100},
     password: {type: String, required: true, max: 100},
     reset_password_token: {type: String},
-    reset_password_token_expires: {type: String}
+    reset_password_token_expires: {type: String},
+    isAdmin: {type: Boolean}
   }
 );
 
