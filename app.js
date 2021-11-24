@@ -27,7 +27,7 @@ store.on('error', function(error) {
 });
 
 // db setup
-mongoose.connect(mongoDB, {useNewUrlParser: true});
+mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
 db.on('error', console.error.bind(console, 'connection error:'));
 
 // view engine setup
