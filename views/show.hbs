@@ -17,7 +17,7 @@
     </a>
   </p>
   <p><strong>Time:</strong> <span class="white-text">{{this.start}} to {{this.end}}</span></p>
-  <p><strong>Regular Admission:</strong> <span class="white-text">{{#if this.regular_admission_fee}}${{this.regular_admission_fee}}{{else}}Free{{/if}}</span></p>
+  <p><strong>Regular Admission:</strong> <span class="white-text">{{#if this.regular_admission_fee}}{{else}}Free{{/if}}</span></p>
   {{#if this.early_admission}}
     <p><strong>Early Admission:</strong> <span class="white-text">Yes <i class="fas fa-check"></i></span></p>
     <p><strong>Early Admission Time:</strong> <span class="white-text">{{this.early_admission_time}}</span></p>
@@ -46,14 +46,8 @@
   {{#if this.cd_dealers}}
     <p><strong>CD Dealers:</strong> <span class="white-text">Yes <i class="fas fa-check"></i></span></p>
   {{/if}}
-  {{#if this.cassette_dealers}}
-    <p><strong>Cassette Dealers:</strong> <span class="white-text">Yes <i class="fas fa-check"></i></span></p>
-  {{/if}}
   {{#if this.fortyfive_dealers}}
     <p><strong>45 Dealers:</strong> <span class="white-text">Yes <i class="fas fa-check"></i></span></p>
-  {{/if}}
-  {{#if this.seventyeight_dealers}}
-    <p><strong>78 Dealers:</strong> <span class="white-text">Yes <i class="fas fa-check"></i></span></p>
   {{/if}}
   {{#if this.memorabilia_dealers}}
     <p><strong>Memorabilia Dealers:</strong> <span class="white-text">Yes <i class="fas fa-check"></i></span></p>
@@ -63,6 +57,9 @@
   {{/if}}
   {{#if this.handicapped_access}}
     <p><strong>Handicapped Access:</strong> <span class="white-text">Yes <i class="fas fa-check"></i></span></p>
+  {{/if}}
+  {{#if this.covid_protocols}}
+    <p><strong>Covid Protocols:</strong> <span class="line-breaks white-text">{{this.covid_protocols}}</span></p>
   {{/if}}
   {{#if this.more_information}}
     <p><strong>More Information:</strong> <span class="line-breaks white-text">{{this.more_information}}</span></p>

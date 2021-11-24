@@ -7,7 +7,7 @@ var Datauri = require('datauri');
 var dUri = new Datauri();
 
 /* display all shows on index in ascending order */
-exports.list_shows = function(req, res) {  
+exports.list_shows = function(req, res) {
   Show.find(function(err, shows) {
     if (err) {
       console.log(err);
@@ -374,12 +374,11 @@ function createShowsArray(shows) {
       table_rent: shows[i].table_rent,
       featured_dealers: shows[i].featured_dealers,
       cd_dealers: shows[i].cd_dealers,
-      cassette_dealers: shows[i].cassette_dealers,
       fortyfive_dealers: shows[i].fortyfive_dealers,
-      seventyeight_dealers: shows[i].seventyeight_dealers,
       memorabilia_dealers: shows[i].memorabilia_dealers,
       food_drink: shows[i].food_drink,
       handicapped_access: shows[i].handicapped_access,
+      covid_protocols: shows[i].covid_protocols,
       more_information: shows[i].more_information,
       contact_name: shows[i].contact_name,
       contact_phone: shows[i].contact_phone,
@@ -427,12 +426,11 @@ function createShowObject(show) {
     table_rent: show.table_rent,
     featured_dealers: show.featured_dealers,
     cd_dealers: show.cd_dealers,
-    cassette_dealers: show.cassette_dealers,
     fortyfive_dealers: show.fortyfive_dealers,
-    seventyeight_dealers: show.seventyeight_dealers,
     memorabilia_dealers: show.memorabilia_dealers,
     food_drink: show.food_drink,
     handicapped_access: show.handicapped_access,
+    covid_protocols: show.covid_protocols,
     more_information: show.more_information,
     contact_name: show.contact_name,
     contact_phone: show.contact_phone,
