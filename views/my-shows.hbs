@@ -34,7 +34,7 @@
                     {{this.address}} <br>
                     {{this.city}}, {{this.state}} {{this.zip}} <br>
                   </a> Time: {{this.start}} to {{this.end}} <br>
-                  Regular Admission: {{this.regular_admission_fee}} <br>
+                  Regular Admission: {{#if this.regular_admission_fee}} ${{this.regular_admission_fee}} {{else}} Free {{/if}}<br>
                   Early Admission? {{#if this.early_admission}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
                   {{#if this.early_admission}}
                     Early Admission Time: {{this.early_admission_time}} <br>

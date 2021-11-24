@@ -17,7 +17,7 @@
     </a>
   </p>
   <p><strong>Time:</strong> <span class="white-text">{{this.start}} to {{this.end}}</span></p>
-  <p><strong>Regular Admission:</strong> <span class="white-text">{{#if this.regular_admission_fee}}{{else}}Free{{/if}}</span></p>
+  <p><strong>Regular Admission:</strong> <span class="white-text">{{#if this.regular_admission_fee }}${{this.regular_admission_fee}}{{else}}Free{{/if}}</span></p>
   {{#if this.early_admission}}
     <p><strong>Early Admission:</strong> <span class="white-text">Yes <i class="fas fa-check"></i></span></p>
     <p><strong>Early Admission Time:</strong> <span class="white-text">{{this.early_admission_time}}</span></p>
