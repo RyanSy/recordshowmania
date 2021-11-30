@@ -23,6 +23,7 @@ exports.list_shows = function(req, res) {
           meta_content: 'Record show listings all across the USA.',
           username: req.session.username,
           isLoggedIn: true,
+          isAdmin: req.session.isAdmin,
           shows: showsArraySorted
         });
       } else {

@@ -9,8 +9,9 @@ exports.show_all_users = function(req, res) {
     if (err) {
       res.render('error', {message: 'An error occured displaying users'});
     }
+    var usersLength = users.length;
     var usersArray = [];
-    for (var i = 0; i < users.length; i++) {
+    for (var i = 0; i < usersLength; i++) {
       var user = {};
       user.username = users[i].username;
       user.email = users[i].email;
@@ -19,7 +20,8 @@ exports.show_all_users = function(req, res) {
     console.log(usersArray);
     res.render('all-users', {
       title: 'All Users',
-      users: usersArray
+      users: usersArray,
+      usersLength: usersLength
     });
   })
 }
