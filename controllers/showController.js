@@ -67,11 +67,28 @@ exports.list_show = function(req, res) {
 /* display add show form */
 exports.get_add_show = function(req, res) {
   if (req.session.isLoggedIn) {
-    res.render('add-show', {
-      username: req.session.username,
-      isLoggedIn: true,
-      dateNow: moment().format('YYYY-MM-DD')
-    });
+    var savedShows = [];
+    if (req.session.isAdmin) {
+      Show.find( {'posted_by': req.session.username}, function(err, shows) {
+        if (err) {
+          console.log(err);
+          res.render('error', {message: 'An error occured.'});
+        } else {
+          for (var i = 0; i < shows.length; i++) {
+            savedShows.push(shows[i]);
+          }
+          console.log();
+          res.render('add-show', {
+            username: req.session.username,
+            isLoggedIn: true,
+            isAdmin: req.session.isAdmin,
+            savedShows: savedShows,
+            savedShowsStrings: JSON.stringify(savedShows),
+            dateNow: moment().format('YYYY-MM-DD')
+          });
+        }
+      });
+    }
   } else {
     res.redirect('/session-expired');
   }

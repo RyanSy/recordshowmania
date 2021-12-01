@@ -68,7 +68,7 @@ function addFeaturedDealer() {
     div.appendChild(text);
     div.appendChild(deleteButton);
 
-    document.getElementById("featuedDealersContainer").appendChild(div);
+    document.getElementById("featuredDealersContainer").appendChild(div);
   }
 
 function deleteFeaturedDealer() {

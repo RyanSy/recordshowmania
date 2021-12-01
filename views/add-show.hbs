@@ -4,6 +4,20 @@
   <h5>Add a show:</h5>
   <small>Fields with a * are required - all other fields are optional, but recommended.</small>
 
+{{#if isAdmin}}
+  <form class="mt-4" action="index.html" method="post">
+    <div class="form-group">
+      <label for="inputSavedShow">Saved Shows</label>
+      <select class="form-control col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="inputSavedShow" name="savedShow">
+          <option value="">Select Show</option>
+        {{#each savedShows}}
+          <option value="{{this._id}}">{{this.name}}</option>
+        {{/each}}
+      </select>
+    </div>
+  </form>
+{{/if}}
+
   <form class="mt-4" action="/add-show" enctype="multipart/form-data" method="post">
     <div class="form-group">
       <label for="inputDate">Date *</label>
@@ -126,16 +140,16 @@
         <label for="earlyAdmissionYes">Early Admission?</label>
       </div>
       <div class="form-check form-check-inline">
-        <input type="radio" class="form-check-input" id="earlyAdmissionYes" name="early_admission" onclick="displayEarlyAdmissionFields()" value="yes">
+        <input type="radio" class="form-check-input" id="earlyAdmissionYes" name="early_admission" value="yes">
         Yes
       </div>
       <div class="form-check form-check-inline">
-        <input type="radio" class="form-check-input" id="earlyAdmissionNo" name="early_admission" onclick="displayEarlyAdmissionFields()" value="no" checked>
+        <input type="radio" class="form-check-input" id="earlyAdmissionNo" name="early_admission" value="no">
         No
       </div>
     </div>
 
-    <div id="earlyAdmissionFields" class="d-none">
+    <div id="earlyAdmissionFields">
       <div class="form-group">
         <label for="earlyAdmissionTime">Early Admission Time</label>
         <input type="time" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="earlyAdmissionTime" name="early_admission_time">
@@ -155,6 +169,12 @@
     <div class="form-group">
       <label for="numberOfDealers">Number of Dealers</label>
       <input type="number" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="numberOfDealers" name="number_of_dealers">
+    </div>
+
+    <div id="featuredDealers" class="form-group">
+      <label for="inputFeaturedDealers">Featured Dealers</label><br>
+      <div id="featuredDealersContainer"></div>
+      <input type="button" id="addFeaturedDealerButton" class="btn btn-success" onclick="addFeaturedDealer()" value="Add Dealer">
     </div>
 
     <div class="form-group">
@@ -177,22 +197,16 @@
       </div>
     </div>
 
-    <div id="featuedDealers" class="form-group">
-      <label for="inputFeaturedDealers">Dealers List</label><br>
-      <div id="featuedDealersContainer"></div>
-      <input type="button" id="addFeaturedDealerButton" class="btn btn-success" onclick="addFeaturedDealer()" value="Add Dealer">
-    </div>
-
     <div class="form-group">
       <div class="form-check form-check-inline">
         <label for="cdDealers">CD Dealers?</label>
       </div>
       <div class="form-check form-check-inline">
-        <input type="radio" class="form-check-input" name="cd_dealers" value="yes">
+        <input id="cdDealersYes" type="radio" class="form-check-input" name="cd_dealers" value="yes">
         Yes
       </div>
       <div class="form-check form-check-inline">
-        <input type="radio" class="form-check-input" name="cd_dealers" value="no">
+        <input type="radio" id="cdDealersNo" class="form-check-input" name="cd_dealers" value="no">
         No
       </div>
     </div>
@@ -202,11 +216,11 @@
         <label for="fortyFiveDealers">45 Dealers?</label>
       </div>
       <div class="form-check form-check-inline">
-        <input type="radio" class="form-check-input" name="fortyfive_dealers" value="yes">
+        <input type="radio" id="fortyFiveDealersYes" class="form-check-input" name="fortyfive_dealers" value="yes">
         Yes
       </div>
       <div class="form-check form-check-inline">
-        <input type="radio" class="form-check-input" name="fortyfive_dealers" value="no">
+        <input type="radio" id="fortyFiveDealersNo" class="form-check-input" name="fortyfive_dealers" value="no">
         No
       </div>
     </div>
@@ -216,11 +230,11 @@
         <label for="memorabiliaDealers">Memorabilia Dealers?</label>
       </div>
       <div class="form-check form-check-inline">
-        <input type="radio" class="form-check-input" name="memorabilia_dealers" value="yes">
+        <input type="radio" id="memorabiliaDealersYes" class="form-check-input" name="memorabilia_dealers" value="yes">
         Yes
       </div>
       <div class="form-check form-check-inline">
-        <input type="radio" class="form-check-input" name="memorabilia_dealers" value="no">
+        <input type="radio" id="memorabiliaDealersNo" class="form-check-input" name="memorabilia_dealers" value="no">
         No
       </div>
     </div>
@@ -230,11 +244,11 @@
         <label for="foodDrink">Food/Drink?</label>
       </div>
       <div class="form-check form-check-inline">
-        <input type="radio" class="form-check-input" name="food_drink" value="yes">
+        <input type="radio" id="foodDrinkYes" class="form-check-input" name="food_drink" value="yes">
         Yes
       </div>
       <div class="form-check form-check-inline">
-        <input type="radio" class="form-check-input" name="food_drink" value="no">
+        <input type="radio" id="foodDrinkNo" class="form-check-input" name="food_drink" value="no">
         No
       </div>
     </div>
@@ -244,11 +258,11 @@
         <label for="handicappedAccess">Handicapped Access?</label>
       </div>
       <div class="form-check form-check-inline">
-        <input type="radio" class="form-check-input" name="handicapped_access" value="yes">
+        <input type="radio" id="handicappedAccessYes" class="form-check-input" name="handicapped_access" value="yes">
         Yes
       </div>
       <div class="form-check form-check-inline">
-        <input type="radio" class="form-check-input" name="handicapped_access" value="no">
+        <input type="radio" id="handicappedAccessNo" class="form-check-input" name="handicapped_access" value="no">
         No
       </div>
     </div>
@@ -290,6 +304,8 @@
       <small>Please enter full URL, e.g. https://facebook.com/yourpage</small>
     </div>
 
+    <div id="savedImageContainer" class="form-group"></div>
+
     <div class="form-group">
       <label for="inputImage">Image Upload</label>
       <input type="file" accept="image/*,.pdf" class="form-control-file" id="inputImage" name="image">
@@ -302,4 +318,77 @@
 
 </div>
 
+<script type="text/javascript">
+  var savedShowsArr = {{{savedShowsStrings}}};
+  var savedShowsArrLength = savedShowsArr.length;
+  $('#inputSavedShow').change(function() {
+    var selectedShowId = $('#inputSavedShow').val();
+    var obj = savedShowsArr.find(o => o._id == selectedShowId);
+    console.log(obj);
+    $('#inputName').val(obj.name);
+    $('#inputVenue').val(obj.venue);
+    $('#inputAddress').val(obj.address);
+    $('#inputCity').val(obj.city);
+    $('#inputState').val(obj.state);
+    $('#inputZip').val(obj.zip);
+    $('#inputStart').val(obj.start);
+    $('#inputEnd').val(obj.end);
+    $('#inputAdmission').val(obj.regular_admission_fee);
+    if (obj.early_admission) {
+      $('#earlyAdmissionYes').prop('checked', true);
+    } else {
+      $('#earlyAdmissionNo').prop('checked', true);
+    }
+    $('#earlyAdmissionTime').val(obj.early_admission_time);
+    $('#earlyAdmissionFee').val(obj.early_admission_fee);
+    $('#numberOfDealers').val(obj.number_of_dealers);
+    var numberOfDealers = obj.featured_dealers.length;
+    if (numberOfDealers > 0) {
+      for (var i = 0; i < numberOfDealers; i++) {
+        console.log('fuck you');
+          $('#featuredDealersContainer').append(`<div id="featuredDealer${i}" class="featured-dealer form-inline"><input type="text" class="form-control col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3 mb-3" name="featured_dealers" value="${obj.featured_dealers[i]}"><input id="featuredDealerDeleteButton${i}" type="button" class="btn btn-danger ml-2 mb-3" onclick="deleteFeaturedDealer()" value="Delete"></div>`);
+      }
+    }
+    $('#numberOfTables').val(obj.number_of_tables);
+    $('#sizeOfTables').val(obj.size_of_tables);
+    $('#tableRent').val(obj.table_rent);
+    if (obj.cd_dealers) {
+      $('#cdDealersYes').prop('checked', true);
+    } else {
+      $('#cdDealersNo').prop('checked', true);
+    }
+    if (obj.fortyfive_dealers) {
+      $('#fortyFiveDealersYes').prop('checked', true);
+    } else {
+      $('#fortyFiveDealersNo').prop('checked', true);
+    }
+    if (obj.memorabilia_dealers) {
+      $('#memorabiliaDealersYes').prop('checked', true);
+    } else {
+      $('#memorabiliaDealersNo').prop('checked', true);
+    }
+    if (obj.food_drink) {
+      $('#foodDrinkYes').prop('checked', true);
+    } else {
+      $('#foodDrinkNo').prop('checked', true);
+    }
+    if (obj.handicapped_access) {
+      $('#handicappedAccessYes').prop('checked', true);
+    } else {
+      $('#handicappedAccessNo').prop('checked', true);
+    }
+    $('#inputMoreInformation').val(obj.more_information);
+    $('#inputCovidProtocols').val(obj.covid_protocols);
+    $('#inputContactName').val(obj.contact_name);
+    $('#inputContactPhone').val(obj.contact_phone);
+    $('#inputContactEmail').val(obj.contact_email);
+    $('#inputWebsite').val(obj.website);
+    $('#inputFacebook').val(obj.facebook);
+    $('#savedImageContainer').html(`<label for="inputSavedImage">Saved Image</label><br><img class="img-fluid mb-4"src="${obj.image}" alt="${obj.name}"><input type="hidden" class="form-control col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3" id="inputSavedImage" name="image"><br><button id="deleteImageButton" class="btn btn-danger mt-4 mb-4">Delete Image</button>`);
+    $('#deleteImageButton').click(function() {
+      $('#savedImageContainer').html('');
+    })
+  });
+
+</script>
 <script type="text/javascript" src="/javascripts/add-show.js"></script>

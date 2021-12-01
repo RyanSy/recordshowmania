@@ -40,7 +40,7 @@ function addFeaturedDealer() {
   div.setAttribute("class", "featured-dealer form-inline");
   text.setAttribute("type", "text");
   text.setAttribute("name", "featured_dealers");
-  text.setAttribute("class", "form-control col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3");
+  text.setAttribute("class", "form-control col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3 mb-3");
   deleteButton.setAttribute("type", "button");
   deleteButton.setAttribute("class", "btn btn-danger ml-2 mb-3");
   deleteButton.setAttribute("onclick", "deleteFeaturedDealer()");
