@@ -76,8 +76,20 @@ exports.get_add_show = function(req, res) {
         } else {
           for (var i = 0; i < shows.length; i++) {
             savedShows.push(shows[i]);
+            console.log(shows[i]);
           }
-          console.log();
+          savedShows.sort(function(a, b) {
+            var nameA = a.name.toUpperCase();
+            var nameB = b.name.toUpperCase();
+            if (nameA < nameB) {
+              return -1;
+            }
+            if (nameA > nameB) {
+              return 1;
+            }
+            return 0;
+          });
+          console.log(savedShows);
           res.render('add-show', {
             username: req.session.username,
             isLoggedIn: true,
@@ -100,6 +112,21 @@ exports.post_add_show = function(req, res) {
   show.posted_by = req.session.username;
   show.date_start = new Date(req.body.date + ' ' + req.body.start);
   show.date_posted = new Date();
+
+  // if there is a show with same name and poster, delete old show
+  Show.findOne({ name: show.name, posted_by: show.posted_by }, function(err, oldShow) {
+    if (err) {
+      console.log(err);
+    } else {
+      Show.findByIdAndDelete({ _id: oldShow._id }, function (err) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(`old ${oldShow.name} show deleted`);
+        }
+      });
+    }
+  })
 
   async.waterfall([
     // upload image and get url
