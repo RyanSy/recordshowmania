@@ -5,6 +5,7 @@ var cloudinary = require('cloudinary').v2;
 var path = require('path');
 var Datauri = require('datauri');
 var dUri = new Datauri();
+var _ = require('lodash');
 
 /* display all shows on index in ascending order */
 exports.list_shows = function(req, res) {
@@ -70,13 +71,13 @@ exports.get_add_show = function(req, res) {
     var savedShows = [];
     if (req.session.isAdmin) {
       Show.find( {'posted_by': req.session.username}, function(err, shows) {
+        var showsLength = shows.length;
         if (err) {
           console.log(err);
           res.render('error', {message: 'An error occured.'});
         } else {
-          for (var i = 0; i < shows.length; i++) {
+          for (var i = 0; i < showsLength; i++) {
             savedShows.push(shows[i]);
-            console.log(shows[i]);
           }
           savedShows.sort(function(a, b) {
             var nameA = a.name.toUpperCase();
@@ -89,13 +90,14 @@ exports.get_add_show = function(req, res) {
             }
             return 0;
           });
-          console.log(savedShows);
+          var savedShowsNoDupes = _.uniqBy(savedShows, 'name');
+          console.log('savedShowsNoDupes:', savedShowsNoDupes);
           res.render('add-show', {
             username: req.session.username,
             isLoggedIn: true,
             isAdmin: req.session.isAdmin,
-            savedShows: savedShows,
-            savedShowsStrings: JSON.stringify(savedShows),
+            savedShows: savedShowsNoDupes,
+            savedShowsStrings: JSON.stringify(savedShowsNoDupes),
             dateNow: moment().format('YYYY-MM-DD')
           });
         }
