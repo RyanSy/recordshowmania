@@ -11,7 +11,6 @@ var _ = require('lodash');
 exports.list_shows = function(req, res) {
   var todaysDate = moment().format('YYYY-MM-DD');
   Show.find({ date: {$gte: todaysDate} }, function(err, shows) {
-    console.log('shows length:', shows.length);
     if (err) {
       console.log(err);
       res.render('error', {message: 'An error occured displaying shows'});
