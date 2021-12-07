@@ -9,15 +9,15 @@ var _ = require('lodash');
 
 /* display all shows on index in ascending order */
 exports.list_shows = function(req, res) {
-  Show.find(function(err, shows) {
+  var todaysDate = moment().format('YYYY-MM-DD');
+  Show.find({ date: {$gte: todaysDate} }, function(err, shows) {
+    console.log('shows length:', shows.length);
     if (err) {
       console.log(err);
       res.render('error', {message: 'An error occured displaying shows'});
     } else {
       var showsArray = createShowsArray(shows);
       var showsArraySorted = sortByDateStart(showsArray);
-
-
       if (req.session.isLoggedIn == true) {
         res.render('index', {
           title: 'Record Show Mania - Find Record Shows Near You!',
@@ -114,7 +114,6 @@ exports.post_add_show = function(req, res) {
   show.posted_by = req.session.username;
   show.date_start = new Date(req.body.date + ' ' + req.body.start);
   show.date_posted = new Date();
-
   // if there is a show with same name and poster, delete old show
   Show.findOne({ name: show.name, posted_by: show.posted_by }, function(err, oldShow) {
     if (err) {
@@ -129,7 +128,6 @@ exports.post_add_show = function(req, res) {
       });
     }
   })
-
   async.waterfall([
     // upload image and get url
     function uploadImage(callback) {
@@ -149,7 +147,6 @@ exports.post_add_show = function(req, res) {
         callback(null, null, null);
       }
     },
-
     // set image url and image public id in show object
     function setShowImage(imageUrl, imagePublicId, callback) {
       if (imageUrl) {
@@ -160,7 +157,6 @@ exports.post_add_show = function(req, res) {
         callback(null, show);
       }
     },
-
     // add show
     function addShow(show, callback) {
       Show.create(show, function(err, newShow) {
@@ -188,7 +184,6 @@ exports.post_add_show = function(req, res) {
       });
     }
   ], // end waterfall array
-
   // waterfall callback
   function(err, newShow) {
     if (req.session.isLoggedIn == true) {
@@ -198,7 +193,6 @@ exports.post_add_show = function(req, res) {
         }
   }); // end waterfall
 }; // end post_add_show
-
 /* search shows */
 exports.search_shows = function(req, res) {
   Show.find({ $or: [{ 'date': req.body.date }, { 'state': req.body.state }] }, function(err, shows) {
@@ -206,7 +200,6 @@ exports.search_shows = function(req, res) {
       console.log(err);
       res.send('An error occured (Error code: SC151). Please go back and try again or email help@recordshowmania.com if the problem persists.');
     }
-
     if (shows.length == 0) {
       if (req.session.isLoggedIn == true) {
         res.render('no-results', {
@@ -312,7 +305,6 @@ exports.get_edit_show = function(req, res) {
 exports.post_edit_show = function(req, res) {
   var update = req.body;
   update.posted_by = req.session.username;
-
   async.waterfall([
     // upload image and get url
     function uploadImage(callback) {
@@ -332,7 +324,6 @@ exports.post_edit_show = function(req, res) {
         callback(null, null, null);
       }
     },
-
     // set image url and image public id in update object
     function setShowImage(imageUrl, imagePublicId, callback) {
       if (imageUrl) {
@@ -343,7 +334,6 @@ exports.post_edit_show = function(req, res) {
         callback(null, update);
       }
     },
-
     // update db
     function updateDb(update, callback) {
       Show.findByIdAndUpdate(req.body.id, update, function(err, updatedShow) {
@@ -356,7 +346,6 @@ exports.post_edit_show = function(req, res) {
       });
     }
   ],
-
   // waterfall callback
   function(err, updatedShow) {
     if (req.session.isLoggedIn == true) {
@@ -376,7 +365,6 @@ exports.delete_show = function(req, res) {
       }
     });
   }
-
   Show.findByIdAndDelete(req.body.id, function(err) {
     if (err) {
       res.render('error', {message: 'An error occured deleting that show'});
