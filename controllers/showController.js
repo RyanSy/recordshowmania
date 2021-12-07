@@ -122,6 +122,7 @@ exports.post_add_show = function(req, res) {
           if (error) {
             console.log(error);
             callback(error, null, null);
+            res.render('error', {message: 'An error occured displaying shows'});
           } else {
             var imageUrl = result.secure_url;
             var imagePublicId = result.public_id;
@@ -148,6 +149,7 @@ exports.post_add_show = function(req, res) {
         if (err) {
           console.log(err);
           callback(err, null);
+          res.render('error', {message: 'An error occured displaying shows'});
         } else {
           // add future shows, if any
           if (req.body.future_dates) {
@@ -159,6 +161,7 @@ exports.post_add_show = function(req, res) {
               Show.create(show, function(err) {
                 if (err) {
                   console.log(err);
+                  res.render('error', {message: 'An error occured displaying shows'});
                 }
               });
             }
