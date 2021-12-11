@@ -412,9 +412,7 @@ function createShowsArray(shows) {
       image_public_id: shows[i].image_public_id,
       posted_by: shows[i].posted_by
     };
-    if (moment(showObject.date_start) > moment(new Date())) {
-      showsArray.push(showObject);
-    }
+    showsArray.push(showObject);
   };
   return showsArray;
 }
