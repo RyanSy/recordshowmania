@@ -6,10 +6,10 @@ var path = require('path');
 var Datauri = require('datauri');
 var dUri = new Datauri();
 var _ = require('lodash');
+var todaysDate = moment().format('YYYY-MM-DD');
 
 /* display all shows on index in ascending order */
 exports.list_shows = function(req, res) {
-  var todaysDate = moment().format('YYYY-MM-DD');
   Show.find({ date: {$gte: todaysDate} }, function(err, shows) {
     if (err) {
       console.log(err);
