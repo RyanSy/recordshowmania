@@ -15,14 +15,13 @@
     </label>
     <!-- search by date -->
     <div class="tab-pane row show active" role="tabpanel" id="search-by-date">
-      <form class="form-inline" action="/search-results" method="post">
+      <form id="searchByDateForm" class="form-inline" action="/search-results" method="post">
         <input type="date" class="form-control col" id="date" name="date">
-        <button type="submit" class="btn btn-success ml-2"><i class="fas fa-search fa-lg"></i></button>
       </form>
     </div>
     <!-- search by state -->
     <div class="tab-pane row" role="tabpanel" id="search-by-state">
-      <form class="form-inline  " action="/search-results" method="post">
+      <form id="searchByStateForm" class="form-inline  " action="/search-results" method="post">
         <select class="form-control col" id="state" name="state" aria-describedby="stateHelp" placeholder="Enter state">
           <option value="">Choose a state:</option>
           <option value="AL">Alabama</option>
@@ -77,7 +76,6 @@
           <option value="WI">Wisconsin</option>
           <option value="WY">Wyoming</option>
         </select>
-        <button type="submit" class="btn btn-success ml-2"><i class="fas fa-search fa-lg"></i></button>
       </form>
     </div>
   </div>

@@ -184,6 +184,7 @@ exports.post_add_show = function(req, res) {
 
 /* search shows */
 exports.search_shows = function(req, res) {
+  console.log('********** req.body **********', req.body);
   Show.find({ $or: [{ 'date': req.body.date }, { 'date': {$gte: todaysDate}, 'state': req.body.state }] }, function(err, shows) {
     if (err) {
       console.log(err);
@@ -209,7 +210,7 @@ exports.search_shows = function(req, res) {
         var showsArraySorted = sortByDateStart(showsArray);
 
         if (req.body.date) {
-          var searchTerm = req.body.date;
+          var searchTerm = moment(req.body.date).format('dddd, MMMM Do, YYYY');
         }
 
         if (req.body.state) {
