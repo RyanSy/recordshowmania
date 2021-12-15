@@ -236,7 +236,7 @@ exports.search_shows = function(req, res) {
 
 /* get my shows page */
 exports.get_my_shows = function(req, res) {
-  Show.find({ 'posted_by': req.session.username }, function(err, shows) {
+  Show.find({ 'posted_by': req.session.username, 'date': {$gte: todaysDate} }, function(err, shows) {
     if (err) {
       console.log(err);
       res.render('error', {message: 'An error occured displaying all shows'});
