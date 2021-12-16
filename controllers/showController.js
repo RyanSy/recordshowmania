@@ -25,7 +25,7 @@ exports.list_shows = function(req, res) {
           isLoggedIn: true,
           isAdmin: req.session.isAdmin,
           shows: showsArraySorted,
-          todaysDate: todaysDate
+          todaysDate: todaysDate.toString()
         });
       } else {
         res.render('index', {
