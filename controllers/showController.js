@@ -24,7 +24,8 @@ exports.list_shows = function(req, res) {
           username: req.session.username,
           isLoggedIn: true,
           isAdmin: req.session.isAdmin,
-          shows: showsArraySorted
+          shows: showsArraySorted,
+          todaysDate: todaysDate
         });
       } else {
         res.render('index', {
@@ -184,7 +185,6 @@ exports.post_add_show = function(req, res) {
 
 /* search shows */
 exports.search_shows = function(req, res) {
-  console.log('********** req.body **********', req.body);
   Show.find({ $or: [{ 'date': req.body.date }, { 'date': {$gte: todaysDate}, 'state': req.body.state }] }, function(err, shows) {
     if (err) {
       console.log(err);
