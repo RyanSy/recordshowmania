@@ -31,7 +31,8 @@ exports.list_shows = function(req, res) {
         res.render('index', {
           title: 'Record Show Mania - Find Record Shows Near You!',
           meta_content: 'Record show listings all across the USA.',
-          shows: showsArraySorted
+          shows: showsArraySorted,
+          todaysDate: todaysDate.toString()
         });
       }
     }
