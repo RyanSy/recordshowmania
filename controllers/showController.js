@@ -25,14 +25,14 @@ exports.list_shows = function(req, res) {
           isLoggedIn: true,
           isAdmin: req.session.isAdmin,
           shows: showsArraySorted,
-          todaysDate: todaysDate.toString()
+          date: todaysDate.toString()
         });
       } else {
         res.render('index', {
           title: 'Record Show Mania - Find Record Shows Near You!',
           meta_content: 'Record show listings all across the USA.',
           shows: showsArraySorted,
-          todaysDate: todaysDate.toString()
+          date: todaysDate.toString()
         });
       }
     }
@@ -198,12 +198,14 @@ exports.search_shows = function(req, res) {
           meta_content: 'Your search yielded no results.',
           username: req.session.username,
           isLoggedIn: true,
+          date: req.body.date
         });
       }
       else {
         res.render('no-results', {
           title: 'Record Show Mania - No Results',
-          meta_content: 'Your search yielded no results.'
+          meta_content: 'Your search yielded no results.',
+          date: req.body.date
         });
       }
     } else {
@@ -224,13 +226,15 @@ exports.search_shows = function(req, res) {
             meta_content: `Search results for ${searchTerm}`,
             username: req.session.username,
             isLoggedIn: true,
-            shows: showsArraySorted
+            shows: showsArraySorted,
+            date: req.body.date
           });
         } else {
             res.render('search-results', {
               title: `Record Show Mania - search results for ${searchTerm}`,
               meta_content: `Search results for ${searchTerm}`,
-              shows: showsArraySorted
+              shows: showsArraySorted,
+              date: req.body.date
           });
       }
     }
