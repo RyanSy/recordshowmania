@@ -73,7 +73,6 @@ exports.get_add_show = function(req, res) {
     if (req.session.isAdmin) {
       Show.find( {'posted_by': req.session.username}, function(err, shows) {
         var savedShows = [];
-        var savedShowsNoDupes = [];
         var showsLength = shows.length;
         if (err) {
           console.log(err);
@@ -93,15 +92,21 @@ exports.get_add_show = function(req, res) {
           }
           return 0;
         });
-        savedShowsNoDupes = _.uniqBy(savedShows, 'name');
+        var savedShowsNoDupes = _.uniqBy(savedShows, 'name');
+        res.render('add-show', {
+          username: req.session.username,
+          isLoggedIn: true,
+          isAdmin: req.session.isAdmin,
+          savedShows: savedShowsNoDupes,
+          savedShowsStrings: JSON.stringify(savedShowsNoDupes),
+          dateNow: moment().format('YYYY-MM-DD')
+        });
       });
     } // end if req.session.isAdmin code block
     res.render('add-show', {
       username: req.session.username,
       isLoggedIn: true,
       isAdmin: req.session.isAdmin,
-      savedShows: savedShowsNoDupes,
-      savedShowsStrings: JSON.stringify(savedShowsNoDupes),
       dateNow: moment().format('YYYY-MM-DD')
     });
   } else {
