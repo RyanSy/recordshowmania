@@ -13,7 +13,7 @@ exports.list_shows = function(req, res) {
   Show.find({ date: {$gte: todaysDate} }, function(err, shows) {
     if (err) {
       console.log(err);
-      res.render('error', {message: 'An error occured displaying shows (SC16).'});
+      res.render('error', {message: 'An error occured displaying shows.'});
     } else {
       var showsArray = createShowsArray(shows);
       var showsArraySorted = sortByDateStart(showsArray);
@@ -44,7 +44,7 @@ exports.list_show = function(req, res) {
   Show.findOne({ '_id': req.body.id }, function(err, show) {
     if (err) {
       console.log(err);
-      res.render('error', {message: 'An error occured displaying this show (SC45).'});
+      res.render('error', {message: 'An error occured displaying this show.'});
     } else {
       var showObject = createShowObject(show);
       if (req.session.isLoggedIn) {
@@ -69,41 +69,41 @@ exports.list_show = function(req, res) {
 /* display add show form */
 exports.get_add_show = function(req, res) {
   if (req.session.isLoggedIn) {
-    var savedShows = [];
+    // if admin is logged in, search for past shows for autocomplete form feature
     if (req.session.isAdmin) {
       Show.find( {'posted_by': req.session.username}, function(err, shows) {
+        var savedShows = [];
+        var savedShowsNoDupes = [];
         var showsLength = shows.length;
         if (err) {
           console.log(err);
-          res.render('error', {message: 'An error occured (SC76).'});
-        } else {
-          for (var i = 0; i < showsLength; i++) {
-            savedShows.push(shows[i]);
-          }
-          savedShows.sort(function(a, b) {
-            var nameA = a.name.toUpperCase();
-            var nameB = b.name.toUpperCase();
-            if (nameA < nameB) {
-              return -1;
-            }
-            if (nameA > nameB) {
-              return 1;
-            }
-            return 0;
-          });
-          var savedShowsNoDupes = _.uniqBy(savedShows, 'name');
-          console.log('savedShowsNoDupes:', savedShowsNoDupes);
-          res.render('add-show', {
-            username: req.session.username,
-            isLoggedIn: true,
-            isAdmin: req.session.isAdmin,
-            savedShows: savedShowsNoDupes,
-            savedShowsStrings: JSON.stringify(savedShowsNoDupes),
-            dateNow: moment().format('YYYY-MM-DD')
-          });
+          res.render('error', {message: 'An error occured.'});
         }
+        for (var i = 0; i < showsLength; i++) {
+          savedShows.push(shows[i]);
+        }
+        savedShows.sort(function(a, b) {
+          var nameA = a.name.toUpperCase();
+          var nameB = b.name.toUpperCase();
+          if (nameA < nameB) {
+            return -1;
+          }
+          if (nameA > nameB) {
+            return 1;
+          }
+          return 0;
+        });
+        savedShowsNoDupes = _.uniqBy(savedShows, 'name');
       });
-    }
+    } // end if req.session.isAdmin code block
+    res.render('add-show', {
+      username: req.session.username,
+      isLoggedIn: true,
+      isAdmin: req.session.isAdmin,
+      savedShows: savedShowsNoDupes,
+      savedShowsStrings: JSON.stringify(savedShowsNoDupes),
+      dateNow: moment().format('YYYY-MM-DD')
+    });
   } else {
     res.redirect('/session-expired');
   }
