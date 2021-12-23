@@ -102,14 +102,15 @@ exports.get_add_show = function(req, res) {
           dateNow: moment().format('YYYY-MM-DD')
         });
       });
-    } // end if req.session.isAdmin code block
-    res.render('add-show', {
-      username: req.session.username,
-      isLoggedIn: true,
-      isAdmin: req.session.isAdmin,
-      dateNow: moment().format('YYYY-MM-DD')
-    });
-  } else {
+    } /* end if req.session.isAdmin */ else {
+      res.render('add-show', {
+        username: req.session.username,
+        isLoggedIn: true,
+        isAdmin: req.session.isAdmin,
+        dateNow: moment().format('YYYY-MM-DD')
+      });
+    }
+  } /* end if req.session.isLoggedIn */ else {
     res.redirect('/session-expired');
   }
 };
