@@ -76,7 +76,7 @@ exports.get_add_show = function(req, res) {
         var showsLength = shows.length;
         if (err) {
           console.log(err);
-          res.render('error', {message: 'An error occured.'});
+          res.render('error', {message: 'An error occured finding saved shows.'});
         }
         for (var i = 0; i < showsLength; i++) {
           savedShows.push(shows[i]);
@@ -130,7 +130,7 @@ exports.post_add_show = function(req, res) {
           if (error) {
             console.log(error);
             callback(error, null, null);
-            res.render('error', {message: 'An error occured displaying shows (SC125).'});
+            res.render('error', {message: 'An error occured uploading your image.'});
           } else {
             var imageUrl = result.secure_url;
             var imagePublicId = result.public_id;
@@ -157,7 +157,7 @@ exports.post_add_show = function(req, res) {
         if (err) {
           console.log(err);
           callback(err, null);
-          res.render('error', {message: 'An error occured displaying shows (SC152).'});
+          res.render('error', {message: 'An error occured adding this show.'});
         } else {
           // add future shows, if any
           if (req.body.future_dates) {
@@ -169,7 +169,7 @@ exports.post_add_show = function(req, res) {
               Show.create(show, function(err) {
                 if (err) {
                   console.log(err);
-                  res.render('error', {message: 'An error occured displaying shows'});
+                  res.render('error', {message: 'An error occured adding future shows.'});
                 }
               });
             }
@@ -195,7 +195,7 @@ exports.search_shows = function(req, res) {
   Show.find({ $or: [{ 'date': req.body.date }, { 'date': {$gte: todaysDate}, 'state': req.body.state }] }, function(err, shows) {
     if (err) {
       console.log(err);
-      res.send('An error occured (Error code: SC190). Please go back and try again or email help@recordshowmania.com if the problem persists.');
+      res.send('An error occured searching shows.');
     }
     if (shows.length == 0) {
       if (req.session.isLoggedIn == true) {
@@ -252,7 +252,7 @@ exports.get_my_shows = function(req, res) {
   Show.find({ 'posted_by': req.session.username, 'date': {$gte: todaysDate} }, function(err, shows) {
     if (err) {
       console.log(err);
-      res.render('error', {message: 'An error occured displaying your shows (SC243).'});
+      res.render('error', {message: 'An error occured displaying your shows.'});
     } else {
       var showsArray = createShowsArray(shows);
       var showsArraySorted = sortByDateStart(showsArray);
@@ -286,7 +286,7 @@ exports.get_edit_show = function(req, res) {
   Show.findOne({ '_id': req.params.id }, function(err, show) {
     if (err) {
       console.log(err);
-      res.render('error', {message: 'An error occured (SC277).'});
+      res.render('error', {message: 'An error occured displaying the edit show page.'});
     } else {
       if (req.session.isLoggedIn) {
         res.render('edit-show', {
@@ -315,6 +315,7 @@ exports.post_edit_show = function(req, res) {
           if (error) {
             console.log(error);
             callback(error, null, null);
+            res.render('error', {message: 'An error occured uploading your image.'});
           } else {
             var imageUrl = result.secure_url;
             var imagePublicId = result.public_id;
@@ -341,6 +342,7 @@ exports.post_edit_show = function(req, res) {
         if (err) {
           console.log(err);
           callback(err, null);
+          res.render('error', {message: 'An error occured updating this show.'});
         } else {
           callback(null, updatedShow);
         }
@@ -368,7 +370,7 @@ exports.delete_show = function(req, res) {
   }
   Show.findByIdAndDelete(req.body.id, function(err) {
     if (err) {
-      res.render('error', {message: 'An error occured deleting that show'});
+      res.render('error', {message: 'An error occured deleting that show.'});
     } else {
       if (req.session.isLoggedIn == true) {
         res.redirect('/my-shows');

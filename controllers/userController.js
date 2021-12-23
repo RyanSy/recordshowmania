@@ -19,7 +19,7 @@ exports.register_user = function(req, res) {
   User.findOne({ email: req.body.email }, function(err, user) {
     if (err) {
       console.log(err);
-      res.render('error', {message: 'An error occured registering that user'});
+      res.render('error', {message: 'An error occured registering your account.'});
     } else {
       if (user) {
         console.log(user);
@@ -28,7 +28,7 @@ exports.register_user = function(req, res) {
         bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
           if (err) {
             console.log(err);
-            res.render('error', {message: 'An error occured registering that user'});
+            res.render('error', {message: 'An error occured registering your account.'});
           } else {
             User.create({
               username: req.body.username,
@@ -37,7 +37,7 @@ exports.register_user = function(req, res) {
             }, function(err, newUser) {
               if (err) {
                 console.log(err);
-                res.render('error', {message: 'An error occured registering that user'});
+                res.render('error', {message: 'An error occured registering your account.'});
               } else {
                 req.session.isLoggedIn = true;
                 req.session.username = req.body.username;
@@ -63,7 +63,7 @@ exports.login_user = function(req, res, next) {
   User.findOne({ email: req.body.email }, function(err, user) {
     if (err) {
       console.log(err);
-      res.render('error', {message: 'An error occured logging in that user'});
+      res.render('error', {message: 'An error occured logging into your account.'});
     } else {
       if (!user) {
         res.send(`${req.body.email} is not registered.`);
@@ -71,7 +71,7 @@ exports.login_user = function(req, res, next) {
         bcrypt.compare(req.body.password, user.password, function(err, result) {
           if (err) {
             console.log(err);
-            res.render('error', {message: 'An error occured logging in that user'});
+            res.render('error', {message: 'An error occured logging into your account.'});
           }
           if (result == true) {
             console.log('user logged in: ', user);
@@ -81,7 +81,7 @@ exports.login_user = function(req, res, next) {
             req.session.isAdmin = user.isAdmin;
             res.redirect('/');
           } else {
-            res.render('error', {message: 'Password incorrect, please go back and try again'});
+            res.render('error', {message: 'Password incorrect, please go back and try again.'});
           }
         });
       }
@@ -108,7 +108,7 @@ exports.send_reset = function(req, res) {
   User.findOneAndUpdate({ email: req.body.email }, update, function(err, user) {
     if (err) {
       console.log(err);
-      res.render('error', {message: 'An error occured finding that user'});
+      res.render('error', {message: 'An error occured finding your account.'});
     } else {
       if (!user) {
         res.render('user-not-found');
@@ -143,7 +143,7 @@ exports.display_reset = function(req, res) {
   User.findOne({ reset_password_token: req.params.token }, function(err, user) {
     if (err) {
       console.log(err);
-      res.render('error', { message: 'Sorry, a server error occured (Code UC144). '});
+      res.render('error', { message: 'An error occured resetting your password.'});
     } else {
       if (!user) {
         res.render('user-not-found');
@@ -161,12 +161,12 @@ exports.display_reset = function(req, res) {
 // reset password
 exports.reset_password = function(req, res) {
   if (req.body.password != req.body.confirm_password) {
-    res.render('error', {message: 'Passwords do not match - please go back and try again'});
+    res.render('error', {message: 'Passwords do not match - please go back and try again.'});
   } else {
     bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
       if (err) {
         console.log(err);
-        res.render('error', {message: 'An error occured updating password'});
+        res.render('error', {message: 'An error occured updating your password.'});
       } else {
         let update = {
           password: hash
@@ -198,7 +198,7 @@ exports.logout_user = function(req, res) {
   req.session.destroy(function(err) {
     if (err) {
       console.log(err);
-      res.render('error', {message: 'An error occured logging out that user'});
+      res.render('error', {message: 'An error occured logging out of your account.'});
     } else {
       res.render('logout', {
         title: 'You have been logged out.'

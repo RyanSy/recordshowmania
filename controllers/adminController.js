@@ -7,7 +7,7 @@ exports.show_all_users = function(req, res) {
 
   User.find(function(err, users) {
     if (err) {
-      res.render('error', {message: 'An error occured displaying users'});
+      res.render('error', {message: 'An error occured displaying all users.'});
     }
     var usersLength = users.length;
     var usersArray = [];
