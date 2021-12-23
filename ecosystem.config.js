@@ -1,5 +1,6 @@
 module.exports = {
   apps : [{
-    script: './bin/www',
+    name   : "recordshowmania-production",
+    script : "./bin/www"
   }]
-};
+}
