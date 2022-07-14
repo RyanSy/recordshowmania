@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "pm2-runtime start ecosystem.config.js --env production",
-    "devstart": "DEBUG=recordshowmania:* nodemon ./bin/www"
+    "devstart": "DEBUG=recordshowmania:* nodemon ./bin/www",
+    "devstart-windows": "set DEBUG=recordshowmania:*&& nodemon ./bin/www"
   },
   "dependencies": {
     "@pm2/pm2-version-check": "^1.0.4",
