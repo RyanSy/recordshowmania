@@ -30,7 +30,6 @@ var showSchema = new Schema(
     food_drink: {type: Boolean},
     handicapped_access: {type: Boolean},
     more_information: {type: String, max: 100},
-    covid_protocols: {type: String, max: 100},
     contact_name: {type: String, max: 100},
     contact_phone: {type: String, max: 100},
     contact_email: {type: String, max: 100},
