@@ -6,10 +6,16 @@
       <span class="mt-2 mr-2"><strong>Search by: </strong></span>
       <ul class="nav nav-pills mb-3">
         <li>
-          <a id="searchByDateButton" href="#search-by-date" class="nav-link searchbox-link active" role="tab" data-toggle="pill">Date</a>
+          <a id="searchByDateButton" href="#search-by-date" class="nav-link searchbox-link active" role="tab"
+            data-toggle="pill">Date</a>
         </li>
         <li>
-          <a id="searchByStateButton" href="#search-by-state" class="nav-link searchbox-link" role="tab" data-toggle="pill">State</a>
+          <a id="searchByStateButton" href="#search-by-state" class="nav-link searchbox-link" role="tab"
+            data-toggle="pill">State &#40USA&#41</a>
+        </li>
+        <li>
+          <a id="searchByCountryButton" href="#search-by-country" class="nav-link searchbox-link" role="tab"
+            data-toggle="pill">Country</a>
         </li>
       </ul>
     </label>
@@ -75,6 +81,15 @@
           <option value="WV">West Virginia</option>
           <option value="WI">Wisconsin</option>
           <option value="WY">Wyoming</option>
+        </select>
+      </form>
+    </div>
+    {{!-- search by country --}}
+    <div class="tab-pane row" role="tabpanel" id="search-by-country">
+      <form id="searchByCountryForm" class="form-inline  " action="/search-results" method="post">
+        <select class="form-control col" id="country" name="country" aria-describedby="countryHelp" placeholder="Enter country">
+          <option value="">Choose a country:</option>
+          {{!-- add list of country options --}}
         </select>
       </form>
     </div>
