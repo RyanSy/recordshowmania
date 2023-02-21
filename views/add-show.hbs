@@ -4,31 +4,43 @@
   <h5>Add a show:</h5>
   <small>Fields with a * are required - all other fields are optional, but recommended.</small>
 
-{{#if isAdmin}}
+  {{#if isAdmin}}
   <form class="mt-4" action="index.html" method="post">
     <div class="form-group">
       <label for="inputSavedShow">Saved Shows</label>
       <select class="form-control col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="inputSavedShow" name="savedShow">
-          <option value="">Select Show</option>
+        <option value="">Select Show</option>
         {{#each savedShows}}
-          <option value="{{this._id}}">{{this.name}}</option>
+        <option value="{{this._id}}">{{this.name}}</option>
         {{/each}}
       </select>
     </div>
   </form>
-{{/if}}
+  {{/if}}
 
   <form class="mt-4" action="/add-show" enctype="multipart/form-data" method="post">
     <div class="form-group">
       <label for="inputDate">Date *</label>
-      <input type="date" class="form-control col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3" id="inputDate" name="date" min="{{dateNow}}" required="true">
+      <input type="date" class="form-control col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3" id="inputDate" name="date"
+        min="{{dateNow}}" required="true">
     </div>
 
     <div id="futureDates" class="form-group">
       <label for="inputFutureDates">Future Dates</label><br>
       <div id="futureDatesContainer"></div>
-      <input type="button" id="addFutureDatesButton" class="btn btn-success" onclick="addFutureDate()" value="Add Future Date"><br>
+      <input type="button" id="addFutureDatesButton" class="btn btn-success" onclick="addFutureDate()"
+        value="Add Future Date"><br>
       <small>For recurring shows, you may add additional dates here</small>
+    </div>
+
+    <div class="form-group">
+      <label for="inputState">Country *</label>
+      <select class="form-control col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="inputCountry" name="country"
+        required="true">
+        <option value=""></option>
+        <option value="Canada">Canada</option>
+        <option value="United States">United States</option>
+      </select>
     </div>
 
     <div class="form-group">
@@ -41,87 +53,103 @@
       <input type="text" class="form-control col-md-6 col-lg-6 col-xl-6" id="inputVenue" name="venue" required="true">
     </div>
 
-    <div class="form-group">
-      <label for="inputAddress">Address *</label>
-      <input type="text" class="form-control col-md-6 col-lg-6 col-xl-6" id="inputAddress" name="address" required="true">
+    {{!-- domestic address input form --}}
+    <div id="domesticAddressInputForm">
+      <div class="form-group">
+        <label for="inputAddress">Address *</label>
+        <input type="text" class="form-control col-md-6 col-lg-6 col-xl-6" id="inputAddress" name="address"
+          required="true">
+      </div>
+
+      <div class="form-group">
+        <label for="inputCity">City *</label>
+        <input type="text" class="form-control col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3" id="inputCity" name="city"
+          required="true">
+      </div>
+
+      <div class="form-group">
+        <label for="inputState">State *</label>
+        <select class="form-control col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="inputState" name="state"
+          required="true">
+          <option value=""></option>
+          <option value="AL">AL</option>
+          <option value="AK">AK</option>
+          <option value="AZ">AZ</option>
+          <option value="AR">AR</option>
+          <option value="CA">CA</option>
+          <option value="CO">CO</option>
+          <option value="CT">CT</option>
+          <option value="DE">DE</option>
+          <option value="DC">DC</option>
+          <option value="FL">FL</option>
+          <option value="GA">GA</option>
+          <option value="HI">HI</option>
+          <option value="ID">ID</option>
+          <option value="IL">IL</option>
+          <option value="IN">IN</option>
+          <option value="IA">IA</option>
+          <option value="KS">KS</option>
+          <option value="KY">KY</option>
+          <option value="LA">LA</option>
+          <option value="ME">ME</option>
+          <option value="MD">MD</option>
+          <option value="MA">MA</option>
+          <option value="MI">MI</option>
+          <option value="MN">MN</option>
+          <option value="MS">MS</option>
+          <option value="MO">MO</option>
+          <option value="MT">MT</option>
+          <option value="NE">NE</option>
+          <option value="NV">NV</option>
+          <option value="NH">NH</option>
+          <option value="NJ">NJ</option>
+          <option value="NM">NM</option>
+          <option value="NY">NY</option>
+          <option value="NC">NC</option>
+          <option value="ND">ND</option>
+          <option value="OH">OH</option>
+          <option value="OK">OK</option>
+          <option value="OR">OR</option>
+          <option value="PA">PA</option>
+          <option value="RI">RI</option>
+          <option value="SC">SC</option>
+          <option value="SD">SD</option>
+          <option value="TN">TN</option>
+          <option value="TX">TX</option>
+          <option value="UT">UT</option>
+          <option value="VT">VT</option>
+          <option value="VA">VA</option>
+          <option value="WA">WA</option>
+          <option value="WV">WV</option>
+          <option value="WI">WI</option>
+          <option value="WY">WY</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="inputZip">Zip *</label>
+        <input type="text" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="inputZip" name="zip"
+          required="true" max="10">
+      </div>
     </div>
 
-    <div class="form-group">
-      <label for="inputCity">City *</label>
-      <input type="text" class="form-control col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3" id="inputCity" name="city" required="true">
-    </div>
-
-    <div class="form-group">
-      <label for="inputState">State *</label>
-      <select class="form-control col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="inputState" name="state" required="true">
-        <option value=""></option>
-        <option value="AL">AL</option>
-      	<option value="AK">AK</option>
-      	<option value="AZ">AZ</option>
-      	<option value="AR">AR</option>
-      	<option value="CA">CA</option>
-      	<option value="CO">CO</option>
-      	<option value="CT">CT</option>
-      	<option value="DE">DE</option>
-      	<option value="DC">DC</option>
-      	<option value="FL">FL</option>
-      	<option value="GA">GA</option>
-      	<option value="HI">HI</option>
-      	<option value="ID">ID</option>
-      	<option value="IL">IL</option>
-      	<option value="IN">IN</option>
-      	<option value="IA">IA</option>
-      	<option value="KS">KS</option>
-      	<option value="KY">KY</option>
-      	<option value="LA">LA</option>
-      	<option value="ME">ME</option>
-      	<option value="MD">MD</option>
-      	<option value="MA">MA</option>
-      	<option value="MI">MI</option>
-      	<option value="MN">MN</option>
-      	<option value="MS">MS</option>
-      	<option value="MO">MO</option>
-      	<option value="MT">MT</option>
-      	<option value="NE">NE</option>
-      	<option value="NV">NV</option>
-      	<option value="NH">NH</option>
-      	<option value="NJ">NJ</option>
-      	<option value="NM">NM</option>
-      	<option value="NY">NY</option>
-      	<option value="NC">NC</option>
-      	<option value="ND">ND</option>
-      	<option value="OH">OH</option>
-      	<option value="OK">OK</option>
-      	<option value="OR">OR</option>
-      	<option value="PA">PA</option>
-      	<option value="RI">RI</option>
-      	<option value="SC">SC</option>
-      	<option value="SD">SD</option>
-      	<option value="TN">TN</option>
-      	<option value="TX">TX</option>
-      	<option value="UT">UT</option>
-      	<option value="VT">VT</option>
-      	<option value="VA">VA</option>
-      	<option value="WA">WA</option>
-      	<option value="WV">WV</option>
-      	<option value="WI">WI</option>
-      	<option value="WY">WY</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label for="inputZip">Zip *</label>
-      <input type="text" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="inputZip" name="zip" required="true" max="10">
+    {{!-- international address input form --}}
+    <div id="internationalAddressInputForm" class="form-group">
+      <label for="inputMoreInformation">Address *</label>
+      <textarea class="form-control col-8" id="inputInternationalAddress" name="more_information" rows="8"
+        cols="40"></textarea>
     </div>
 
     <div class="form-group">
       <label for="inputStart">Start Time *</label>
-      <input type="time" class="form-control col-4 col-sm-4 col-md-3 col-lg-2 col-xl-2" id="inputStart" name="start" required="true">
+      <input type="time" class="form-control col-4 col-sm-4 col-md-3 col-lg-2 col-xl-2" id="inputStart" name="start"
+        required="true">
     </div>
 
     <div class="form-group">
       <label for="inputEnd">End Time *</label>
-      <input type="time" class="form-control col-4 col-sm-4 col-md-3 col-lg-2 col-xl-2" id="inputEnd" name="end" required="true">
+      <input type="time" class="form-control col-4 col-sm-4 col-md-3 col-lg-2 col-xl-2" id="inputEnd" name="end"
+        required="true">
     </div>
 
     <div class="form-group">
@@ -130,7 +158,8 @@
         <div class="input-group-prepend">
           <div class="input-group-text">$</div>
         </div>
-        <input type="number" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="inputAdmission" name="regular_admission_fee">
+        <input type="number" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="inputAdmission"
+          name="regular_admission_fee">
       </div>
       <small>Leave blank for free admission</small>
     </div>
@@ -152,7 +181,8 @@
     <div id="earlyAdmissionFields">
       <div class="form-group">
         <label for="earlyAdmissionTime">Early Admission Time</label>
-        <input type="time" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="earlyAdmissionTime" name="early_admission_time">
+        <input type="time" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="earlyAdmissionTime"
+          name="early_admission_time">
       </div>
       <div class="form-group">
         <label for="inputAdmission">Early Admission Fee</label>
@@ -160,7 +190,8 @@
           <div class="input-group-prepend">
             <div class="input-group-text">$</div>
           </div>
-          <input type="number" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="earlyAdmissionFee" name="early_admission_fee">
+          <input type="number" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="earlyAdmissionFee"
+            name="early_admission_fee">
         </div>
         <small>Leave blank for free early admission</small>
       </div>
@@ -168,23 +199,27 @@
 
     <div class="form-group">
       <label for="numberOfDealers">Number of Dealers</label>
-      <input type="number" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="numberOfDealers" name="number_of_dealers">
+      <input type="number" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="numberOfDealers"
+        name="number_of_dealers">
     </div>
 
     <div id="featuredDealers" class="form-group">
       <label for="inputFeaturedDealers">Featured Dealers</label><br>
       <div id="featuredDealersContainer"></div>
-      <input type="button" id="addFeaturedDealerButton" class="btn btn-success" onclick="addFeaturedDealer()" value="Add Dealer">
+      <input type="button" id="addFeaturedDealerButton" class="btn btn-success" onclick="addFeaturedDealer()"
+        value="Add Dealer">
     </div>
 
     <div class="form-group">
       <label for="numberOfTables">Number of Tables</label>
-      <input type="number" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="numberOfTables" name="number_of_tables">
+      <input type="number" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="numberOfTables"
+        name="number_of_tables">
     </div>
 
     <div class="form-group">
       <label for="sizeOfTables">Size of Tables</label>
-      <input type="text" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="sizeOfTables" name="size_of_tables">
+      <input type="text" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="sizeOfTables"
+        name="size_of_tables">
     </div>
 
     <div class="form-group">
@@ -193,7 +228,8 @@
         <div class="input-group-prepend">
           <div class="input-group-text">$</div>
         </div>
-        <input type="number" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="tableRent" name="table_rent">
+        <input type="number" class="form-control col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2" id="tableRent"
+          name="table_rent">
       </div>
     </div>
 
@@ -269,22 +305,26 @@
 
     <div class="form-group">
       <label for="inputMoreInformation">More Information</label>
-      <textarea class="form-control col-8" id="inputMoreInformation" name="more_information" rows="8" cols="40"></textarea>
+      <textarea class="form-control col-8" id="inputMoreInformation" name="more_information" rows="8"
+        cols="40"></textarea>
     </div>
 
     <div class="form-group">
       <label for="inputContactName">Contact Name</label>
-      <input type="text" class="form-control col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3" id="inputContactName" name="contact_name">
+      <input type="text" class="form-control col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3" id="inputContactName"
+        name="contact_name">
     </div>
 
     <div class="form-group">
       <label for="inputContactPhone">Contact Phone</label>
-      <input type="tel" class="form-control col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3" id="inputContactPhone" name="contact_phone">
+      <input type="tel" class="form-control col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3" id="inputContactPhone"
+        name="contact_phone">
     </div>
 
     <div class="form-group">
       <label for="inputContactEmail">Contact Email</label>
-      <input type="email" class="form-control col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3" id="inputContactEmail" name="contact_email">
+      <input type="email" class="form-control col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3" id="inputContactEmail"
+        name="contact_email">
     </div>
 
     <div class="form-group">
@@ -295,7 +335,8 @@
 
     <div class="form-group">
       <label for="inputFacebook">Facebook Page</label>
-      <input type="url" class="form-control col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3" id="inputFacebook" name="facebook">
+      <input type="url" class="form-control col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3" id="inputFacebook"
+        name="facebook">
       <small>Please enter full URL, e.g. https://facebook.com/yourpage</small>
     </div>
 
@@ -314,9 +355,9 @@
 </div>
 
 <script type="text/javascript">
-  var savedShowsArr = {{{savedShowsStrings}}};
+  var savedShowsArr = {{{ savedShowsStrings }}};
   var savedShowsArrLength = savedShowsArr.length;
-  $('#inputSavedShow').change(function() {
+  $('#inputSavedShow').change(function () {
     var selectedShowId = $('#inputSavedShow').val();
     var obj = savedShowsArr.find(o => o._id == selectedShowId);
     console.log(obj);
@@ -340,8 +381,7 @@
     var numberOfDealers = obj.featured_dealers.length;
     if (numberOfDealers > 0) {
       for (var i = 0; i < numberOfDealers; i++) {
-        console.log('fuck you');
-          $('#featuredDealersContainer').append(`<div id="featuredDealer${i}" class="featured-dealer form-inline"><input type="text" class="form-control col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3 mb-3" name="featured_dealers" value="${obj.featured_dealers[i]}"><input id="featuredDealerDeleteButton${i}" type="button" class="btn btn-danger ml-2 mb-3" onclick="deleteFeaturedDealer()" value="Delete"></div>`);
+        $('#featuredDealersContainer').append(`<div id="featuredDealer${i}" class="featured-dealer form-inline"><input type="text" class="form-control col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3 mb-3" name="featured_dealers" value="${obj.featured_dealers[i]}"><input id="featuredDealerDeleteButton${i}" type="button" class="btn btn-danger ml-2 mb-3" onclick="deleteFeaturedDealer()" value="Delete"></div>`);
       }
     }
     $('#numberOfTables').val(obj.number_of_tables);
@@ -383,11 +423,32 @@
       $('#imageUpload').hide();
     }
     $('#savedImageContainer').html(`<label for="inputSavedImage">Saved Image</label><br><img class="img-fluid mb-4"src="${obj.image}" alt="${obj.name}"><input type="hidden" class="form-control col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3" id="inputSavedImage" name="image" value="${obj.image}"><br><button id="deleteImageButton" class="btn btn-danger mt-4 mb-4">Delete Image</button>`);
-    $('#deleteImageButton').click(function() {
+    $('#deleteImageButton').click(function () {
       $('#savedImageContainer').html('');
       $('#imageUpload').show();
     })
   });
-
 </script>
 <script type="text/javascript" src="/javascripts/add-show.js"></script>
+<script>
+  $(function() {
+    // hide address input fields on initial load
+    $('#domesticAddressInputForm').hide();
+    $('#internationalAddressInputForm').hide();
+
+    // show address field based on country selection
+    $('#inputCountry').on('change', function() {
+      if(this.value == 'United States') {
+        $('#domesticAddressInputForm').show();
+        $('#internationalAddressInputForm').hide();
+      } else {
+        $('#internationalAddressInputForm').show();
+        $('#domesticAddressInputForm').hide();
+      }
+      if(this.value == '') {
+        $('#domesticAddressInputForm').hide();
+        $('#internationalAddressInputForm').hide();
+      }
+    })
+  });
+</script>
