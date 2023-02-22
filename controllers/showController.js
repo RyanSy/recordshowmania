@@ -250,6 +250,7 @@ exports.search_shows = function(req, res) {
 /* get my shows page */
 exports.get_my_shows = function(req, res) {
   Show.find({ 'posted_by': req.session.username, 'date': {$gte: todaysDate} }, function(err, shows) {
+    console.log(shows);
     if (err) {
       console.log(err);
       res.render('error', {message: 'An error occured displaying your shows.'});
@@ -394,6 +395,9 @@ function createShowsArray(shows) {
       date_og: shows[i].date,
       name: shows[i].name,
       name_formatted: shows[i].name.toLowerCase().replace(/[\s-@#!$%^&*()_+|~=`{}\[\]:";'<>?,.\/]/g, '-'),
+      country: shows[i].country,
+      isInternational: shows[i].isInternational,
+      international_address: shows[i].international_address,
       venue: shows[i].venue,
       address: shows[i].address,
       city: shows[i].city,

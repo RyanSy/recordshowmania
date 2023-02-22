@@ -1,10 +1,10 @@
 {
   "name": "recordshowmania",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "private": true,
   "scripts": {
     "start": "pm2-runtime start ecosystem.config.js --env production",
-    "devstart": "DEBUG=recordshowmania:* nodemon ./bin/www",
+    "devstart": "DEBUG=recordshowmania:* nodemon ./bin/www -e js,json,hbs",
     "devstart-windows": "set DEBUG=recordshowmania:*&& nodemon ./bin/www"
   },
   "dependencies": {

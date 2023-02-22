@@ -44,6 +44,9 @@ body {
 #searchByStateButton {
   color: white !important;
 }
+#searchByCountryButton {
+  color: white !important;
+}
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
     background-color: #18bc9c !important;
 }
