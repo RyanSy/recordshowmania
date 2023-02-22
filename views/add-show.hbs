@@ -286,6 +286,8 @@
       </select>
     </div>
 
+    <input type="hidden" id="inputIsInternational" name="isInternational">
+
     <div class="form-group">
       <label for="inputName">Name of Show *</label>
       <input type="text" class="form-control col-md-6 col-lg-6 col-xl-6" id="inputName" name="name" required="true">
@@ -601,12 +603,14 @@
     $('#inputCountry').on('change', function () {
       if (this.value == 'United States') {
         $('#addressInputFields').html(domesticAddressInputHtml);
+        $('#inputIsInternational').val(0);
       } else {
         $('#addressInputFields').html(internationalAddressInputHtml);
+        $('#inputIsInternational').val(1);
       }
       if (this.value == '') {
         $('#addressInputFields').html('');
       }
-    })
+    });
   });
 </script>

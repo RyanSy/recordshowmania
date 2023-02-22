@@ -7,6 +7,7 @@ var showSchema = new Schema(
     date: {type: String, required: true},
     future_dates: [{type: String}],
     country: {type: String, required: true, max: 75},
+    isInternational: {type: Boolean},
     name: {type: String, required: true, max: 50},
     venue: {type: String, required: true, max: 50},
     address: {type: String, max: 100},

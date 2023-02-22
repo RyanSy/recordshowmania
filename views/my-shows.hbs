@@ -6,90 +6,104 @@
   <br>
 
   {{#if message_exists}}
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-      {{message}}
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{message}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
   {{/if}}
 
   {{#if noshow_message}}
-    <p class="mt-5">{{noshow_message}}</p>
+  <p class="mt-5">{{noshow_message}}</p>
   {{/if}}
 
   <table class="table">
     <tbody>
       {{#each shows}}
-        <tr>
-          <td>
-            {{#if this.image}}
-              <img src="{{this.image}}" alt="{{this.name}}" class="img-fluid mb-4"> <br>
-            {{else}}
-            {{/if}}
-            {{this.date}} <br>
-            {{this.name}} <br>
-            <a href="https://maps.google.com/?q={{this.address}}+{{this.city}}+{{this.state}}" target="_blank">
-                    {{this.venue}} <br>
-                    {{this.address}} <br>
-                    {{this.city}}, {{this.state}} {{this.zip}} <br>
-                  </a> Time: {{this.start}} to {{this.end}} <br>
-                  Regular Admission: {{#if this.regular_admission_fee}} ${{this.regular_admission_fee}} {{else}} Free {{/if}}<br>
-                  Early Admission? {{#if this.early_admission}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
-                  {{#if this.early_admission}}
-                    Early Admission Time: {{this.early_admission_time}} <br>
-                    Early Admission Fee: {{this.early_admission_fee}} <br>
-                  {{/if}}
-                  Number Of Dealers: {{this.number_of_dealers}} <br>
-                  Featured Dealers: <br>
-                  {{#each this.featured_dealers}}
-                    <li>{{this}}</li>
-                  {{/each}}
-                  Number Of Tables: {{this.number_of_tables}} <br>
-                  Size Of Tables: {{this.size_of_tables}} <br>
-                  Table Rent: {{this.table_rent}} <br>
-                  CD Dealers? {{#if this.cd_dealers}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
-                  45 Dealers? {{#if this.fortyfive_dealers}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
-                  Memorabilia Dealers? {{#if this.memorabilia_dealers}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
-                  Food/Drink? {{#if this.food_drink}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
-                  Handicapped Access? {{#if this.handicapped_access}}Yes <i class="fas fa-check"></i>{{else}}No <i class="fas fa-times"></i>{{/if}}<br>
-                  More Information: <span class="line-breaks">{{this.more_information}}</span><br>
-                  Contact Name: {{this.contact_name}} <br>
-                  Contact Phone: <a href="tel:{{this.contact_phone}}">{{this.contact_phone}}</a> <br>
-                  Contact Email: <a href="mailto:{{this.contact_email}}">{{this.contact_email}}</a> <br>
-                  Website: <a href="{{this.website}}" target="_blank">{{this.website}}</a> <br>
-                  Facebook Page: <a href="{{this.facebook}}" target="_blank">{{this.facebook}}</a> <br>
-                  <br> Posted by: {{this.posted_by}}
-            <div class="mt-2">
-              <a class="btn btn-warning" href="/edit-show/{{this.id}}">Edit</a><span> | </span><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete{{this.id}}">Delete</button>
-            </div>
-            <!-- Modal -->
-            <div class="modal fade" id="confirmDelete{{this.id}}" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel{{this.id}}" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="confirmDeleteModalLabel{{this.id}}">Confirm Delete</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    Are you sure you want to delete "{{this.name}}"?
-                  </div>
-                  <div class="modal-footer">
-                    <form action="/delete-show" method="post">
-                      <input type="hidden" name="id" value="{{this.id}}">
-                      <input type="hidden" name="image_public_id" value="{{this.image_public_id}}">
-                      <button class="btn btn-danger" type="submit">Delete</button>
-                    </form>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                  </div>
+      <tr>
+        <td>
+          {{#if this.image}}
+          <img src="{{this.image_public_id}}" alt="{{this.name}}" class="img-fluid mb-4"> <br>
+          {{else}}
+          {{/if}}
+          {{this.date}} <br>
+          {{this.name}} <br>
+          {{#if this.state}}
+              <a href="https://maps.google.com/?q={{this.address}}+{{this.city}}+{{this.state}}" target="_blank">
+                {{this.venue}} <br>
+                {{this.address}} <br>
+                {{this.city}}, {{this.state}} {{this.zip}} <br>
+              </a>
+          {{else}}              
+              <pre style="color: yellow;">{{this.international_address}}</pre>
+          {{/if}}              
+          Time: {{this.start}} to {{this.end}} <br>
+          Regular Admission: {{#if this.regular_admission_fee}} ${{this.regular_admission_fee}} {{else}} Free
+          {{/if}}<br>
+          Early Admission? {{#if this.early_admission}}Yes <i class="fas fa-check"></i>{{else}}No <i
+            class="fas fa-times"></i>{{/if}}<br>
+          {{#if this.early_admission}}
+          Early Admission Time: {{this.early_admission_time}} <br>
+          Early Admission Fee: {{this.early_admission_fee}} <br>
+          {{/if}}
+          Number Of Dealers: {{this.number_of_dealers}} <br>
+          Featured Dealers: <br>
+          {{#each this.featured_dealers}}
+          <li>{{this}}</li>
+          {{/each}}
+          Number Of Tables: {{this.number_of_tables}} <br>
+          Size Of Tables: {{this.size_of_tables}} <br>
+          Table Rent: {{this.table_rent}} <br>
+          CD Dealers? {{#if this.cd_dealers}}Yes <i class="fas fa-check"></i>{{else}}No <i
+            class="fas fa-times"></i>{{/if}}<br>
+          45 Dealers? {{#if this.fortyfive_dealers}}Yes <i class="fas fa-check"></i>{{else}}No <i
+            class="fas fa-times"></i>{{/if}}<br>
+          Memorabilia Dealers? {{#if this.memorabilia_dealers}}Yes <i class="fas fa-check"></i>{{else}}No <i
+            class="fas fa-times"></i>{{/if}}<br>
+          Food/Drink? {{#if this.food_drink}}Yes <i class="fas fa-check"></i>{{else}}No <i
+            class="fas fa-times"></i>{{/if}}<br>
+          Handicapped Access? {{#if this.handicapped_access}}Yes <i class="fas fa-check"></i>{{else}}No <i
+            class="fas fa-times"></i>{{/if}}<br>
+          More Information: <span class="line-breaks">{{this.more_information}}</span><br>
+          Contact Name: {{this.contact_name}} <br>
+          Contact Phone: <a href="tel:{{this.contact_phone}}">{{this.contact_phone}}</a> <br>
+          Contact Email: <a href="mailto:{{this.contact_email}}">{{this.contact_email}}</a> <br>
+          Website: <a href="{{this.website}}" target="_blank">{{this.website}}</a> <br>
+          Facebook Page: <a href="{{this.facebook}}" target="_blank">{{this.facebook}}</a> <br>
+          <br> Posted by: {{this.posted_by}}
+          <div class="mt-2">
+            <a class="btn btn-warning" href="/edit-show/{{this.id}}">Edit</a><span> | </span><button type="button"
+              class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete{{this.id}}">Delete</button>
+          </div>
+          <!-- Modal -->
+          <div class="modal fade" id="confirmDelete{{this.id}}" tabindex="-1" role="dialog"
+            aria-labelledby="confirmDeleteModalLabel{{this.id}}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="confirmDeleteModalLabel{{this.id}}">Confirm Delete</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  Are you sure you want to delete "{{this.name}}"?
+                </div>
+                <div class="modal-footer">
+                  <form action="/delete-show" method="post">
+                    <input type="hidden" name="id" value="{{this.id}}">
+                    <input type="hidden" name="image_public_id" value="{{this.image_public_id}}">
+                    <button class="btn btn-danger" type="submit">Delete</button>
+                  </form>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 </div>
               </div>
             </div>
-            {{!-- end mnodal --}}
-          </td>
-        </tr>
+          </div>
+          {{!-- end mnodal --}}
+        </td>
+      </tr>
       {{/each}}
     </tbody>
   </table>
