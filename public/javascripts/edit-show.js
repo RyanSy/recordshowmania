@@ -1,15 +1,36 @@
-var state = document.getElementById('selectedState').value;
+// set selected state in input field
+if (document.getElementById('selectedState')) {
+  var state = document.getElementById('selectedState').value;
 
-setSelectedState(state);
-
-function setSelectedState(value) {
-  var options = document.getElementsByTagName("option");
-  for (var i = 0; i < options.length; i++) {
-    if (options[i].value == value) {
-      options[i].selected = true;
+  function setSelectedState(value) {
+    var options = document.getElementsByTagName("option");
+    for (var i = 0; i < options.length; i++) {
+      if (options[i].value == value) {
+        options[i].selected = true;
+      }
     }
   }
+  
+  setSelectedState(state);  
 }
+
+// set selected country in input field
+if (document.getElementById('selectedCountry')) {
+  var country = document.getElementById('selectedCountry').value;
+
+  console.log(country);
+  function setSelectedCountry(value) {
+    var options = document.getElementsByTagName("option");
+    for (var i = 0; i < options.length; i++) {
+      if (options[i].value == value) {
+        options[i].selected = true;
+      }
+    }
+  } 
+
+  setSelectedCountry(country);
+}
+
 
 var earlyAdmissionYes = document.getElementById('earlyAdmissionYes');
 var earlyAdmissionNo = document.getElementById('earlyAdmissionNo');

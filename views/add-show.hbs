@@ -34,7 +34,7 @@
     </div>
 
     <div class="form-group">
-      <label for="inputState">Country *</label>
+      <label for="inputCountry">Country *</label>
       <select class="form-control col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="inputCountry" name="country"
         required="true">
         <option value=""></option>
@@ -599,7 +599,7 @@
     // show usa address inputs as default
     $('#addressInputFields').html(domesticAddressInputHtml);
 
-    // show large textarea if other country is selected
+    // show large textarea if other country is selected and set isInternational value
     $('#inputCountry').on('change', function () {
       if (this.value == 'United States') {
         $('#addressInputFields').html(domesticAddressInputHtml);

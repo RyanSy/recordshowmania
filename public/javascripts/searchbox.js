@@ -4,5 +4,8 @@ $(document).ready(function() {
   });
   $('#state').change(function() {
     $('#searchByStateForm').submit();
-  })
+  });
+  $('#country').change(function() {
+    $('#searchByCountryForm').submit();
+  });
 });

@@ -3,7 +3,7 @@
   <div class="tab-content">
     <label class="row">
       <!-- navigation -->
-      <span class="mt-2 mr-2"><strong>Search by: </strong></span>
+      {{!-- <span class="mt-2 mr-2"><strong>Search by: </strong></span> --}}
       <ul class="nav nav-pills mb-3">
         <li>
           <a id="searchByDateButton" href="#search-by-date" class="nav-link searchbox-link active" role="tab"
@@ -11,7 +11,7 @@
         </li>
         <li>
           <a id="searchByStateButton" href="#search-by-state" class="nav-link searchbox-link" role="tab"
-            data-toggle="pill">State &#40USA&#41</a>
+            data-toggle="pill">State</a>
         </li>
         <li>
           <a id="searchByCountryButton" href="#search-by-country" class="nav-link searchbox-link" role="tab"
@@ -21,15 +21,15 @@
     </label>
     <!-- search by date -->
     <div class="tab-pane row show active" role="tabpanel" id="search-by-date">
-      <form id="searchByDateForm" class="form-inline" action="/search-results" method="post">
-        <input type="date" class="form-control col" id="date" name="date" value="{{date}}">
+      <form id="searchByDateForm" class="form-inline" action="/search-shows-by-date" method="post">
+        <input type="date" class="form-control col" id="date" name="date" value="{{date}}" placeholder="Search by date:">
       </form>
     </div>
     <!-- search by state -->
     <div class="tab-pane row" role="tabpanel" id="search-by-state">
-      <form id="searchByStateForm" class="form-inline  " action="/search-results" method="post">
-        <select class="form-control col" id="state" name="state" aria-describedby="stateHelp" placeholder="Enter state">
-          <option value="">Choose a state:</option>
+      <form id="searchByStateForm" class="form-inline" action="/search-shows-by-state" method="post">
+        <select class="form-control col" id="state" name="state" aria-describedby="stateHelp" placeholder="Search by state:">
+          <option value="">Search by state:</option>
           <option value="AL">Alabama</option>
           <option value="AK">Alaska</option>
           <option value="AZ">Arizona</option>
@@ -86,11 +86,13 @@
     </div>
     {{!-- search by country --}}
     <div class="tab-pane row" role="tabpanel" id="search-by-country">
-      <form id="searchByCountryForm" class="form-inline  " action="/search-results" method="post">
+      <form id="searchByCountryForm" class="form-inline" action="/search-shows-by-country" method="post">
         <select class="form-control col" id="country" name="country" aria-describedby="countryHelp"
-          placeholder="Enter country">
-          <option value="">Choose a country:</option>
-          {{!-- add list of country options --}}
+          placeholder="Search by country:">
+          <option value="">Search by country:</option>
+          <option value="Canada">Canada</option>
+          <option value="United Kingdom">United Kingdom</option>
+          <option value="Ireland">Ireland</option>
           <option value="Afghanistan">Afghanistan</option>
           <option value="Åland Islands">Åland Islands</option>
           <option value="Albania">Albania</option>

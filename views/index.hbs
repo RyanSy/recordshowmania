@@ -31,9 +31,15 @@
           </form>
           <a href="#" onclick="document.getElementById('show-{{this.id}}').submit(); return false;">{{this.name}}</a>
           <br>
+          {{#if this.isInternational}}
+          {{this.country}}
+          {{else}}
           {{this.city}}, {{this.state}}
+          {{/if}}
         </div>
       </div>
     </div>
   {{/each}}
 </div>
+
+<script src="javascripts/searchbox.js"></script>

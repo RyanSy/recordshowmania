@@ -9,6 +9,10 @@
   </p>
   <p><strong>{{this.date}}</strong></p>
   <p><strong>{{this.name}}</strong></p>
+  {{#if this.isInternational}}
+  <span style="color: white;">{{this.venue}}</span>
+  <pre style="color: white;">{{this.international_address}}</pre>
+  {{else}}
   <p>
     <a href="https://maps.google.com/?q={{this.address}}+{{this.city}}+{{this.state}}" target="_blank">
       {{this.venue}} <br>
@@ -16,6 +20,7 @@
       {{this.city}}, {{this.state}} {{this.zip}} <br>
     </a>
   </p>
+  {{/if}}
   <p><strong>Time:</strong> <span class="white-text">{{this.start}} to {{this.end}}</span></p>
   <p><strong>Regular Admission:</strong> <span class="white-text">{{#if this.regular_admission_fee }}${{this.regular_admission_fee}}{{else}}Free{{/if}}</span></p>
   {{#if this.early_admission}}

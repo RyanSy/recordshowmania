@@ -37,7 +37,8 @@
               </a>
           {{else}}              
               <pre style="color: yellow;">{{this.international_address}}</pre>
-          {{/if}}              
+          {{/if}}   
+          Country: {{this.country}} <br>           
           Time: {{this.start}} to {{this.end}} <br>
           Regular Admission: {{#if this.regular_admission_fee}} ${{this.regular_admission_fee}} {{else}} Free
           {{/if}}<br>
