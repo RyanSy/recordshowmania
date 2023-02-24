@@ -22,11 +22,37 @@
   </p>
   {{/if}}
   <p><strong>Time:</strong> <span class="white-text">{{this.start}} to {{this.end}}</span></p>
-  <p><strong>Regular Admission:</strong> <span class="white-text">{{#if this.regular_admission_fee }}${{this.regular_admission_fee}}{{else}}Free{{/if}}</span></p>
+  <p>
+    <strong>Regular Admission Fee:</strong> 
+    <span class="white-text">
+      {{#if this.regular_admission_fee}}
+        {{#if this.isInternational}}
+          {{this.regular_admission_fee}} {{this.currency}}
+        {{else}}
+          ${{this.regular_admission_fee}}
+        {{/if}}
+      {{else}}
+        Free
+      {{/if}} 
+    </span>
+  </p>
   {{#if this.early_admission}}
     <p><strong>Early Admission:</strong> <span class="white-text">Yes <i class="fas fa-check"></i></span></p>
     <p><strong>Early Admission Time:</strong> <span class="white-text">{{this.early_admission_time}}</span></p>
-    <p><strong>Early Admission Fee:</strong> <span class="white-text">{{#if this.early_admission_fee}}${{this.early_admission_fee}}{{else}}Free{{/if}}</span></p>
+    <p>
+    <strong>Early Admission Fee:</strong> 
+    <span class="white-text">
+      {{#if this.early_admission_fee}}
+        {{#if this.isInternational}}
+          {{this.early_admission_fee}} {{this.currency}}
+        {{else}}
+          ${{this.early_admission_fee}}
+        {{/if}}
+      {{else}}
+        Free
+      {{/if}} 
+    </span>
+  </p>
   {{/if}}
   {{#if this.number_of_dealers}}
     <p><strong>Number Of Dealers:</strong> <span class="white-text">{{this.number_of_dealers}}</span></p>
@@ -38,7 +64,16 @@
     <p><strong>Size Of Tables:</strong> <span class="white-text">{{this.size_of_tables}}</span></p>
   {{/if}}
   {{#if this.table_rent}}
-    <p><strong>Table Rent:</strong> <span class="white-text">${{this.table_rent}}</span></p>
+    <p>
+      <strong>Table Rent:</strong>
+       <span class="white-text">
+        {{#if this.isInternational}}
+          {{this.table_rent}} {{this.currency}}
+        {{else}}
+          ${{this.table_rent}}
+        {{/if}}
+      </span>
+    </p>
   {{/if}}
   {{#if this.featured_dealers}}
     <p><strong>Featured Dealers:</strong></p>
@@ -62,9 +97,6 @@
   {{/if}}
   {{#if this.handicapped_access}}
     <p><strong>Handicapped Access:</strong> <span class="white-text">Yes <i class="fas fa-check"></i></span></p>
-  {{/if}}
-  {{#if this.covid_protocols}}
-    <p><strong>Covid Protocols:</strong> <span class="line-breaks white-text">{{this.covid_protocols}}</span></p>
   {{/if}}
   {{#if this.more_information}}
     <p><strong>More Information:</strong> <span class="line-breaks white-text">{{this.more_information}}</span></p>

@@ -18,7 +18,6 @@ if (document.getElementById('selectedState')) {
 if (document.getElementById('selectedCountry')) {
   var country = document.getElementById('selectedCountry').value;
 
-  console.log(country);
   function setSelectedCountry(value) {
     var options = document.getElementsByTagName("option");
     for (var i = 0; i < options.length; i++) {
@@ -31,6 +30,21 @@ if (document.getElementById('selectedCountry')) {
   setSelectedCountry(country);
 }
 
+// set selected currency in input field
+if (document.getElementById('selectedCurrency')) {
+  var country = document.getElementById('selectedCurrency').value;
+
+  function setSelectedCurrency(value) {
+    var options = document.getElementsByTagName("option");
+    for (var i = 0; i < options.length; i++) {
+      if (options[i].value == value) {
+        options[i].selected = true;
+      }
+    }
+  } 
+
+  setSelectedCurrency(currency);
+}
 
 var earlyAdmissionYes = document.getElementById('earlyAdmissionYes');
 var earlyAdmissionNo = document.getElementById('earlyAdmissionNo');

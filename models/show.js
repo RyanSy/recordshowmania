@@ -19,6 +19,7 @@ var showSchema = new Schema(
     start: {type: String, required: true, max: 50},
     end: {type: String, required: true, max: 50},
     date_start: {type: Date, required: true},
+    currency: {type: String, max: 75},
     regular_admission_fee: {type: Number},
     early_admission: {type: Boolean},
     early_admission_fee: {type: Number},
