@@ -190,9 +190,9 @@ exports.post_add_show = function(req, res) {
   }); // end waterfall
 }; // end post_add_show
 
-/* search shows */
-exports.search_shows = function(req, res) {
-  Show.find({ $or: [{ 'date': req.body.date }, { 'date': {$gte: todaysDate}, 'state': req.body.state }] }, function(err, shows) {
+/* search shows by date*/
+exports.search_shows_by_date = function(req, res) {
+  Show.find({ 'date': req.body.date }, function(err, shows) {
     if (err) {
       console.log(err);
       res.send('An error occured searching shows.');
@@ -217,14 +217,107 @@ exports.search_shows = function(req, res) {
     } else {
         var showsArray = createShowsArray(shows);
         var showsArraySorted = sortByDateStart(showsArray);
+        var searchTerm = moment(req.body.date).format('dddd, MMMM Do, YYYY');
 
-        if (req.body.date) {
-          var searchTerm = moment(req.body.date).format('dddd, MMMM Do, YYYY');
-        }
+        if (req.session.isLoggedIn == true) {
+          res.render('search-results', {
+            title: `Record Show Mania - search results for ${searchTerm}`,
+            meta_content: `Search results for ${searchTerm}`,
+            username: req.session.username,
+            isLoggedIn: true,
+            shows: showsArraySorted,
+            date: req.body.date
+          });
+        } else {
+            res.render('search-results', {
+              title: `Record Show Mania - search results for ${searchTerm}`,
+              meta_content: `Search results for ${searchTerm}`,
+              shows: showsArraySorted,
+              date: req.body.date
+          });
+      }
+    }
+  });
+};
 
-        if (req.body.state) {
-          var searchTerm = req.body.state;
-        }
+/** search shows by state */
+exports.search_shows_by_state = function(req, res) {
+  Show.find({ 'date': {$gte: todaysDate}, 'state': req.body.state }, function(err, shows) {
+    if (err) {
+      console.log(err);
+      res.send('An error occured searching shows.');
+    }
+    if (shows.length == 0) {
+      if (req.session.isLoggedIn == true) {
+        res.render('no-results', {
+          title: 'Record Show Mania - No Results',
+          meta_content: 'Your search yielded no results.',
+          username: req.session.username,
+          isLoggedIn: true,
+          date: req.body.date
+        });
+      }
+      else {
+        res.render('no-results', {
+          title: 'Record Show Mania - No Results',
+          meta_content: 'Your search yielded no results.',
+          date: req.body.date
+        });
+      }
+    } else {
+        var showsArray = createShowsArray(shows);
+        var showsArraySorted = sortByDateStart(showsArray);
+        var searchTerm = req.body.state;
+
+        if (req.session.isLoggedIn == true) {
+          res.render('search-results', {
+            title: `Record Show Mania - search results for ${searchTerm}`,
+            meta_content: `Search results for ${searchTerm}`,
+            username: req.session.username,
+            isLoggedIn: true,
+            shows: showsArraySorted,
+            date: req.body.date
+          });
+        } else {
+            res.render('search-results', {
+              title: `Record Show Mania - search results for ${searchTerm}`,
+              meta_content: `Search results for ${searchTerm}`,
+              shows: showsArraySorted,
+              date: req.body.date
+          });
+      }
+    }
+  });
+};
+
+/** search shows by country */
+exports.search_shows_by_country = function(req, res) {
+  Show.find({ 'date': {$gte: todaysDate}, 'country': req.body.country }, function(err, shows) {
+    if (err) {
+      console.log(err);
+      res.send('An error occured searching shows.');
+    }
+    if (shows.length == 0) {
+      if (req.session.isLoggedIn == true) {
+        res.render('no-results', {
+          title: 'Record Show Mania - No Results',
+          meta_content: 'Your search yielded no results.',
+          username: req.session.username,
+          isLoggedIn: true,
+          date: req.body.date
+        });
+      }
+      else {
+        res.render('no-results', {
+          title: 'Record Show Mania - No Results',
+          meta_content: 'Your search yielded no results.',
+          date: req.body.date
+        });
+      }
+    } else {
+        var showsArray = createShowsArray(shows);
+        var showsArraySorted = sortByDateStart(showsArray);
+        var searchTerm = req.body.country;
 
         if (req.session.isLoggedIn == true) {
           res.render('search-results', {
@@ -250,7 +343,6 @@ exports.search_shows = function(req, res) {
 /* get my shows page */
 exports.get_my_shows = function(req, res) {
   Show.find({ 'posted_by': req.session.username, 'date': {$gte: todaysDate} }, function(err, shows) {
-    console.log(shows);
     if (err) {
       console.log(err);
       res.render('error', {message: 'An error occured displaying your shows.'});
@@ -306,6 +398,7 @@ exports.get_edit_show = function(req, res) {
 /* edit show */
 exports.post_edit_show = function(req, res) {
   var update = req.body;
+  update.isInternational ? update.isInternational = true : update.isInternational = false;
   update.posted_by = req.session.username;
   async.waterfall([
     // upload image and get url
@@ -406,6 +499,7 @@ function createShowsArray(shows) {
       start: moment(shows[i].start, 'HH:mm').format('LT'),
       end: moment(shows[i].end, 'HH:mm').format('LT'),
       date_start: new Date(shows[i].date + ' ' + shows[i].start),
+      currency: shows[i].currency,
       regular_admission_fee: shows[i].regular_admission_fee,
       early_admission: shows[i].early_admission,
       early_admission_time: moment(shows[i].early_admission_time, 'HH:mm').format('LT'),
@@ -420,7 +514,6 @@ function createShowsArray(shows) {
       memorabilia_dealers: shows[i].memorabilia_dealers,
       food_drink: shows[i].food_drink,
       handicapped_access: shows[i].handicapped_access,
-      covid_protocols: shows[i].covid_protocols,
       more_information: shows[i].more_information,
       contact_name: shows[i].contact_name,
       contact_phone: shows[i].contact_phone,
@@ -449,6 +542,8 @@ function createShowObject(show) {
     date_og: show.date,
     name: show.name,
     name_formatted: show.name.toLowerCase().replace(/[\s-@#!$%^&*()_+|~=`{}\[\]:";'<>?,.\/]/g, '-'),
+    isInternational: show.isInternational,
+    international_address: show.international_address,
     venue: show.venue,
     address: show.address,
     city: show.city,
@@ -456,6 +551,7 @@ function createShowObject(show) {
     zip: show.zip,
     start: moment(show.start, 'HH').format('LT'),
     end: moment(show.end, 'HH').format('LT'),
+    currency: show.currency,
     regular_admission_fee: show.regular_admission_fee,
     early_admission: show.early_admission,
     early_admission_time: moment(show.early_admission_time, 'HH').format('LT'),
@@ -470,7 +566,6 @@ function createShowObject(show) {
     memorabilia_dealers: show.memorabilia_dealers,
     food_drink: show.food_drink,
     handicapped_access: show.handicapped_access,
-    covid_protocols: show.covid_protocols,
     more_information: show.more_information,
     contact_name: show.contact_name,
     contact_phone: show.contact_phone,

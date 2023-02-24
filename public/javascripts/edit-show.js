@@ -1,14 +1,49 @@
-var state = document.getElementById('selectedState').value;
+// set selected state in input field
+if (document.getElementById('selectedState')) {
+  var state = document.getElementById('selectedState').value;
 
-setSelectedState(state);
-
-function setSelectedState(value) {
-  var options = document.getElementsByTagName("option");
-  for (var i = 0; i < options.length; i++) {
-    if (options[i].value == value) {
-      options[i].selected = true;
+  function setSelectedState(value) {
+    var options = document.getElementsByTagName("option");
+    for (var i = 0; i < options.length; i++) {
+      if (options[i].value == value) {
+        options[i].selected = true;
+      }
     }
   }
+  
+  setSelectedState(state);  
+}
+
+// set selected country in input field
+if (document.getElementById('selectedCountry')) {
+  var country = document.getElementById('selectedCountry').value;
+
+  function setSelectedCountry(value) {
+    var options = document.getElementsByTagName("option");
+    for (var i = 0; i < options.length; i++) {
+      if (options[i].value == value) {
+        options[i].selected = true;
+      }
+    }
+  } 
+
+  setSelectedCountry(country);
+}
+
+// set selected currency in input field
+if (document.getElementById('selectedCurrency')) {
+  var country = document.getElementById('selectedCurrency').value;
+
+  function setSelectedCurrency(value) {
+    var options = document.getElementsByTagName("option");
+    for (var i = 0; i < options.length; i++) {
+      if (options[i].value == value) {
+        options[i].selected = true;
+      }
+    }
+  } 
+
+  setSelectedCurrency(currency);
 }
 
 var earlyAdmissionYes = document.getElementById('earlyAdmissionYes');

@@ -56,8 +56,14 @@ router.get('/add-show', show_controller.get_add_show);
 // add show
 router.post('/add-show', upload, show_controller.post_add_show);
 
-// search shows
-router.post('/search-results', show_controller.search_shows);
+// search shows by date
+router.post('/search-shows-by-date', show_controller.search_shows_by_date);
+
+// search shows by state
+router.post('/search-shows-by-state', show_controller.search_shows_by_state);
+
+// search shows by country
+router.post('/search-shows-by-country', show_controller.search_shows_by_country);
 
 // get my shows
 router.get('/my-shows', show_controller.get_my_shows);
