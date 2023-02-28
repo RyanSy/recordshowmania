@@ -683,7 +683,10 @@
     // show usa address inputs as default
     $('#addressInputFields').html(domesticAddressInputHtml);
 
-    // show large textarea if other country is selected and set isInternational value
+    // set default isInternational value (usa - false)
+    $('#inputIsInternational').val(0);
+
+    // show large textarea if other country is selected
     $('#currencyInput').hide();
 
     $('#inputCountry').on('change', function () {
