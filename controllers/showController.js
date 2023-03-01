@@ -159,29 +159,39 @@ exports.post_add_show = function(req, res) {
           callback(err, null);
           res.render('error', {message: 'An error occured adding this show.'});
         } else {
-          // add future shows, if any
-          if (req.body.future_dates) {
-            var futureDates = req.body.future_dates;
-
-            for (var i = 0; i < futureDates.length; i++) {
-              show.date = futureDates[i];
-              show.date_start = new Date(futureDates[i] + ' ' + show.start);
-              Show.create(show, function(err) {
-                if (err) {
-                  console.log(err);
-                  res.render('error', {message: 'An error occured adding future shows.'});
-                }
-              });
-            }
-          }
-
           callback(null, newShow);
         }
       });
+    },
+    // add future shows, if any
+    function addNewShow(newShow, callback) {
+      let futureShow = (({country, isInternational, name, venue, address, address2, international_address, city, state, zip, start, end, currency, regular_admission_fee, early_admission, early_admission_fee, early_admission_time, number_of_dealers, number_of_tables, size_of_tables, table_rent, featured_dealers, cd_dealers, fortyfive_dealers, memorabilia_dealers, food_drink, handicapped_access, more_information, contact_name, contact_phone, contact_email, website, facebook, image, image_public_id, message, posted_by, date_posted}) => ({country, isInternational, name, venue, address, address2, international_address, city, state, zip, start, end, currency, regular_admission_fee, early_admission, early_admission_fee, early_admission_time, number_of_dealers, number_of_tables, size_of_tables, table_rent, featured_dealers, cd_dealers, fortyfive_dealers, memorabilia_dealers, food_drink, handicapped_access, more_information, contact_name, contact_phone, contact_email, website, facebook, image, image_public_id, message, posted_by, date_posted}))(newShow);
+      if (newShow.future_dates) {
+        var futureDates = newShow.future_dates;
+        // create new show for each future date
+        for (var i = 0; i < futureDates.length; i++) {
+          futureShow.date = futureDates[i];
+          futureShow.date_start = new Date(futureDates[i] + ' ' + newShow.start);
+          Show.create(futureShow, function(err, newFutureShow) {
+            if (err) {
+              console.log(err);
+              res.render('error', {message: 'An error occured adding future shows.'});
+            } else {
+              return;
+            }
+          });
+        }
+        callback(null);
+      } else {
+        callback(null);
+      }
     }
   ], // end waterfall array
   // waterfall callback
-  function(err, newShow) {
+  function(err) {
+    if (err) {
+      console.log('waterfall callback error:', err);
+    }
     if (req.session.isLoggedIn == true) {
           res.redirect('/my-shows');
         } else {

@@ -1,4 +1,5 @@
 function addFutureDate() {
+    document.getElementById('futureDatesLabel').innerHTML = 'Future Dates *';
     var div = document.createElement("div");
     var date = document.createElement("input");
     var deleteButton = document.createElement("input");
@@ -7,6 +8,7 @@ function addFutureDate() {
     div.setAttribute("class", "future-date form-inline");
     date.setAttribute("type", "date");
     date.setAttribute("class", "form-control col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3 mb-3");
+    date.setAttribute("required", "true");
     deleteButton.setAttribute("type", "button");
     deleteButton.setAttribute("class", "btn btn-danger ml-2 mb-3");
     deleteButton.setAttribute("onclick", "deleteFutureDate()");
