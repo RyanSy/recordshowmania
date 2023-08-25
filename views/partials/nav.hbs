@@ -1,7 +1,26 @@
+<header id="link-header" class="d-flex justify-content-center .justify-content-sm-evenly py-3">
+  <a class="nav-link" href="https://www.recordriots.com">
+    <img class="img-fluid" height="70" width="70" src="https://recordshowmania.com/images/record-riots-logo.png" alt="Record Riots">
+  </a>
+
+  <a class="nav-link" href="https://www.groovycoasters.com">
+    <img class="img-fluid" height="70" width="116" src="https://recordshowmania.com/images/groovycoasters-logo.png" alt="Groovy Coasters">
+  </a>
+
+  <form action="https://www.paypal.com/donate" method="post" target="_top">
+    <input type="hidden" name="hosted_button_id" value="4J8RJ9KXFJDJ8" />
+    <button class="btn mr-2" type="submit">
+      <img class="img-fluid" height="70" width="145" src="https://recordshowmania.com/images/donate-paypal.png" alt="Donate">
+    </button>
+  </form>
+</header>
+
 <nav class="navbar navbar-expand-lg">
   <div class="container">
     <a id="logo" class="navbar-brand" href="/">Record Show Mania</a>
-    <button id="navbarbutton" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <button id="navbarbutton" class="navbar-toggler" type="button" data-toggle="collapse"
+      data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+      aria-label="Toggle navigation">
       <i class="fas fa-bars"></i>
     </button>
     <div class="mt-3 collapse navbar-collapse text-right" id="navbarResponsive">
@@ -19,32 +38,12 @@
         <li class="nav-item">
           <a class="nav-link" href="/logout">Log Out</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://www.recordriots.com"><img height="60" width="60" src="https://recordshowmania.com/images/record-riots-logo.png" alt="Record Riots Logo"></a>
-        </li>
-        <li class="nav-item">
-          <form action="https://www.paypal.com/donate" method="post" target="_top">
-            <input type="hidden" name="hosted_button_id" value="4J8RJ9KXFJDJ8" />
-            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
-            {{!-- <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" /> --}}
-          </form>
-        </li>
         {{else}}
         <li class="nav-item">
           <a class="nav-link" href="/login">Login</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" href="/register">Register</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://www.recordriots.com"><img height="60" width="60" src="https://recordshowmania.com/images/record-riots-logo.png" alt="Record Riots Logo"></a>
-        </li>
-        <li class="nav-item">
-          <form action="https://www.paypal.com/donate" method="post" target="_top">
-            <input type="hidden" name="hosted_button_id" value="4J8RJ9KXFJDJ8" />
-            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
-            {{!-- <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" /> --}}
-          </form>
+          <a class="nav-link" href="/register">Register</a>
         </li>
         {{/if}}
       </ul>

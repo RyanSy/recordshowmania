@@ -9,7 +9,7 @@ body {
 .content-wrap {
   padding-bottom: 2.5rem;
 }
-.navbar {
+.navbar, #link-header {
   background-color: black;
 }
 #logo {
