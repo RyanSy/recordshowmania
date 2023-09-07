@@ -72,3 +72,6 @@ body {
 .white-text {
   color: white !important;
 }
+.modal-content {
+  background-color: slategrey;
+}

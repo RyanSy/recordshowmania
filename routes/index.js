@@ -3,6 +3,7 @@ var router = express.Router();
 var show_controller = require('../controllers/showController');
 var user_controller = require('../controllers/userController');
 var admin_controller = require('../controllers/adminController');
+var blog_controller = require('../controllers/blogController');
 var path = require('path');
 var multer = require('multer');
 var memoryStorage = multer.memoryStorage({
@@ -85,5 +86,26 @@ router.get('/terms-conditions', user_controller.get_terms_and_conditions);
 
 // show all users
 router.get('/all-users', admin_controller.show_all_users);
+
+// show all blog posts
+router.get('/blog', blog_controller.list_blog_posts);
+
+// get blog post details
+router.get('/blog-post/:id', blog_controller.get_blog_post_details);
+
+// get create blog post page
+router.get('/create-blog-post', blog_controller.get_create_blog_post);
+
+// create blog post
+router.post('/create-blog-post', upload, blog_controller.post_create_blog_post);
+
+// get edit blog post page
+router.get('/edit-blog-post/:id', blog_controller.get_edit_blog_post);
+
+// edit blog post
+router.post('/edit-blog-post', upload, blog_controller.post_edit_blog_post);
+
+// delete blog post
+router.post('/delete-blog-post', blog_controller.delete_blog_post);
 
 module.exports = router;

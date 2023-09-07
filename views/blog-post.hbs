@@ -1,0 +1,80 @@
+{{> nav}}
+
+<!-- Divider-->
+<hr class="my-4" />
+
+<!-- Page Header-->
+{{#blogPost}}
+<header class="masthead mt-5">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="post-heading">
+                    <h1>{{this.title}}</h1>
+                    <span class="meta">
+                        Posted by
+                        <a href="#!">{{this.author}}</a>
+                        on {{this.date_posted}}
+                    </span class="meta">
+                    {{#if this.date_updated}}
+                    (Updated on {{this.date_updated}})
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Post Content-->
+<article class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7" style="white-space: pre-wrap">
+                {{this.content}}
+            </div>
+        </div>
+    </div>
+</article>
+{{/blogPost}}
+
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        {{#if isAdmin}}
+        <div class="form-inline mt-2">
+            {{#blogPost}}
+            <form action="/edit-blog-post/{{this._id}}">
+                <button class="btn btn-warning mt-3 mr-3" type="submit">Edit</button>
+            </form>
+            <button class="btn btn-danger mt-3" data-toggle="modal" data-target="#confirmDelete{{this._id}}">Delete</button>
+            {{/blogPost}}
+        </div>
+        {{/if}}
+
+        {{#blogPost}}
+        <!-- Modal -->
+        <div class="modal fade" id="confirmDelete{{this._id}}" tabindex="-1" role="dialog"
+            aria-labelledby="confirmDeleteModalLabel{{this._id}}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmDeleteModalLabel{{this.id}}">Confirm Delete</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete this blog post?
+                    </div>
+                    <div class="modal-footer">
+                        <form action="/delete-blog-post" method="post">
+                            <input type="hidden" name="id" value="{{this._id}}">
+                            <button class="btn btn-danger" type="submit">Delete</button>
+                        </form>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{!-- end mnodal --}}
+        {{/blogPost}}
+    </div>
+</div>
