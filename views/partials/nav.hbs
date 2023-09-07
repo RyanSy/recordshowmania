@@ -1,16 +1,19 @@
 <header id="link-header" class="d-flex justify-content-center .justify-content-sm-evenly py-3">
   <a class="nav-link" href="https://www.recordriots.com">
-    <img class="img-fluid" height="70" width="70" src="https://recordshowmania.com/images/record-riots-logo.png" alt="Record Riots">
+    <img class="img-fluid" height="70" width="70" src="https://recordshowmania.com/images/record-riots-logo.png"
+      alt="Record Riots">
   </a>
 
   <a class="nav-link" href="https://www.groovycoasters.com">
-    <img class="img-fluid" height="70" width="116" src="https://recordshowmania.com/images/groovycoasters-logo.png" alt="Groovy Coasters">
+    <img class="img-fluid" height="70" width="116" src="https://recordshowmania.com/images/groovycoasters-logo.png"
+      alt="Groovy Coasters">
   </a>
 
   <form action="https://www.paypal.com/donate" method="post" target="_top">
     <input type="hidden" name="hosted_button_id" value="4J8RJ9KXFJDJ8" />
     <button class="btn mr-2" type="submit">
-      <img class="img-fluid" height="70" width="145" src="https://recordshowmania.com/images/donate-paypal.png" alt="Donate">
+      <img class="img-fluid" height="70" width="145" src="https://recordshowmania.com/images/donate-paypal.png"
+        alt="Donate">
     </button>
   </form>
 </header>
@@ -25,6 +28,12 @@
     </button>
     <div class="mt-3 collapse navbar-collapse text-right" id="navbarResponsive">
       <ul class="navbar-nav nav-items ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/blog">Blog</a>
+        </li>
+        <li class="nav-item">
+          <span class="nav-link">|</span>
+        </li>
         {{#if isLoggedIn}}
         <li class="nav-item">
           <span class="nav-link">Welcome, {{username}}</span>
@@ -35,6 +44,11 @@
         <li class="nav-item">
           <a class="nav-link" href="/my-shows">My Shows</a>
         </li>
+        {{#if isAdmin}}
+        <li class="nav-item">
+          <a class="nav-link" href="/create-blog-post">Create Blog Post</a>
+        </li>
+        {{/if}}
         <li class="nav-item">
           <a class="nav-link" href="/logout">Log Out</a>
         </li>

@@ -375,7 +375,8 @@ exports.get_my_shows = function(req, res) {
           username: req.session.username,
           isLoggedIn: true,
           shows: showsArraySorted,
-          noshow_message: noshow_message
+          noshow_message: noshow_message,
+          isAdmin: req.session.isAdmin
         });
       } else {
         res.redirect('/session-expired');
