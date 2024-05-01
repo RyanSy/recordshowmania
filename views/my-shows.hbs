@@ -70,6 +70,25 @@
                       {{else}}
                         ${{this.table_rent}}
                       {{/if}}<br>
+      {{/each}}
+          {{#if isAdmin}}
+          Dealer RSVP List: <br>
+          <ul>
+            {{#each shows}}
+              {{#each this.dealer_rsvp_list}}
+              <li>{{this}}</li>
+              {{/each}}
+            {{/each}}
+          </ul>
+          <br>
+          {{#each shows}}
+          Number Of Tables For Rent: {{this.number_of_tables_for_rent}} <br>
+          Max Tables Per Dealer: {{this.max_tables_per_dealer}} <br>
+          RSVP Open? {{#if this.rsvp}}Yes <i class="fas fa-check"></i>{{else}}No <i
+            class="fas fa-times"></i>{{/if}}<br>
+          {{/each}}
+          {{/if}}
+      {{#each shows}}
           CD Dealers? {{#if this.cd_dealers}}Yes <i class="fas fa-check"></i>{{else}}No <i
             class="fas fa-times"></i>{{/if}}<br>
           45 Dealers? {{#if this.fortyfive_dealers}}Yes <i class="fas fa-check"></i>{{else}}No <i

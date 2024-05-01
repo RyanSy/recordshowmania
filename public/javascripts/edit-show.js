@@ -90,7 +90,5 @@ function addFeaturedDealer() {
 function deleteFeaturedDealer() {
   var deleteButtonID = document.getElementById(event.target.id);
   var featuredDealerDiv = document.getElementById(deleteButtonID.closest("div").id);
-  console.log(deleteButtonID);
-  console.log(featuredDealerDiv);
   featuredDealerDiv.parentNode.removeChild(featuredDealerDiv);
 }

@@ -357,6 +357,7 @@ exports.get_my_shows = function(req, res) {
       console.log(err);
       res.render('error', {message: 'An error occured displaying your shows.'});
     } else {
+      console.log(req.session.isAdmin)
       var showsArray = createShowsArray(shows);
       var showsArraySorted = sortByDateStart(showsArray);
 
@@ -387,6 +388,7 @@ exports.get_my_shows = function(req, res) {
 
 /* get edit show page */
 exports.get_edit_show = function(req, res) {
+  console.log(req.params);
   Show.findOne({ '_id': req.params.id }, function(err, show) {
     if (err) {
       console.log(err);
@@ -396,6 +398,7 @@ exports.get_edit_show = function(req, res) {
         res.render('edit-show', {
           username: req.session.username,
           isLoggedIn: true,
+          isAdmin: req.session.isAdmin,
           dateNow: moment().format('YYYY-MM-DD'),
           show: show
         });
@@ -533,7 +536,11 @@ function createShowsArray(shows) {
       facebook: shows[i].facebook,
       image: shows[i].image,
       image_public_id: shows[i].image_public_id,
-      posted_by: shows[i].posted_by
+      posted_by: shows[i].posted_by,
+      dealer_rsvp_list: shows[i].dealer_rsvp_list,
+      rsvp: shows[i].rsvp,
+      number_of_tables_for_rent: shows[i].number_of_tables_for_rent,
+      max_tables_per_dealer: shows[i].max_tables_per_dealer
     };
     showsArray.push(showObject);
   };
