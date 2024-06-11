@@ -92,6 +92,9 @@ exports.get_add_show = function(req, res) {
           }
           return 0;
         });
+        // sort by date - descending order so info is pulled from latest entries
+        savedShows.sort((a, b) => b.date_start - a.date_start);
+
         var savedShowsNoDupes = _.uniqBy(savedShows, 'name');
         res.render('add-show', {
           username: req.session.username,
