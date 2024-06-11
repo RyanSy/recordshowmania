@@ -18,13 +18,13 @@
     <p class="mt-5">{{noshow_message}}</p>
     {{/if}}
 
-    <table class="table">
+    <table class="table text-break">
         <tbody>
             {{#each shows}}
             <tr>
                 <td>
                     {{#if this.image}}
-                    <img src="{{this.image_public_id}}" alt="{{this.name}}" class="img-fluid mb-4"> <br>
+                    <img src="{{this.image}}" alt="{{this.name}}" class="img-fluid mb-4"> <br>
                     {{else}}
                     {{/if}}
                     {{this.date}} <br>
