@@ -17,7 +17,6 @@ exports.show_all_users = function(req, res) {
       user.email = users[i].email;
       usersArray.push(user);
     }
-    console.log(usersArray);
     res.render('all-users', {
       title: 'All Users',
       users: usersArray,

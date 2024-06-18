@@ -39,7 +39,7 @@ exports.list_shows = function(req, res) {
   });
 };
 
-/* display a show details */
+/* display a show details - for non-admin view */
 exports.list_show = function(req, res) {
   Show.findOne({ '_id': req.body.id }, function(err, show) {
     if (err) {
@@ -360,7 +360,6 @@ exports.get_my_shows = function(req, res) {
       console.log(err);
       res.render('error', {message: 'An error occured displaying your shows.'});
     } else {
-      console.log(req.session.isAdmin)
       var showsArray = createShowsArray(shows);
       var showsArraySorted = sortByDateStart(showsArray);
 
@@ -391,7 +390,6 @@ exports.get_my_shows = function(req, res) {
 
 /* get edit show page */
 exports.get_edit_show = function(req, res) {
-  console.log(req.params);
   Show.findOne({ '_id': req.params.id }, function(err, show) {
     if (err) {
       console.log(err);
@@ -543,7 +541,8 @@ function createShowsArray(shows) {
       dealer_rsvp_list: shows[i].dealer_rsvp_list,
       rsvp: shows[i].rsvp,
       number_of_tables_for_rent: shows[i].number_of_tables_for_rent,
-      max_tables_per_dealer: shows[i].max_tables_per_dealer
+      max_tables_per_dealer: shows[i].max_tables_per_dealer,
+      dealer_information: shows[i].dealer_information
     };
     showsArray.push(showObject);
   };

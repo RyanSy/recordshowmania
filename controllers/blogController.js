@@ -43,7 +43,6 @@ exports.post_create_blog_post = async function(req, res) {
     var blogPost = req.body;
     // if image file is included, upload to cloudinary and include info in blog post object
     if (req.file) {
-        console.log('req.file included')
         dUri.format(path.extname(req.file.originalname).toString(), req.file.buffer);
         await cloudinary.uploader.upload(dUri.content, { width: 400, height: 400, crop: 'limit' }, function (error, result) {
           if (error) {
@@ -51,7 +50,6 @@ exports.post_create_blog_post = async function(req, res) {
             callback(error, null, null);
             res.render('error', {message: 'An error occured uploading your image.'});
           } else {
-            console.log('uploaded to cloudinary:', result)
             blogPost.image = result.secure_url;
             blogPost.image_public_id = result.public_id;
           }
@@ -59,7 +57,6 @@ exports.post_create_blog_post = async function(req, res) {
     }
 
     BlogPost.create(blogPost, function(err, newBlogPost) {
-        console.log('adding post to db');
         if(err) {
             console.log(err);
         } else {
@@ -113,7 +110,6 @@ exports.post_edit_blog_post = function(req, res) {
             console.log(err);
             res.render('error', { message: 'Error updating blog post.'});
         }
-        console.log('updated post:', updatedBlogPost);
         res.redirect('blog');
     })
 }

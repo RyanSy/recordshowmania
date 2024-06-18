@@ -22,7 +22,6 @@ exports.register_user = function(req, res) {
       res.render('error', {message: 'An error occured registering your account.'});
     } else {
       if (user) {
-        console.log(user);
         res.render('already-registered', {email: req.body.email});
       } else {
         bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
@@ -74,8 +73,6 @@ exports.login_user = function(req, res, next) {
             res.render('error', {message: 'An error occured logging into your account.'});
           }
           if (result == true) {
-            console.log('user logged in: ', user);
-            console.log('user is admin? ', user.isAdmin);
             req.session.isLoggedIn = true;
             req.session.username = user.username;
             req.session.isAdmin = user.isAdmin;

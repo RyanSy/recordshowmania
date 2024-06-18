@@ -34,7 +34,7 @@ var showSchema = new Schema(
     memorabilia_dealers: {type: Boolean},
     food_drink: {type: Boolean},
     handicapped_access: {type: Boolean},
-    more_information: {type: String, max: 100},
+    more_information: {type: String, max: 200},
     contact_name: {type: String, max: 100},
     contact_phone: {type: String, max: 100},
     contact_email: {type: String, max: 100},
@@ -48,7 +48,8 @@ var showSchema = new Schema(
     dealer_rsvp_list: [{type: String}],
     number_of_tables_for_rent: {type: Number},
     max_tables_per_dealer: {type: Number},
-    rsvp: {type: Boolean}
+    rsvp: {type: Boolean},
+    dealer_information: {type: String, max: 200}
   }
 );
 
