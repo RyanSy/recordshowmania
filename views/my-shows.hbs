@@ -23,9 +23,8 @@
             {{#each shows}}
             <tr>
                 <td>
-                    {{#if this.image}}
+                    {{#if ../this.image}}
                     <img src="{{this.image}}" alt="{{this.name}}" class="img-fluid mb-4"> <br>
-                    {{else}}
                     {{/if}}
                     {{this.date}} <br>
                     {{this.name}} <br>
