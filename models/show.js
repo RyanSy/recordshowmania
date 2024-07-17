@@ -45,7 +45,20 @@ var showSchema = new Schema(
     message: {type: String, max: 100},
     posted_by: {type: String, required: true, max: 100},
     date_posted: {type: Date},
-    dealer_rsvp_list: [{type: String}],
+    dealer_rsvp_list: [
+        {
+            name: { type: String, max: 50 },
+            company_name: { type: String, max: 50 },
+            email: { type: String, max: 50 },
+            number_of_tables: { type: Number },
+            notes: { type: String, max: 200 },
+            paid: { type: Boolean },
+            discount_code: { type: String },
+            discount_percentage: { type: Number },
+            discount_applied: { type: Boolean},
+            rent_due: { type: Number }
+        }
+    ],
     number_of_tables_for_rent: {type: Number},
     max_tables_per_dealer: {type: Number},
     rsvp: {type: Boolean},
