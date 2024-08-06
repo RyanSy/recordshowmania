@@ -505,8 +505,8 @@
     </div>
 
     <div class="form-group">
-      <label for="inputDealerInformation">Dealer Information</label>
-      <textarea class="form-control col-8" id="inputDealerInformation" name="dealer_information" rows="8"
+      <label for="dealerInformation">Dealer Information</label>
+      <textarea class="form-control col-8" id="dealerInformation" name="dealer_information" rows="8"
         cols="40"></textarea>
     </div>
     {{/if}}
@@ -664,6 +664,7 @@
     $('#numberOfTables').val(obj.number_of_tables);
     $('#sizeOfTables').val(obj.size_of_tables);
     $('#tableRent').val(obj.table_rent);
+    $('#dealerInformation').val(obj.dealer_information);
     if (obj.cd_dealers) {
       $('#cdDealersYes').prop('checked', true);
     } else {
@@ -703,7 +704,7 @@
     $('#deleteImageButton').click(function () {
       $('#savedImageContainer').html('');
       $('#imageUpload').show();
-    })
+    });
   });
 </script>
 <script type="text/javascript" src="/javascripts/add-show.js"></script>
