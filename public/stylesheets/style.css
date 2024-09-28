@@ -9,7 +9,7 @@ body {
 .content-wrap {
   padding-bottom: 2.5rem;
 }
-.navbar, #link-header {
+.navbar, #link-header, #vinyl-steve-announcement-header {
   background-color: black;
 }
 #logo {
