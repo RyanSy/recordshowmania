@@ -542,6 +542,7 @@ function createShowsArray(shows) {
       rsvp: shows[i].rsvp,
       number_of_tables_for_rent: shows[i].number_of_tables_for_rent,
       max_tables_per_dealer: shows[i].max_tables_per_dealer,
+      dealer_information: shows[i].dealer_information
     };
     showsArray.push(showObject);
   };
