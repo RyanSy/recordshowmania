@@ -26,9 +26,7 @@
                     {{this.date}} <br>
                     {{this.name}} <br>
 
-                    <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#show{{this.id}}" aria-expanded="false" aria-controls="collapseExample">
-                        Show Details
-                    </button> <br>
+                    <button class="btn btn-success toggle mt-1" type="button" data-toggle="collapse" data-target="#show{{this.id}}" aria-expanded="false" aria-controls="collapseExample"></button> <br>
 
                     <div class="collapse" id="show{{this.id}}">
                         {{#if ../this.image}}
@@ -146,5 +144,12 @@
 </div>
 
 <script>
-
+    $('button.toggle').html('Show Details');
+    $('button.toggle').click(function () {
+         if($(this).html() == "Show Details") {
+                $(this).html('Hide Details');
+         } else {
+            $(this).html('Show Details');
+         }
+     });
 </script>
