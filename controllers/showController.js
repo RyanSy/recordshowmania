@@ -168,14 +168,14 @@ exports.post_add_show = function(req, res) {
     },
     // add future shows, if any
     function addNewShow(newShow, callback) {
-      let futureShow = (({country, isInternational, name, venue, address, address2, international_address, city, state, zip, start, end, currency, regular_admission_fee, early_admission, early_admission_fee, early_admission_time, number_of_dealers, number_of_tables, size_of_tables, table_rent, featured_dealers, cd_dealers, fortyfive_dealers, memorabilia_dealers, food_drink, handicapped_access, more_information, contact_name, contact_phone, contact_email, website, facebook, image, image_public_id, message, posted_by, date_posted}) => ({country, isInternational, name, venue, address, address2, international_address, city, state, zip, start, end, currency, regular_admission_fee, early_admission, early_admission_fee, early_admission_time, number_of_dealers, number_of_tables, size_of_tables, table_rent, featured_dealers, cd_dealers, fortyfive_dealers, memorabilia_dealers, food_drink, handicapped_access, more_information, contact_name, contact_phone, contact_email, website, facebook, image, image_public_id, message, posted_by, date_posted}))(newShow);
+      let futureShow = (({country, isInternational, name, venue, address, address2, international_address, city, state, zip, start, end, currency, regular_admission_fee, early_admission, early_admission_fee, early_admission_time, number_of_dealers, number_of_tables, size_of_tables, table_rent, featured_dealers, cd_dealers, fortyfive_dealers, memorabilia_dealers, food_drink, handicapped_access, more_information, contact_name, contact_phone, contact_email, website, facebook, image, image_public_id, message, posted_by, date_posted, dealer_rsvp_list, number_of_tables_for_rent, max_tables_per_dealer, rsvp,dealer_information}) => ({country, isInternational, name, venue, address, address2, international_address, city, state, zip, start, end, currency, regular_admission_fee, early_admission, early_admission_fee, early_admission_time, number_of_dealers, number_of_tables, size_of_tables, table_rent, featured_dealers, cd_dealers, fortyfive_dealers, memorabilia_dealers, food_drink, handicapped_access, more_information, contact_name, contact_phone, contact_email, website, facebook, image, image_public_id, message, posted_by, date_posted, dealer_rsvp_list, number_of_tables_for_rent, max_tables_per_dealer, rsvp,dealer_information}))(newShow);
       if (newShow.future_dates) {
         var futureDates = newShow.future_dates;
         // create new show for each future date
         for (var i = 0; i < futureDates.length; i++) {
           futureShow.date = futureDates[i];
           futureShow.date_start = new Date(futureDates[i] + ' ' + newShow.start);
-          Show.create(futureShow, function(err, newFutureShow) {
+          Show.create(futureShow, function(err) {
             if (err) {
               console.log(err);
               res.render('error', {message: 'An error occured adding future shows.'});
@@ -456,6 +456,20 @@ exports.post_edit_show = function(req, res) {
           callback(null, updatedShow);
         }
       });
+
+       // update future shows with dealer info
+      const futureShows = { $and: [{ 'date': { '$gte': update.date } }, { name: update.name }] };
+
+      const updateDealerInformation = { $set: { dealer_information: update.dealer_information } }
+
+      Show.updateMany(futureShows, updateDealerInformation)
+        // .then(result => {
+        //   console.log(result);
+        // })
+        .catch(err => {
+          console.error(err);
+        });
+
     }
   ],
   // waterfall callback
