@@ -165,6 +165,19 @@ exports.post_add_show = function(req, res) {
           callback(null, newShow);
         }
       });
+
+      // update future shows with dealer info
+      const futureShows = { $and: [{ 'date': { '$gte': update.date } }, { name: update.name }] };
+
+      const updateDealerInformation = { $set: { dealer_information: update.dealer_information } }
+
+      Show.updateMany(futureShows, updateDealerInformation)
+        // .then(result => {
+        //   console.log(result);
+        // })
+        .catch(err => {
+          console.error(err);
+        });
     },
     // add future shows, if any
     function addNewShow(newShow, callback) {
@@ -457,7 +470,7 @@ exports.post_edit_show = function(req, res) {
         }
       });
 
-       // update future shows with dealer info
+      // update future shows with dealer info
       const futureShows = { $and: [{ 'date': { '$gte': update.date } }, { name: update.name }] };
 
       const updateDealerInformation = { $set: { dealer_information: update.dealer_information } }
