@@ -47,13 +47,19 @@ exports.list_show = function(req, res) {
       res.render('error', {message: 'An error occured displaying this show.'});
     } else {
       var showObject = createShowObject(show);
+      // console.log('showObject', showObject);
+      const dealerRsvpList = showObject.dealer_rsvp_list;
+      const numberOfDealers = dealerRsvpList.length;
+      const numberOfTables = dealerRsvpList.reduce((n, {number_of_tables}) => n + number_of_tables, 0);
       if (req.session.isLoggedIn) {
         res.render('show', {
           username: req.session.username,
           isLoggedIn: true,
           title: `${showObject.name} - ${showObject.date}`,
           meta_content: show.more_information,
-          show: showObject
+          show: showObject,
+          numberOfDealers: numberOfDealers,
+          numberOfTables: numberOfTables
         })
       } else {
         res.render('show', {
@@ -621,7 +627,13 @@ function createShowObject(show) {
     facebook: show.facebook,
     image: show.image,
     image_public_id: show.image_public_id,
-    posted_by: show.posted_by
+    posted_by: show.posted_by,
+    date_posted: show.date_posted,
+    dealer_rsvp_list: show.dealer_rsvp_list,
+    number_of_tables_for_rent: show.number_of_tables_for_rent,
+    max_tables_per_dealer: show.max_tables_per_dealer,
+    rsvp: show.rsvp,
+    dealer_information: show.dealer_information
   };
 
   return showObject;

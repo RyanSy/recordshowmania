@@ -54,11 +54,19 @@
     </span>
   </p>
   {{/if}}
-  {{#if this.number_of_dealers}}
-    <p><strong>Number Of Dealers:</strong> <span class="white-text">{{this.number_of_dealers}}</span></p>
+  <p>
+    Dealers: <br>
+    <ul>
+      {{#each this.dealer_rsvp_list}}
+        <li>{{this.name}}</li>
+      {{/each}}
+    </ul>
+  </p>
+  {{#if ../numberOfDealers}}
+    <p><strong>Number Of Dealers:</strong> <span class="white-text">{{../numberOfDealers}}</span></p>
   {{/if}}
-  {{#if this.number_of_tables}}
-    <p><strong>Number Of Tables:</strong> <span class="white-text">{{this.number_of_tables}}</span></p>
+  {{#if ../numberOfTables}}
+    <p><strong>Number Of Tables:</strong> <span class="white-text">{{../numberOfTables}}</span></p>
   {{/if}}
   {{#if this.size_of_tables}}
     <p><strong>Size Of Tables:</strong> <span class="white-text">{{this.size_of_tables}}</span></p>
