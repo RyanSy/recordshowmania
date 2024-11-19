@@ -130,6 +130,13 @@ exports.post_add_show = function(req, res) {
   show.posted_by = req.session.username;
   show.date_start = new Date(req.body.date + ' ' + req.body.start);
   show.date_posted = new Date();
+  show.dealer_rsvp_list = [];
+  if (show.posted_by = 'mayfieldmouse') {
+    show.dealer_rsvp_list.push({
+      name: 'Iris Records',
+      number_of_tables: 4
+    });
+  }
   async.waterfall([
     // upload image and get url
     function uploadImage(callback) {
@@ -137,7 +144,7 @@ exports.post_add_show = function(req, res) {
         dUri.format(path.extname(req.file.originalname).toString(), req.file.buffer);
         cloudinary.uploader.upload(dUri.content, { width: 400, height: 400, crop: 'limit' }, function (error, result) {
           if (error) {
-            console.log(error);
+            console.log('error uploading image:', error);
             callback(error, null, null);
             res.render('error', {message: 'An error occured uploading your image.'});
           } else {
@@ -164,26 +171,13 @@ exports.post_add_show = function(req, res) {
     function addShow(show, callback) {
       Show.create(show, function(err, newShow) {
         if (err) {
-          console.log(err);
+          console.log('error adding show:', err);
           callback(err, null);
           res.render('error', {message: 'An error occured adding this show.'});
         } else {
           callback(null, newShow);
         }
       });
-
-      // update future shows with dealer info
-      const futureShows = { $and: [{ 'date': { '$gte': update.date } }, { name: update.name }] };
-
-      const updateDealerInformation = { $set: { dealer_information: update.dealer_information } }
-
-      Show.updateMany(futureShows, updateDealerInformation)
-        // .then(result => {
-        //   console.log(result);
-        // })
-        .catch(err => {
-          console.error(err);
-        });
     },
     // add future shows, if any
     function addNewShow(newShow, callback) {

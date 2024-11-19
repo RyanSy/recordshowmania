@@ -64,7 +64,7 @@
                         Number Of Dealers: {{this.number_of_dealers}} <br>
                         Featured Dealers: <br>
                         {{#each this.featured_dealers}}
-                        <li>{{this}}</li>
+                            <li>{{this}}</li>
                         {{/each}}
                         Number Of Tables: {{this.number_of_tables}} <br>
                         Size Of Tables: {{this.size_of_tables}} <br>
@@ -77,7 +77,7 @@
                         Dealer RSVP List: <br>
                         <ul>
                             {{#each this.dealer_rsvp_list}}
-                            <li>{{this.name}}</li>
+                                <li>{{this.name}} / {{this.number_of_tables}} tables</li>
                             {{/each}}
                         </ul>
                         <br>
