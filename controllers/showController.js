@@ -131,7 +131,7 @@ exports.post_add_show = function(req, res) {
   show.date_start = new Date(req.body.date + ' ' + req.body.start);
   show.date_posted = new Date();
   show.dealer_rsvp_list = [];
-  if (show.posted_by = 'mayfieldmouse') {
+  if (show.posted_by == 'mayfieldmouse') {
     show.dealer_rsvp_list.push({
       name: 'Iris Records',
       number_of_tables: 4

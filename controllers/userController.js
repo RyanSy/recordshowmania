@@ -58,30 +58,32 @@ exports.display_login = function(req, res) {
 }
 
 // login user
-exports.login_user = function(req, res, next) {
+exports.login_user = function(req, res) {
   User.findOne({ email: req.body.email }, function(err, user) {
     if (err) {
       console.log(err);
       res.render('error', {message: 'An error occured logging into your account.'});
-    } else {
-      if (!user) {
-        res.send(`${req.body.email} is not registered.`);
-      } else {
-        bcrypt.compare(req.body.password, user.password, function(err, result) {
-          if (err) {
-            console.log(err);
-            res.render('error', {message: 'An error occured logging into your account.'});
-          }
-          if (result == true) {
-            req.session.isLoggedIn = true;
-            req.session.username = user.username;
-            req.session.isAdmin = user.isAdmin;
-            res.redirect('/');
-          } else {
-            res.render('error', {message: 'Password incorrect, please go back and try again.'});
-          }
-        });
-      }
+    } 
+    
+    if (!user) {
+      res.send(`${req.body.email} is not registered.`);
+    } 
+
+    if (user) {
+      bcrypt.compare(req.body.password, user.password, function(err, result) {
+        if (err) {
+          console.log(err);
+          res.render('error', {message: 'An error occured logging into your account.'});
+        }
+        if (result == true) {
+          req.session.isLoggedIn = true;
+          req.session.username = user.username;
+          req.session.isAdmin = user.isAdmin;
+          res.redirect('/');
+        } else {
+          res.render('error', {message: 'Password incorrect, please go back and try again.'});
+        }
+      });
     }
   });
 }
