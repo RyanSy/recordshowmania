@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "@pm2/pm2-version-check": "^1.0.4",
-    "@sendgrid/mail": "^7.6.0",
     "async": "^2.6.3",
     "bcrypt": "^5.0.1",
     "cloudinary": "^1.19.0",
@@ -30,6 +29,7 @@
     "morgan": "~1.9.0",
     "multer": "^1.4.2",
     "newrelic": "^5.13.1",
+    "nodemailer": "^6.9.16",
     "pm2": "^5.1.2"
   }
 }

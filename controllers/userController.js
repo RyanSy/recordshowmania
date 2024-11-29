@@ -2,6 +2,16 @@ var User = require('../models/user');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 var crypto = require('crypto');
+const nodemailer = require('nodemailer');
+const transporter = nodemailer.createTransport({
+    host: process.env.BREVO_SMTP_SERVER,
+    port: process.env.BREVO_SMTP_PORT,
+    secure: false, // true for port 465, false for other ports
+    auth: {
+        user: process.env.BREVO_LOGIN,
+        pass: process.env.BREVO_PASSWORD,
+    },
+});
 
 // display user registration page
 exports.display_registration = function(req, res) {
@@ -112,25 +122,17 @@ exports.send_reset = function(req, res) {
       if (!user) {
         res.render('user-not-found');
       } else {
-        const sgMail = require('@sendgrid/mail');
-        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-        const msg = {
-          to: req.body.email,
-          from: 'info@recordshowmania.com',
-          subject: 'Password Reset',
-          html: `<p>Click the link below to reset your Record Show Mania password:</p> <br>
-          <p><a href="https://www.recordshowmania.com/reset/${token}">https://www.recordshowmania.com/reset/${token}</a></p> <br>`
-        };
-        sgMail
-          .send(msg)
-          .then(() => {
-            console.log('password reset email sent');
-          })
-          .catch((error) => {
-            console.log('error sending password reset email');
-            console.log(error.response.body);
-            console.error(error);
-          });
+          async function main() {
+            await transporter.sendMail({
+                from: '"Record Show Mania" <help@recordshowmania.com>', // sender address
+                to: req.body.email, 
+                subject: 'Record Show Mania Password Reset', // subject line
+                text: `Click the link below to reset your Record Show Mania password:\nhttps://www.recordshowmania.com/reset/${token}`, // plain text body
+                html: `<p>Click the link below to reset your Record Show Mania password:</p> <br>
+            <p><a href="https://www.recordshowmania.com/reset/${token}">https://www.recordshowmania.com/reset/${token}</a></p> <br>`
+            });
+          }
+        main().catch(console.error);
         res.render('check-email');
       }
     }
