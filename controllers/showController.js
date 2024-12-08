@@ -137,6 +137,12 @@ exports.post_add_show = function(req, res) {
       number_of_tables: 4
     });
   }
+  if (show.posted_by == 'john bastone') {
+    show.dealer_rsvp_list.push({
+      name: 'John Bastone',
+      number_of_tables: 5
+    });
+  }
   async.waterfall([
     // upload image and get url
     function uploadImage(callback) {
