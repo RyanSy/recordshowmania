@@ -34,6 +34,9 @@ db.on('error', console.error.bind(console, 'connection error:'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 hbs.registerPartials(__dirname + '/views/partials/');
+hbs.registerHelper('gt', function(a, b) {
+  return (a > b);
+});
 
 app.use(logger('dev'));
 app.use(express.json());

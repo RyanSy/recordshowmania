@@ -77,7 +77,7 @@
                         Dealer RSVP List: <br>
                         <ul>
                             {{#each this.dealer_rsvp_list}}
-                                <li>{{this.name}} / {{this.number_of_tables}} tables</li>
+                                <li>{{this.name}} / {{this.number_of_tables}} {{#if (gt this.number_of_tables 1)}} tables {{else}} table {{/if}}</li>
                             {{/each}}
                         </ul>
                         <br>
