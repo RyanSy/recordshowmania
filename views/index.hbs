@@ -17,9 +17,10 @@
   </div>
 {{/if}}
 
-<div class="container mt-5">
+<div class="container mt-5 mb-5">
   <h3 class="mt-5 mb-5">Upcoming Shows:</h3>
   {{#each shows}}
+  <div class="show">
     <div class="mb-3 pl-1 pr-1 rounded">
       <div class="row">
         <div class="col-4 pl-2 pr-1">
@@ -39,7 +40,9 @@
         </div>
       </div>
     </div>
+  </div>
   {{/each}}
 </div>
 
 <script src="javascripts/searchbox.js"></script>
+<script src="javascripts/show-more.js"></script>
