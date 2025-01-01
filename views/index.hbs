@@ -1,8 +1,35 @@
+<header id="link-header" class="d-flex justify-content-center py-3">
+  <a class="nav-link" href="https://www.recordriots.com">
+    <img class="img-fluid ml-3" height="70" width="70" src="{{host}}/images/record-riots-logo.png"
+      alt="Record Riots">
+  </a>
+
+  <div class="ms-3">
+    <a class="nav-link" href="https://www.groovycoasters.com">
+        <img class="img-fluid" height="70" width="116" src="{{host}}/images/groovycoasters-logo.png"
+        alt="Groovy Coasters">
+    </a>
+  </div>
+
+  <form action="https://www.paypal.com/donate" method="post" target="_top">
+    <input type="hidden" name="hosted_button_id" value="4J8RJ9KXFJDJ8" />
+      <button class="btn" type="submit">
+        <img class="img-fluid" height="70" width="145" src="{{host}}/images/donate-paypal.png"
+          alt="Donate">
+      </button>
+  </form>
+</header>
+
+<header id="vinyl-steve-announcement-header" class="d-flex justify-content-center .justify-content-sm-evenly pt-3">
+  <span><strong>Wanna sell at a Record Riot? Go to <a href="http://www.vinylsteve.com">vinylsteve.com</a> to register!</strong></span>
+</header>
+
+{{> nav}}
+
 <div class="header">
   <div class="header-wrapper">
-    {{> nav}}
-    <div class="text-center">
-      <h2 id="header-message" class="header-message mt-5 mb-5">Looking for a record show?</h2>
+    <div class="text-center pt-5">
+      <h2 id="header-message" class="header-message pt-5 pb-3">Looking for a record show?</h2>
     </div>
     {{> searchbox}}
   </div>

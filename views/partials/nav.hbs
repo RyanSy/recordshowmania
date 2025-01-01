@@ -1,45 +1,22 @@
-<header id="link-header" class="d-flex justify-content-center .justify-content-sm-evenly py-3">
-  <form action="https://www.paypal.com/donate" method="post" target="_top">
-    <input type="hidden" name="hosted_button_id" value="4J8RJ9KXFJDJ8" />
-    <button class="btn mr-2" type="submit">
-      <img class="img-fluid" height="70" width="145" src="https://recordshowmania.com/images/donate-paypal.png"
-        alt="Donate">
-    </button>
-  </form>
-
-  <a class="nav-link" href="https://www.groovycoasters.com">
-    <img class="img-fluid" height="70" width="116" src="https://recordshowmania.com/images/groovycoasters-logo.png"
-      alt="Groovy Coasters">
-  </a>
-
-  <a class="nav-link" href="https://www.recordriots.com">
-    <img class="img-fluid" height="70" width="70" src="https://recordshowmania.com/images/record-riots-logo.png"
-      alt="Record Riots">
-  </a>
-</header>
-
-<header id="vinyl-steve-announcement-header" class="d-flex justify-content-center .justify-content-sm-evenly pt-3">
-  <span>Wanna sell at a Record Riot? Go to <a href="http://www.vinylsteve.com">vinylsteve.com</a> to register!</span>
-</header>
-
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-dark navbar-expand-lg">
   <div class="container">
     <a id="logo" class="navbar-brand" href="/">
-      <img class="img-fluid" height="225" width="225" src="https://recordshowmania.com/images/record-show-mania-logo.png"
+      <img class="img-fluid" height="225" width="225" src="{{host}}/images/record-show-mania-logo.png"
       alt="Record Show Mania">
     </a>
     <button id="navbarbutton" class="navbar-toggler" type="button" data-toggle="collapse"
       data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
       aria-label="Toggle navigation">
-      Menu
+      <span class="navbar-toggler-icon white-text"></span>
     </button>
-    <div class="mt-3 collapse navbar-collapse text-right" id="navbarResponsive">
-      <ul class="navbar-nav nav-items ml-auto">
+    <div class="mt-3 collapse navbar-collapse justify-content-end" id="navbarResponsive">
+      <ul class="nav navbar-nav">
         <li class="nav-item">
           <a class="nav-link" href="/blog">Blog</a>
         </li>
         <li class="nav-item">
-          <span class="nav-link">|</span>
+          <span class="nav-link d-sm-none d-md-block">|</span>
+          <span class="nav-link d-none d-sm-block d-md-none">-</span>
         </li>
         {{#if isLoggedIn}}
         <li class="nav-item">
