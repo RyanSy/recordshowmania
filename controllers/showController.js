@@ -19,7 +19,7 @@ exports.list_shows = function(req, res) {
       var showsArraySorted = sortByDateStart(showsArray);
       if (req.session.isLoggedIn == true) {
         res.render('index', {
-          title: 'Record Show Mania - Find Record Shows and Fairs Near You!',
+          title: 'Record Show Mania - Find Vinyl Record Shows and Fairs Near You!',
           meta_content: 'Listings of vinyl record shows and fairs all across the USA (and beyond)! Register now - for free - to list your event.',
           username: req.session.username,
           isLoggedIn: true,
@@ -30,7 +30,7 @@ exports.list_shows = function(req, res) {
         });
       } else {
         res.render('index', {
-          title: 'Record Show Mania - Find Record Shows and Fairs Near You!',
+          title: 'Record Show Mania - Find Vinyl Record Shows and Fairs Near You!',
           meta_content: 'Listings of vinyl record shows and fairs all across the USA (and beyond)! Register now - for free - to list your event.',
           shows: showsArraySorted,
           date: todaysDate.toString()
