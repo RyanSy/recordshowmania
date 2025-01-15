@@ -49,6 +49,9 @@ exports.list_show = function(req, res) {
     } else {
       var showObject = createShowObject(show);
       // console.log('showObject', showObject);
+      if (showObject.image == 'undefined') {
+        showObject.image = null;
+      }
       const dealerRsvpList = showObject.dealer_rsvp_list;
       const numberOfDealers = dealerRsvpList.length;
       const numberOfTables = dealerRsvpList.reduce((n, {number_of_tables}) => n + number_of_tables, 0);
