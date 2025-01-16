@@ -20,27 +20,6 @@
 
 
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-    </li>
-    <li>
-      <a href="#built-with">Built With</a>
-    </li>
-    <li>
-      <a href="#requirements">Requirements</a>
-    </li>
-    <li>
-      <a href="#contact">Contact</a>
-    </li>
-  </ol>
-</details>
-
-
-
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
@@ -49,8 +28,6 @@ Record Show Mania is a website that allows visitors to search for record shows, 
 Registered users can advertise their events on the website for free.
 
 Ranked #1 as top result when Google users search for "record shows" or "record shows near me."
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -67,15 +44,11 @@ Ranked #1 as top result when Google users search for "record shows" or "record s
 [![Heroku Badge](https://img.shields.io/badge/Heroku-430098?logo=heroku&logoColor=fff&style=for-the-badge)](https://www.heroku.com/)
 [![Cloudflare Badge](https://img.shields.io/badge/Cloudflare-F38020?logo=cloudflare&logoColor=fff&style=for-the-badge)](https://www.cloudflare.com/)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- REQUIREMENTS -->
 ## Requirements
 Latest stable version of Node.js required.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -84,9 +57,7 @@ Latest stable version of Node.js required.
 
 Ryan Sy - ryanbsy@gmail.com
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+Project Link: [https://github.com/RyanSy/recordshowmania](https://github.com/RyanSy/recordshowmania)
 
 
 
