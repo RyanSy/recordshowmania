@@ -24,11 +24,12 @@ Record Show Mania is a website where users can search for record shows across th
 
 It is ranked as the #1 search result on Google for "record shows" or "record shows near me."
 
-Here are some key numbers (with no paid advertising at all):
+Here are some key numbers (with no paid ads, strictly word of mouth referrals):
 
 * 18,684 active users for the 2024 calendar year according to Google Analytics
 * 439 registered users to date
 * 1,856 shows have been advertised since 2019
+* Google Lighthouse SEO score: 100/100
 
 
 
@@ -49,7 +50,7 @@ Here are some key numbers (with no paid advertising at all):
 Website architecture is based on the [MDN Express web framework tutorial][MDN-url].
 
 * Front end uses Handlebars templates, Bootstrap for styling, and jQuery for added functionality
-* Back end is n Node.js server using the Express framework
+* Back end is a Node.js server using the Express framework
 * Database uses Mongo Atlas/Mongoose
 * Application deployed to Heroku
 * Cloudflare used for CDN
