@@ -1,7 +1,3 @@
-<a id="readme-top"></a>
-
-
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -17,17 +13,22 @@
     <a href="https://www.recordshowmania.com/">View Live Site</a>
   </p>
 </div>
-
+  
 
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+What is a record show? According to Google's AI overview: "A record show is an event where people can buy and sell records, CDs, and other music-related items. Record shows can feature local, independent, and out-of-state vendors."
 
-Record Show Mania is a website that allows visitors to search for record shows, by date or location. 
+Record Show Mania is a website where users can search for record shows across the world, and registered users can advertise their events for free.
 
-Registered users can advertise their events on the website for free.
+It is ranked as the #1 search result on Google for "record shows" or "record shows near me."
 
-Ranked #1 as top result when Google users search for "record shows" or "record shows near me."
+Here are some key numbers (with no paid advertising at all):
+
+* 18,684 active users for the 2024 calendar year according to Google Analytics
+* 439 registered users to date
+* 1,856 shows have been advertised since 2019
 
 
 
@@ -43,12 +44,6 @@ Ranked #1 as top result when Google users search for "record shows" or "record s
 [![Mongoose Badge](https://img.shields.io/badge/Mongoose-800?logo=mongoose&logoColor=fff&style=for-the-badge)](https://mongoosejs.com/)
 [![Heroku Badge](https://img.shields.io/badge/Heroku-430098?logo=heroku&logoColor=fff&style=for-the-badge)](https://www.heroku.com/)
 [![Cloudflare Badge](https://img.shields.io/badge/Cloudflare-F38020?logo=cloudflare&logoColor=fff&style=for-the-badge)](https://www.cloudflare.com/)
-
-
-
-<!-- REQUIREMENTS -->
-## Requirements
-Latest stable version of Node.js required.
 
 
 
