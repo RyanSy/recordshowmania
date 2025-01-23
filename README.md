@@ -8,7 +8,7 @@
   <h3 align="center">Record Show Mania</h3>
 
   <p align="center">
-    A website that allows users to find, as well as advertise record shows across the world.
+    Record Show Mania is a website that allows users to find, as well as advertise record shows across the world.
     <br />
     <a href="https://www.recordshowmania.com/">View Live Site</a>
   </p>
