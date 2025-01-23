@@ -61,6 +61,8 @@ Website architecture is based on the [MDN Express web framework tutorial][MDN-ur
 
 Ryan Sy - ryanbsy@gmail.com
 
+Live Site: https://www.recordshowmania.com/
+
 Project Link: [https://github.com/RyanSy/recordshowmania](https://github.com/RyanSy/recordshowmania)
 
 
