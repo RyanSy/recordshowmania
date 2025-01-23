@@ -1,5 +1,4 @@
 <!-- PROJECT LOGO -->
-<br />
 <div align="center">
   <a href="https://www.recordshowmania.com/">
     <img src="https://www.recordshowmania.com/images/record-show-mania-logo.png" alt="Record Show Mania" width="225" height="225">
