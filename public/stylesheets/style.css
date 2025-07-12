@@ -1,6 +1,6 @@
 body {
   background-color: black;
-  color: yellow;
+  color: white;
 }
 .page-container {
   position: relative;
@@ -9,12 +9,8 @@ body {
 .content-wrap {
   padding-bottom: 2.5rem;
 }
-.navbar, #link-header, #vinyl-steve-announcement-header {
+.navbar {
   background-color: black;
-}
-#logo {
-  font-family: 'Rock Salt', cursive;
-  color: #FF5800;
 }
 #navbarbutton {
   color: #2F4F4F !important;
@@ -22,12 +18,16 @@ body {
 .header-wrapper {
   background-color: rgba(0, 0, 0, 0.1);
 }
-.header {
-  height: auto;
-  background: url('https://res.cloudinary.com/hxzook5wx/image/upload/v1638985582/records_umfsh5.webp');
+/* .header {
+  background: 
+    linear-gradient(
+      rgba(0, 0, 0, 0.5), 
+      rgba(0, 0, 0, 0.5)
+    ),
+    url('https://res.cloudinary.com/hxzook5wx/image/upload/v1638985582/records_umfsh5.webp');
   background-repeat: no-repeat;
   background-size: cover;
-}
+} */
 #header-message {
   color: white !important;
 }
@@ -74,4 +74,10 @@ body {
 }
 .modal-content {
   background-color: slategrey;
+}
+.custom-h1 {
+  font-size: 2rem; /* Adjust the size as per your need */
+}
+.gun-metal-bg {
+  background-color: #0F1314 !important;
 }

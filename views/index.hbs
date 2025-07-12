@@ -1,32 +1,73 @@
-<header id="link-header" class="d-flex justify-content-center py-3">
-  <a class="nav-link" href="https://www.recordriots.com">
-    <img class="img-fluid ml-3" height="70" width="70" src="{{host}}/images/record-riots-logo.png"
-      alt="Record Riots">
-  </a>
+<div class="alert gun-metal-bg alert-dismissible fade show text-center" role="alert" style="margin-bottom: 0;">
+      <form action="https://www.paypal.com/donate" method="post" target="_blank">
+        <input type="hidden" name="hosted_button_id" value="4J8RJ9KXFJDJ8" />
+        <input type="hidden" name="item_name" value="Record Show Mania Donation" />
+          <button class="btn btn-link" type="submit">Help keep our website free - click/tap here to make a donation =)</button>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+      </form>
+</div>
 
-  <div class="ms-3">
-    <a class="nav-link" href="https://www.groovycoasters.com">
-        <img class="img-fluid" height="70" width="116" src="{{host}}/images/groovycoasters-logo.png"
-        alt="Groovy Coasters">
-    </a>
-  </div>
-
-  <form action="https://www.paypal.com/donate" method="post" target="_top">
-    <input type="hidden" name="hosted_button_id" value="4J8RJ9KXFJDJ8" />
-      <button class="btn" type="submit">
-        <img class="img-fluid" height="70" width="145" src="{{host}}/images/donate-paypal.png"
-          alt="Donate">
-      </button>
-  </form>
-</header>
-
-<header id="vinyl-steve-announcement-header" class="d-flex justify-content-center .justify-content-sm-evenly pt-3">
-  <span><strong>Wanna sell at a Record Riot? Go to <a href="http://www.vinylsteve.com">vinylsteve.com</a> to register!</strong></span>
-</header>
+<br>
 
 {{> nav}}
 
-<div class="header">
+<div class="header text-center mt-2 p-5 gun-metal-bg">
+  <br>
+  <h1 class="custom-h1">Welcome to Record Show Mania!</h1>
+  <br>
+  <p class="lead">We are the ultimate spot for vinyl lovers to find local record shows and connect with fellow collectors.</p>
+  <p class="lead"><strong>Organizers - </strong>you may register and list your shows here for free!</p>
+  <br>
+  <p>
+    <a href="/login" class="btn btn-success mr-3">Login</a>  |  <a class="ml-3" href="/register">Register</a>
+  </p>
+  <br>
+  <p class="lead"><strong>Vendors - </strong>wanna sell at a Record Riot? Go to <a href="http://www.vinylsteve.com">vinylsteve.com</a> to register!</p>
+  <br>
+</div>
+
+<div class="gun-metal-bg text-center mb-5">
+  <p>Brought to you by the good folks at:</p>
+
+  <header id="link-header" class="d-flex justify-content-center pb-5">
+    <a class="nav-link" href="https://www.recordriots.com">
+      <img class="img-fluid ml-3" height="80" width="80" src="{{host}}/images/record-riots-logo.png"
+        alt="Record Riots">
+    </a>
+
+    <a class="nav-link" href="https://www.irisrecordsjc.com">
+      <img class="img-fluid" height="100" width="90" src="{{host}}/images/iris-records-logo.png"
+        alt="Iris Records">
+    </a>
+
+    <a class="nav-link" href="https://www.groovycoasters.com">
+        <img class="img-fluid" height="120" width="120" src="{{host}}/images/groovycoasters-logo.png"
+        alt="Groovy Coasters">
+    </a>
+  </header>
+</div>
+
+<div class="mt-5 py-5 mb-5">
+  <div class="text-center mb-5">
+      <h5>Need help promoting your event?</h5>
+  </div>
+
+  <div class="mb-5">
+      <img src="{{host}}/images/orange-cat-social-media.png" alt="Orange Cat Social Media" style="width: 100%; height: auto;">
+  </div>
+
+  <div class="text-center mb-3">
+    <h5 class="mt-3">Contact <a href="https://forms.gle/rZeeDC5vamnYPqFV9" target="_blank" rel="noopener noreferrer">Orange Cat Social Media</a> today!</h5>
+  </div>
+
+  <div class="text-center">
+    <a href="https://forms.gle/rZeeDC5vamnYPqFV9" class="btn btn-success">Go to Contact Form</a>
+  </div>
+</div>
+
+<div class="gun-metal-bg mt-5 mb-5">
   <div class="header-wrapper">
     <div class="text-center pt-5">
       <h1 id="header-message" class="header-message pt-5 pb-3">Looking for a record show?</h1>
@@ -44,8 +85,8 @@
   </div>
 {{/if}}
 
-<div class="container mt-5 mb-5">
-  <h3 class="mt-5 mb-5">Upcoming Shows:</h3>
+<div class="container mt-2 mb-5">
+  <h3 class="py-5">Upcoming Shows:</h3>
   {{#each shows}}
   <div class="show">
     <div class="mb-3 pl-1 pr-1 rounded">
