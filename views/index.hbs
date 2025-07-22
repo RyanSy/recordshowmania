@@ -1,12 +1,13 @@
 <div class="alert gun-metal-bg alert-dismissible fade show text-center" role="alert" style="margin-bottom: 0;">
-      <form action="https://www.paypal.com/donate" method="post" target="_blank">
-        <input type="hidden" name="hosted_button_id" value="4J8RJ9KXFJDJ8" />
-        <input type="hidden" name="item_name" value="Record Show Mania Donation" />
-          <button class="btn btn-link" type="submit">Help keep our website free - click/tap here to make a donation =)</button>
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-      </form>
+  <form action="https://www.paypal.com/donate" method="post" target="_blank">
+    <input type="hidden" name="hosted_button_id" value="4J8RJ9KXFJDJ8" />
+    <input type="hidden" name="item_name" value="Record Show Mania Donation" />
+    <button class="btn btn-link" type="submit">Help keep our website free - click/tap here to make a donation
+      =)</button>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </form>
 </div>
 
 <br>
@@ -17,47 +18,61 @@
   <br>
   <h1 class="custom-h1">Welcome to Record Show Mania!</h1>
   <br>
-  <p class="lead">We are the ultimate spot for vinyl lovers to find local record shows and connect with fellow collectors.</p>
+  <p class="lead">We are the ultimate spot for vinyl lovers to find local record shows and connect with fellow
+    collectors.</p>
   <p class="lead"><strong>Organizers - </strong>you may register and list your shows here for free!</p>
   <br>
   <p>
-    <a href="/login" class="btn btn-success mr-3">Login</a>  |  <a class="ml-3" href="/register">Register</a>
+    <a href="/login" class="btn btn-success mr-3">Login</a> | <a class="ml-3" href="/register">Register</a>
   </p>
   <br>
-  <p class="lead"><strong>Vendors - </strong>wanna sell at a Record Riot? Go to <a href="http://www.vinylsteve.com">vinylsteve.com</a> to register!</p>
+  <p class="lead"><strong>Vendors - </strong>wanna sell at a Record Riot? Go to <a
+      href="http://www.vinylsteve.com">vinylsteve.com</a> to register!</p>
   <br>
 </div>
 
 <div class="gun-metal-bg text-center mb-5">
   <p>Brought to you by the good folks at:</p>
 
-  <header id="link-header" class="d-flex justify-content-center pb-5">
-    <a class="nav-link" href="https://www.recordriots.com">
-      <img class="img-fluid ml-3" height="80" width="80" src="{{host}}/images/record-riots-logo.png"
-        alt="Record Riots">
-    </a>
+  <header id="link-header">
+    <div class="container">
+      <div class="row d-flex justify-content-center pb-5">
+        <div class="col-6 col-md-3 mt-3">
+          <a class="nav-link" href="https://www.recordriots.com">
+            <img height="80" width="80" src="{{host}}/images/record-riots-logo.png" alt="Record Riots">
+          </a>
+        </div>
 
-    <a class="nav-link" href="https://www.irisrecordsjc.com">
-      <img class="img-fluid" height="100" width="90" src="{{host}}/images/iris-records-logo.png"
-        alt="Iris Records">
-    </a>
+        <div class="col-6 col-md-3 mt-3">
+          <a class="nav-link" href="https://www.irisrecordsjc.com">
+            <img height="80" width="80" src="{{host}}/images/iris-records-logo.png" alt="Iris Records">
+          </a>
+        </div>
 
-    <a class="nav-link" href="https://www.groovycoasters.com">
-        <img class="img-fluid" height="120" width="120" src="{{host}}/images/groovycoasters-logo.png"
-        alt="Groovy Coasters">
-    </a>
+        <div class="col-6 col-md-3 mt-3">
+          <a class="nav-link" href="https://www.groovycoasters.com">
+            <img height="80" width="100" src="{{host}}/images/groovycoasters-logo.png" alt="Groovy Coasters">
+          </a>
+        </div>
+
+        <div class="col-6 col-md-3 mt-3">
+          <a class="nav-link" href="https://forms.gle/rZeeDC5vamnYPqFV9">
+            <img height="80" width="80" src="{{host}}/images/orange-cat-social-media.png" alt="Orange Cat Social Media"
+              class="img-fluid">
+          </a>
+        </div>
+      </div>
+    </div>
   </header>
+
+  {{!--
+  --}}
 </div>
 
-<div class="mt-5 p-5 mb-5 mx-auto text-center">
-  <div class="col-md-2 col-sm-6 mb-5 text-center mx-auto">
-    <a href="https://forms.gle/rZeeDC5vamnYPqFV9" target="_blank" rel="noopener"><img src="{{host}}/images/orange-cat-social-media.png" alt="Orange Cat Social Media" class="img-fluid"></a>
-  </div>
-
-  <div class="mb-5 col-md-8 col-sm-12 mx-auto text-center">
-    <p class="lead">Need help promoting your event? Contact <a href="https://forms.gle/rZeeDC5vamnYPqFV9" target="_blank" rel="noopener">Orange Cat Social Media</a> today!</p>
-    <p><a href="https://forms.gle/rZeeDC5vamnYPqFV9" class="btn btn-success">Go to Contact Form</a></p> 
-  </div>
+<div class="p-5 text-center">
+  <p class="lead">Need help promoting your event? Contact <a href="https://forms.gle/rZeeDC5vamnYPqFV9" target="_blank"
+      rel="noopener">Orange Cat Social Media</a> today!</p>
+  <p><a href="https://forms.gle/rZeeDC5vamnYPqFV9" class="btn btn-success">Go to Contact Form</a></p>
 </div>
 
 <div class="gun-metal-bg mt-5 mb-5">
@@ -70,12 +85,12 @@
 </div>
 
 {{#if message}}
-  <div class="alert alert-success alert-dismissible fade show" role="alert">
-    {{message}}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  {{message}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 {{/if}}
 
 <div class="container mt-2 mb-5">
